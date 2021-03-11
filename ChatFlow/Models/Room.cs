@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Models
 {
-    class Room
+    public class Room
     {
         [Key]
         public string RoomID { get; set; }

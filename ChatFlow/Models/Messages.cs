@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models
 {
-    class Messages
+    public class Messages
     {
         public string MessageID { get; set; }
         public string Content { get; set; }

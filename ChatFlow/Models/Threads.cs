@@ -6,7 +6,7 @@ using System.Text;
 namespace Models
 {
     // Renamed to threads, not to conflit with the built-in thread class
-    class Threads
+    public class Threads
     {
         [Key]
         public string ThreadID { get; set; }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Models
 {
-    class Student : User
+    public class Student : User
     {
     }
 }
