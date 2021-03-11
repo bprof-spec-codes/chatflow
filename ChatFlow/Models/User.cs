@@ -5,10 +5,6 @@ using System.Text;
 
 namespace Models
 {
-    public enum UserType
-    {
-        Admin, Teacher, Student
-    }
     class User
     {
         [Key]
@@ -17,6 +13,6 @@ namespace Models
         public string Username { get; set; }
         [StringLength(32)]
         public string Password { get; set; }
-        public UserType UserType { get; set; }
+        public ICollection<Room> Rooms { get; set; }
     }
 }

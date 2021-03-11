@@ -10,7 +10,6 @@ namespace Models
         public string Content { get; set; }
         public string SenderID { get; set; }
         public DateTime TimeStamp { get; set; }
-        //Type? Emoji class?
-        public string Reactions { get; set; }
+        public IList<char> Reactions { get; set; }
     }
 }

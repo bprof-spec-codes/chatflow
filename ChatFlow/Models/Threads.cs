@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Models
 {
-    class Thread
+    // Renamed to threads, not to conflit with the built-in thread class
+    class Threads
     {
         [Key]
         public string ThreadID { get; set; }
@@ -14,5 +15,6 @@ namespace Models
         public ICollection<Messages> Messages { get; set; }
         public DateTime TimeStamp { get; set; }
         public string SenderID { get; set; }
+        public bool IsPinned { get; set; }
     }
 }
