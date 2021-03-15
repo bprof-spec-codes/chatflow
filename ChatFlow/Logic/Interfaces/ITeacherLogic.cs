@@ -8,5 +8,6 @@ namespace Logic.Interfaces
 {
     interface ITeacherLogic
     {
+        //TODO
     }
 }
