@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Logic.Interfaces;
+using Models;
+using Repository.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +9,38 @@ using System.Threading.Tasks;
 
 namespace Logic.Classes
 {
-    class StudentLogic
+    public class StudentLogic : IStudentLogic
     {
+        ICommonRepository<Student> studentRepository;
+
+        public StudentLogic(ICommonRepository<Student> studentRepository)
+        {
+            this.studentRepository = studentRepository;
+        }
+
+        public void AddStudent(Student student)
+        {
+            studentRepository.Add(student);
+        }
+
+        public void DeleteStudent(Student student)
+        {
+            studentRepository.Delete(student);
+        }
+
+        public IQueryable<Student> GetAllStudent()
+        {
+            return studentRepository.GetAll();
+        }
+
+        public Student GetOneStudent(string id)
+        {
+            return studentRepository.GetOne(id);
+        }
+
+        public void UpdateStudent(Student updatedItem)
+        {
+            studentRepository.Update(updatedItem);
+        }
     }
 }
