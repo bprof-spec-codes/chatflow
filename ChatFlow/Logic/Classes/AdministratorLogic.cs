@@ -33,14 +33,14 @@ namespace Logic.Classes
             return administratorRepository.GetAll();
         }
 
-        public Administrator GetOneAdministrator(string id)
+        public Administrator GetOneAdministrator(string idAdministrator)
         {
-            return administratorRepository.GetOne(id);
+            return administratorRepository.GetOne(idAdministrator);
         }
 
-        public void UpdateAdministrator(Administrator updatedItem)
+        public void UpdateAdministrator(Administrator updatedAdministrator)
         {
-            administratorRepository.Update(updatedItem);
+            administratorRepository.Update(updatedAdministrator);
         }
     }
 }

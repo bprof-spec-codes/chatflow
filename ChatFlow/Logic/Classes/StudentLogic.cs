@@ -33,14 +33,14 @@ namespace Logic.Classes
             return studentRepository.GetAll();
         }
 
-        public Student GetOneStudent(string id)
+        public Student GetOneStudent(string idStudent)
         {
-            return studentRepository.GetOne(id);
+            return studentRepository.GetOne(idStudent);
         }
 
-        public void UpdateStudent(Student updatedItem)
+        public void UpdateStudent(Student updatedStudent)
         {
-            studentRepository.Update(updatedItem);
+            studentRepository.Update(updatedStudent);
         }
     }
 }

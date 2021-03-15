@@ -33,14 +33,14 @@ namespace Logic.Classes
             return messagesRepository.GetAll();
         }
 
-        public Messages GetOneMessages(string id)
+        public Messages GetOneMessages(string idMessages)
         {
-            return messagesRepository.GetOne(id);
+            return messagesRepository.GetOne(idMessages);
         }
 
-        public void UpdateMessages(Messages updatedItem)
+        public void UpdateMessages(Messages updatedMessages)
         {
-            messagesRepository.Update(updatedItem);
+            messagesRepository.Update(updatedMessages);
         }
     }
 }

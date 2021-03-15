@@ -33,14 +33,14 @@ namespace Logic.Classes
             return threadsRepository.GetAll();
         }
 
-        public Threads GetOneThreads(string id)
+        public Threads GetOneThreads(string idThreads)
         {
-            return threadsRepository.GetOne(id);
+            return threadsRepository.GetOne(idThreads);
         }
 
-        public void UpdateThreads(Threads updatedItem)
+        public void UpdateThreads(Threads updatedThreads)
         {
-            threadsRepository.Update(updatedItem);
+            threadsRepository.Update(updatedThreads);
         }
     }
 }

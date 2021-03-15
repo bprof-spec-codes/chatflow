@@ -33,14 +33,14 @@ namespace Logic.Classes
             return roomRepository.GetAll();
         }
 
-        public Room GetOneRoom(string id)
+        public Room GetOneRoom(string idRoom)
         {
-            return roomRepository.GetOne(id);
+            return roomRepository.GetOne(idRoom);
         }
 
-        public void UpdateRoom(Room updatedItem)
+        public void UpdateRoom(Room updatedRoom)
         {
-            roomRepository.Update(updatedItem);
+            roomRepository.Update(updatedRoom);
         }
     }
 }

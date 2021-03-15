@@ -33,14 +33,14 @@ namespace Logic.Classes
             return teacherRepository.GetAll();
         }
 
-        public Teacher GetOneTeacher(string id)
+        public Teacher GetOneTeacher(string idTeacher)
         {
-            return teacherRepository.GetOne(id);
+            return teacherRepository.GetOne(idTeacher);
         }
 
-        public void UpdateTeacher(Teacher updatedItem)
+        public void UpdateTeacher(Teacher updatedTeacher)
         {
-            teacherRepository.Update(updatedItem);
+            teacherRepository.Update(updatedTeacher);
         }
     }
 }
