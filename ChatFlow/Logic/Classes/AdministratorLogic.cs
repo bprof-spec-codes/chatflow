@@ -11,9 +11,9 @@ namespace Logic.Classes
 {
     public class AdministratorLogic : IAdministratorLogic
     {
-        ICommonRepository<Administrator> administratorRepository;
+        IAdministratorRepository administratorRepository;
 
-        public AdministratorLogic(ICommonRepository<Administrator> administratorRepository)
+        public AdministratorLogic(IAdministratorRepository administratorRepository)
         {
             this.administratorRepository = administratorRepository;
         }

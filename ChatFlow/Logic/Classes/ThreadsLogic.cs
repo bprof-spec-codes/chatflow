@@ -11,9 +11,9 @@ namespace Logic.Classes
 {
     public class ThreadsLogic : IThreadsLogic
     {
-        ICommonRepository<Threads> threadsRepository;
+        IThreadsRepository threadsRepository;
 
-        public ThreadsLogic(ICommonRepository<Threads> threadsRepository)
+        public ThreadsLogic(IThreadsRepository threadsRepository)
         {
             this.threadsRepository = threadsRepository;
         }

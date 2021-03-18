@@ -11,9 +11,9 @@ namespace Logic.Classes
 {
     public class MessagesLogic : IMessagesLogic
     {
-        ICommonRepository<Messages> messagesRepository;
+        IMessagesRepository messagesRepository;
 
-        public MessagesLogic(ICommonRepository<Messages> messagesRepository)
+        public MessagesLogic(IMessagesRepository messagesRepository)
         {
             this.messagesRepository = messagesRepository;
         }
