@@ -11,9 +11,9 @@ namespace Logic.Classes
 {
     public class TeacherLogic : ITeacherLogic
     {
-        ICommonRepository<Teacher> teacherRepository;
+        ITeacherRepository teacherRepository;
 
-        public TeacherLogic(ICommonRepository<Teacher> teacherRepository)
+        public TeacherLogic(ITeacherRepository teacherRepository)
         {
             this.teacherRepository = teacherRepository;
         }

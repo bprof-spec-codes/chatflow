@@ -11,9 +11,9 @@ namespace Logic.Classes
 {
     public class RoomLogic : IRoomLogic
     {
-        ICommonRepository<Room> roomRepository;
+        IRoomRepository roomRepository;
 
-        public RoomLogic(ICommonRepository<Room> roomRepository)
+        public RoomLogic(IRoomRepository roomRepository)
         {
             this.roomRepository = roomRepository;
         }
