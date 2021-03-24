@@ -1,0 +1,14 @@
+.logo {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 7.8px;
+    color: white;
+}
+
+.side-bar {
+    overflow: "auto";
+    height: "100vh";
+    position: "fixed";
+    left: 0;
+}
