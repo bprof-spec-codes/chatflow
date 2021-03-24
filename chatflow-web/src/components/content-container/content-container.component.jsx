@@ -7,6 +7,6 @@ const { Content } = Layout;
 
 export const ContentContainer = (props) => (
   <Content className="content-container">
-    <div className="site-layout-background">Placeholder</div>
+    <div className="site-layout-background">{props.messages}</div>
   </Content>
 );

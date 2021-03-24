@@ -8,7 +8,7 @@ const { Header } = Layout;
 
 export const Headerr = (props) => (
   <Header className="header">
-    <div className="header-left">Placeholder</div>
+    <div className="header-left">{props.id}</div>
     <div className="header-right">
       <Avatar size="large" icon={<UserOutlined />} />
     </div>
