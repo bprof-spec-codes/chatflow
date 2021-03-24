@@ -3,6 +3,7 @@ import "./App.css";
 import { Layout } from "antd";
 import { Sidebar } from "./components/side-bar/side-bar.component";
 import { Headerr } from "./components/header/header.component";
+import { ContentContainer } from "./components/content-container/content-container.component";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Sidebar></Sidebar>
         <Layout className="site-layout">
           <Headerr></Headerr>
+          <ContentContainer></ContentContainer>
         </Layout>
       </Layout>
     </div>
