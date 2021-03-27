@@ -18,7 +18,7 @@ function Tmp() {
 function App() {
   return (
     <div className="App">
-      <Layout style={{ minHeight: "100vh", width: "100vw" }}>
+      <Layout style={{ minHeight: "100vh" }}>
         <Sidebar></Sidebar>
         <Layout className="site-layout">
           <Headerr prop={Tmp.id}></Headerr>

@@ -48,12 +48,12 @@ export const Demo = () => {
     <Comment
       actions={actions}
       author={<p>John Doe</p>}
-      avatar={
+      /*avatar={
         <Avatar
           src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
           alt="Han Solo"
         />
-      }
+      }*/
       content={
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum

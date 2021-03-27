@@ -3,19 +3,7 @@
 }
 
 .content-container {
-    margin: "24px 16px 0"; 
     overflow: "initial";
-    left: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    padding-left: 20px;
-    width: 1500px;
-}
-
-.box {
-    background-color: #c6e3ff;
-    border: 1px solid #c6e3ff;
-    border-radius: 5px;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    width: 100%;
+    padding: 20px;
 }

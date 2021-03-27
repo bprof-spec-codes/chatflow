@@ -8,32 +8,14 @@ const { Content } = Layout;
 
 export const ContentContainer = (props) => (
   <Content className="content-container">
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
-    <div className="box">
-      <Demo></Demo>
-    </div>
+    <Demo></Demo>
+    <Demo></Demo>
+    <Demo></Demo>
+    <Demo></Demo>
+    <Demo></Demo>
+    <Demo></Demo>
+    <Demo></Demo>
+    <Demo></Demo>
+    <Demo></Demo>
   </Content>
 );

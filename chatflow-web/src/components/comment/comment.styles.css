@@ -1,4 +1,4 @@
-.comment-action {
+/* .comment-action {
     padding-left: 8px;
     cursor: 'auto';
 }
@@ -6,8 +6,16 @@
 [class*='-col-rtl'] .comment-action {
     padding-right: 8px;
     padding-left: 0;
-}
+} */
 
 .ant-comment-content-author-time {
     color: rgb(0, 0, 0);
+}
+
+.ant-comment {
+    background-color: #ffffff;
+    border-radius: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-left: 15px;
 }
