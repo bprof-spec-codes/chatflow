@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { NormalLoginForm } from './components/login/login.component';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    
+    <NormalLoginForm />
   </React.StrictMode>,
   document.getElementById('root')
 );
