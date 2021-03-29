@@ -12,7 +12,7 @@ export const NormalLoginForm = () => {
 
   return (
     <div className='login-container'>
-      <Form
+      <Form 
         name="normal_login"
         className="login-form"
         initialValues={{
@@ -29,7 +29,7 @@ export const NormalLoginForm = () => {
             },
           ]}
         >
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+          <Input className="form-item" prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
         </Form.Item>
         <Form.Item
           name="password"
@@ -40,7 +40,7 @@ export const NormalLoginForm = () => {
             },
           ]}
         >
-          <Input
+          <Input className="form-item"
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
