@@ -5,6 +5,7 @@ import { Sidebar } from "./components/side-bar/side-bar.component";
 import { Headerr } from "./components/header/header.component";
 import { ContentContainer } from "./components/content-container/content-container.component";
 import { useParams } from "react-router-dom";
+import { NormalLoginForm } from "./components/login/login.component";
 
 function Tmp() {
   const { id } = useParams();
@@ -25,6 +26,14 @@ function App() {
           <ContentContainer messages={Tmp.messages}></ContentContainer>
         </Layout>
       </Layout>
+    </div>
+  );
+}
+
+function Login() {
+  return (
+    <div className="Login">
+      <NormalLoginForm/>
     </div>
   );
 }
