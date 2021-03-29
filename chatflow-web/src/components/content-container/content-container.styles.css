@@ -1,0 +1,9 @@
+.site-layout-background {
+    padding: 24px;
+}
+
+.content-container {
+    overflow: "initial";
+    width: 100%;
+    padding: 20px;
+}
