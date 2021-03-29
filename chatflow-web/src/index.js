@@ -8,7 +8,6 @@ import { NormalLoginForm } from './components/login/login.component';
 ReactDOM.render(
   <React.StrictMode>
     <App/>
-    <NormalLoginForm />
   </React.StrictMode>,
   document.getElementById('root')
 );
