@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import './login.styles.css';
 import { Form, Input, Button, Checkbox } from 'antd';
@@ -67,5 +66,3 @@ export const NormalLoginForm = () => {
 
   );
 };
-
-//ReactDOM.render(<NormalLoginForm />, document.getElementById('container'));
