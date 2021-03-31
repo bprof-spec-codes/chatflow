@@ -1,8 +1,10 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./login.styles.css";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+
+const { Footer } = Layout;
 
 export const NormalLoginForm = () => {
   const onFinish = (values) => {
@@ -73,6 +75,12 @@ export const NormalLoginForm = () => {
             Or <a href="/">register now!</a>
           </Form.Item>
         </Form>
+      </div>
+      <div>
+        <Footer style={{ textAlign: "center" }}>
+          Chatflow ©2021 Created by Bihari Boldizsár, Bogdán Roland, Buzási
+          Simon, Lengyel Tamás, Szabó Dáriusz
+        </Footer>
       </div>
     </div>
   );

@@ -13,7 +13,7 @@ body{
 }
 
 .login-container{
-  height: 70%;
+  height: calc(100% - 88px - 70px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,4 +46,9 @@ body{
   color: white;
   left: 0;
   padding-left: 10px;
+}
+
+.ant-layout-footer {
+  background: #001529;
+  color: ghostwhite;
 }
