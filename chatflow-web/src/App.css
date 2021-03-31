@@ -32,7 +32,3 @@
     transform: rotate(360deg);
   }
 }
-
-.site-layout {
-  width: calc(100% - 200px) !important;
-}

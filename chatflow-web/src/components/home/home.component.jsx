@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./home.styles.css";
 import { Layout } from "antd";
 import { Sidebar } from "../side-bar/side-bar.component";
 import { Headerr } from "../header/header.component";
