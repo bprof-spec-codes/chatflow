@@ -1,35 +1,49 @@
-  body{
-    background-color: #001529;
-  }
-  .ant-col-rtl .login-form-forgot {
-    float: left;
-  }
-  .form-item
-  {
-    border-radius: 5px;
-    box-shadow: 1px 1px 0 0 #000000, 2px 2px 0 0 #000000;
-  }
-  .login-container{
-    margin: 5% auto;
-    width: 30%;      
-    border: 3px solid rgb(134, 163, 255);
-    border-radius: 15px;
-    padding: 1%;
-    background-color: #ffffffff;
-    box-shadow: 1px 1px 0 0 #000000, 2px 2px 0 0 #000000, 3px 3px 0 0 #000000,4px 4px 0 0 #000000,5px 5px 0 0 #000000,6px 6px 0 0 #000000;
-  }
-  .login-form {
-    max-width: 90%;
-    margin: 5% auto;
-  }
-  .login-form-button {
-    width: 100%;
-    border-radius: 5px;
-    border-color:rgb(1, 1, 104) ;
-    box-shadow: 1px 1px 0 0 #000000, 2px 2px 0 0 #000000;
-  }
-  .login-form-forgot {
-    float: right;    
-  }   
-  
-  
+body{
+  background-color: #001529;
+}
+
+.ant-col-rtl .login-form-forgot {
+  float: left;
+}
+
+.form-item
+{
+  border-radius: 5px;
+  box-shadow: 1px 1px 0 0 #000000, 2px 2px 0 0 #000000;
+}
+
+.login-container{
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  margin: 5% auto;
+  width: 30%;      
+  border: 3px solid rgb(134, 163, 255);
+  border-radius: 15px;
+  padding: 1%;
+  background-color: #ffffffff;
+  box-shadow: 1px 1px 0 0 #000000, 2px 2px 0 0 #000000, 3px 3px 0 0 #000000,4px 4px 0 0 #000000,5px 5px 0 0 #000000,6px 6px 0 0 #000000;
+}
+
+.login-form-button {
+  width: 100%;
+  border-radius: 5px;
+  border-color:rgb(1, 1, 104) ;
+  box-shadow: 1px 1px 0 0 #000000, 2px 2px 0 0 #000000;
+}
+
+.login-form-forgot {
+  float: right;    
+}
+
+.logo-login {
+  font-size: 4em;
+  font-weight: bold;
+  color: white;
+  left: 0;
+  padding-left: 10px;
+}
