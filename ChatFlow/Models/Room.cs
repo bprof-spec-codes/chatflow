@@ -11,9 +11,14 @@ namespace Models
         public string RoomID { get; set; }
         [StringLength(64)]
         public string RoomName { get; set; }
-        public ICollection<Student> Students { get; set; }
-        public ICollection<Teacher> Teachers { get; set; }
-        public ICollection<Threads> Threads { get; set; }
+        // public ICollection<Student> Students { get; set; }
+        // public ICollection<Teacher> Teachers { get; set; }
+        // todo: user and role management
+        public virtual ICollection<Threads> Threads { get; set; }
 
+        public Room()
+        {
+            this.Threads = new List<Threads>();
+        }
     }
 }
