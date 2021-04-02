@@ -5,4 +5,5 @@
     display: flex;
     justify-content: space-between;
     top: 0;
+    height: 64px !important;
   }
