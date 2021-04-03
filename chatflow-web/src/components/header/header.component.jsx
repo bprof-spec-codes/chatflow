@@ -1,14 +1,22 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./header.styles.css";
-import { Layout, Avatar } from "antd";
+import { Layout, Avatar, Skeleton } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 
-export const TopRow = (props) => (
+export const TopRow = ({ selectedRoom }) => (
   <Header className="header">
-    <div className="header-left">{props.id}</div>
+    <div className="header-left">
+      <Skeleton
+        loading={!selectedRoom}
+        active
+        title={false}
+        paragraph={{ rows: 1 }}
+      />
+      {selectedRoom ? selectedRoom.name : ""}
+    </div>
     <div className="header-right">
       <Avatar size="large" icon={<UserOutlined />} />
     </div>

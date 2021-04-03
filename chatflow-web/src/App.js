@@ -6,17 +6,15 @@ import { Home } from "./components/home/home.component";
 function App() {
   return (
     <Router>
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/login">
             <NormalLoginForm />
           </Route>
-          <Route path="/home">
+          <Route path="/rooms/:id">
             <Home />
           </Route>
           <Route path="/">
-            <NormalLoginForm />
+            <Home />
           </Route>
         </Switch>
     </Router>
