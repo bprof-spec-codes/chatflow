@@ -18,27 +18,27 @@ namespace Logic.Classes
             this.threadsRepository = threadsRepository;
         }
 
-        public void AddThreads(Threads threads)
+        public void AddThread(Threads threads)
         {
             threadsRepository.Add(threads);
         }
 
-        public void DeleteThreads(Threads threads)
+        public void DeleteThread(Threads threads)
         {
             threadsRepository.Delete(threads);
         }
 
-        public IQueryable<Threads> GetAllThreads()
+        public IQueryable<Threads> GetAllThread()
         {
             return threadsRepository.GetAll();
         }
 
-        public Threads GetOneThreads(string idThreads)
+        public Threads GetOneThread(string idThreads)
         {
             return threadsRepository.GetOne(idThreads);
         }
 
-        public void UpdateThreads(Threads updatedThreads)
+        public void UpdateThread(Threads updatedThreads)
         {
             threadsRepository.Update(updatedThreads);
         }
