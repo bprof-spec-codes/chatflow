@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Interfaces
 {
-    interface IThreadsLogic
+    public interface IThreadsLogic
     {
         void AddThread(Threads threads);
         void DeleteThread(Threads threads);
