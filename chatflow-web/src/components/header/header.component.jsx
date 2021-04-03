@@ -6,7 +6,7 @@ import { UserOutlined } from "@ant-design/icons";
 
 const { Header } = Layout;
 
-export const Headerr = (props) => (
+export const TopRow = (props) => (
   <Header className="header">
     <div className="header-left">{props.id}</div>
     <div className="header-right">

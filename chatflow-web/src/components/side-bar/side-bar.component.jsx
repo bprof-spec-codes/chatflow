@@ -1,27 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import "./side-bar.styles.css";
-import { Menu, Layout } from "antd";
+import { Menu, Layout, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 
 const { Sider } = Layout;
 
-export const Sidebar = (props) => (
-  <Sider className="side-bar">
-    <div className="logo">ChatFlow</div>
-    <Menu theme="dark">
-      <Menu.Item key="1">
-        {/* <Link to="/channel1">Channel 1</Link> */}
-        Channel 1
-      </Menu.Item>
-      <Menu.Item key="2">
-        {/* <Link to="/channel2">Channel 2</Link> */}
-        Channel 2
-      </Menu.Item>
-      <Menu.Item key="3">
-        {/* <Link to="/channel3">Channel 3</Link> */}
-        Channel 3
-      </Menu.Item>
-    </Menu>
-  </Sider>
-);
+export const Sidebar = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [channels, setChannels] = useState(null);
+
+  useEffect(() => {
+    setLoading(true);
+    const minTime = new Promise(resolve => setTimeout(resolve, 2000))
+    const req = fetch("/api/channels").then(res => res.json())
+    Promise.all([minTime, req]).then(values => {
+      const reqData = values[1]
+      setChannels(reqData)
+      setLoading(false);
+    })
+  }, []);
+
+  return (
+    <Sider className="side-bar">
+      <div className="logo">ChatFlow</div>
+      <Skeleton loading={loading} active title={false} paragraph={{rows: 5}}/>
+      {channels && (
+          <Menu theme="dark">
+            {channels.map(channel => (
+              <Menu.Item key={channel.id}>
+                <Link to={`/channels/${channel.id}`}>{channel.name}</Link>
+              </Menu.Item>
+            ))}
+          </Menu>
+        )}
+    </Sider>
+  );
+};
