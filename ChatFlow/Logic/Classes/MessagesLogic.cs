@@ -18,27 +18,27 @@ namespace Logic.Classes
             this.messagesRepository = messagesRepository;
         }
 
-        public void AddMessages(Messages messages)
+        public void AddMessage(Messages messages)
         {
             messagesRepository.Add(messages);
         }
 
-        public void DeleteMessages(Messages messages)
+        public void DeleteMessage(Messages messages)
         {
             messagesRepository.Delete(messages);
         }
 
-        public IQueryable<Messages> GetAllMessages()
+        public IQueryable<Messages> GetAllMessage()
         {
             return messagesRepository.GetAll();
         }
 
-        public Messages GetOneMessages(string idMessages)
+        public Messages GetOneMessage(string idMessages)
         {
             return messagesRepository.GetOne(idMessages);
         }
 
-        public void UpdateMessages(Messages updatedMessages)
+        public void UpdateMessage(Messages updatedMessages)
         {
             messagesRepository.Update(updatedMessages);
         }
