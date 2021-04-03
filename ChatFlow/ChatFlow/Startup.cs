@@ -33,6 +33,9 @@ namespace ChatFlow
             services.AddTransient<IThreadsRepository, ThreadsRepository>();
 
             services.AddTransient<DbContext, ChatFlowContext>();
+
+            //for testing
+            services.AddTransient<RoomLogic, RoomLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
