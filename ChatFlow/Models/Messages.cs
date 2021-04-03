@@ -11,6 +11,7 @@ namespace Models
     public class Messages
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string MessageID { get; set; }
 
         [StringLength(300)]
