@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace Logic.Interfaces
 {
     interface IRoomLogic
     {
-        //TODO
+        void AddRoom(Room room);
+        void DeleteRoom(Room room);
+        IQueryable<Room> GetAllRoom();
+        Room GetOneRoom(string idRoom);
+        void UpdateRoom(Room updatedRoom);
     }
 }
