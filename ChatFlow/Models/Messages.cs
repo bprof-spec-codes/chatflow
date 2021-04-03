@@ -21,6 +21,7 @@ namespace Models
 
         public DateTime TimeStamp { get; set; }
 
+        [NotMapped]
         public IList<char> Reactions { get; set; }
 
         public string ThreadID { get; set; }

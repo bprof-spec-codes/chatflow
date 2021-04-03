@@ -6,7 +6,7 @@ using Models;
 
 namespace Data
 {
-    class ChatFlowContext : DbContext
+    public class ChatFlowContext : DbContext
     {
         // public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -31,7 +31,8 @@ namespace Data
             {
                 optionsBuilder.
                     UseLazyLoadingProxies().
-                    UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ChatflowTestDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                    //UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ChatflowTestDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                    UseSqlServer(@"data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\ChatFlowTestDB.mdf;integrated security=True;MultipleActiveResultSets=True");
             }
         }
 

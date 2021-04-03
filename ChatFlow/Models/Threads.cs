@@ -14,10 +14,9 @@ namespace Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ThreadID { get; set; }
 
-        [StringLength(500)]
         public string Content { get; set; }
 
-        public ICollection<Messages> Messages { get; set; }
+        public virtual ICollection<Messages> Messages { get; set; }
 
         public DateTime TimeStamp { get; set; }
 

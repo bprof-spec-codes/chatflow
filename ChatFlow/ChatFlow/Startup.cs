@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Data;
 using Logic.Classes;
 using Logic.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Models;
@@ -26,9 +28,14 @@ namespace ChatFlow
             services.AddTransient<IRoomLogic, RoomLogic>();
             services.AddTransient<IThreadsLogic, ThreadsLogic>();
 
-            services.AddTransient<ICommonRepository<Messages>, MessagesRepository>();
-            services.AddTransient<ICommonRepository<Room>, RoomRepository>();
-            services.AddTransient<ICommonRepository<Threads>, ThreadsRepository>();
+            services.AddTransient<IMessagesRepository, MessagesRepository>();
+            services.AddTransient<IRoomRepository, RoomRepository>();
+            services.AddTransient<IThreadsRepository, ThreadsRepository>();
+
+            services.AddTransient<DbContext, ChatFlowContext>();
+
+            //for testing
+            services.AddTransient<RoomLogic, RoomLogic>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
