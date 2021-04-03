@@ -6,7 +6,7 @@ using Models;
 
 namespace Data
 {
-    class ChatFlowContext : DbContext
+    public class ChatFlowContext : DbContext
     {
         // public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
