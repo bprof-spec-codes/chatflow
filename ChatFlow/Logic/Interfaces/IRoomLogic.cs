@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Interfaces
 {
-    interface IRoomLogic
+    public interface IRoomLogic
     {
         void AddRoom(Room room);
         void DeleteRoom(Room room);

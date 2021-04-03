@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Logic.Interfaces
 {
-    interface IMessagesLogic
+    public interface IMessagesLogic
     {
         void AddMessage(Messages messages);
         void DeleteMessage(Messages messages);
