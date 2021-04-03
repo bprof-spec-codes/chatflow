@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,10 @@ namespace Logic.Interfaces
 {
     interface IThreadsLogic
     {
-        //TODO
+        void AddThread(Threads threads);
+        void DeleteThread(Threads threads);
+        IQueryable<Threads> GetAllThread();
+        Threads GetOneThread(string idThreads);
+        void UpdateThread(Threads updatedThreads);
     }
 }
