@@ -22,7 +22,7 @@ export const Sidebar = (props) => {
         <Menu theme="dark">
           {rooms.map((room) => (
             <Menu.Item key={room.id}>
-              <Link to={`/rooms/${room.id}`}>{room.name}</Link>
+              <Link to={`/rooms/${room.id}`}>{'# ' + room.name}</Link>
             </Menu.Item>
           ))}
         </Menu>

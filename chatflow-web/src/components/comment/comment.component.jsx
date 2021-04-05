@@ -9,10 +9,11 @@ import {
 } from "@ant-design/icons";
 import "./comment.styles.css";
 
-export const Demo = () => {
+export const Demo = (props) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
+  const {content} = props;
 
   const like = () => {
     setLikes(1);
@@ -46,23 +47,24 @@ export const Demo = () => {
 
   return (
     <Comment
+    
       actions={actions}
       author={<p>John Doe</p>}
-      content={
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
-          feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
-          cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
-          ligula faucibus et.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
-          feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
-          cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
-          ligula faucibus et.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
-          feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
-          cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
-          ligula faucibus et.
-        </p>
+      content={ content
+        // <p>
+        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
+        //   feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
+        //   cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
+        //   ligula faucibus et.
+        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
+        //   feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
+        //   cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
+        //   ligula faucibus et.
+        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
+        //   feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
+        //   cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
+        //   ligula faucibus et.
+        // </p>
       }
       datetime={
         <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>

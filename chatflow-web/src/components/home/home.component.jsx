@@ -38,7 +38,7 @@ export const Home = () => {
         <Sidebar loading={loading} rooms={rooms}></Sidebar>
         <Layout className="site-layout">
           <TopRow selectedRoom={selectedRoom}></TopRow>
-          <ContentContainer></ContentContainer>
+          <ContentContainer selectedRoom={selectedRoom}></ContentContainer>
           <div className="write-post">
             <TextArea rows={3} placeholder="Write a post..." />
             <Button type="primary">Send</Button>
