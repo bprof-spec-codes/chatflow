@@ -16,7 +16,7 @@ export const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    const minTime = new Promise((resolve) => setTimeout(resolve, 1000));
+    const minTime = new Promise((resolve) => setTimeout(resolve, 1500));
     const req = fetch("/api/Room").then((res) => res.json());
 
     Promise.all([minTime, req]).then((values) => {

@@ -12,11 +12,14 @@
     color: rgb(0, 0, 0);
 }
 
-.ant-comment {
+.my-comment{
     background-color: #ffffff;
     border-radius: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding: 15px;
+}
+
+.ant-comment-inner{
+    padding: 0;
 }

@@ -13,10 +13,9 @@ export const ContentContainer = ({ selectedRoom }) => {
   useEffect(() => {
     if (selectedRoom) {
       fetch(`/api/Room/${selectedRoom.id}`)
-      .then((res) => res.json())
-      .then((room) => setThreads(room.threads));
+        .then((res) => res.json())
+        .then((room) => setThreads(room.threads));
     }
-    
   }, [selectedRoom]);
 
   useEffect(() => {
@@ -26,17 +25,15 @@ export const ContentContainer = ({ selectedRoom }) => {
 
   return (
     <Content className="content-container" id="messagebody">
+      {!threads && (
+        <div>
+          <Demo></Demo>
+          <Demo></Demo>
+          <Demo></Demo>
+        </div>
+      )}
       {threads &&
         threads.map((thread) => <Demo content={thread.content}></Demo>)}
-      {/* <Demo></Demo>
-      <Demo></Demo>
-      <Demo></Demo>
-      <Demo></Demo>
-      <Demo></Demo>
-      <Demo></Demo>
-      <Demo></Demo>
-      <Demo></Demo>
-      <Demo></Demo> */}
     </Content>
   );
 };

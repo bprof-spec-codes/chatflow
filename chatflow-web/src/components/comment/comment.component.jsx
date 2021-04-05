@@ -1,5 +1,5 @@
 import React, { createElement, useState } from "react";
-import { Comment, Tooltip} from "antd";
+import { Comment, Tooltip, Skeleton } from "antd";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -13,7 +13,7 @@ export const Demo = (props) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
-  const {content} = props;
+  const { content } = props;
 
   const like = () => {
     setLikes(1);
@@ -46,31 +46,28 @@ export const Demo = (props) => {
   ];
 
   return (
-    <Comment
-    
-      actions={actions}
-      author={<p>John Doe</p>}
-      content={ content
-        // <p>
-        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
-        //   feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
-        //   cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
-        //   ligula faucibus et.
-        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
-        //   feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
-        //   cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
-        //   ligula faucibus et.
-        //   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum
-        //   feugiat libero porttitor lacinia. Praesent dui nunc, dapibus eget
-        //   cursus et, dictum quis felis. Ut euismod libero nunc, a tincidunt
-        //   ligula faucibus et.
-        // </p>
-      }
-      datetime={
-        <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-          <span>{moment().fromNow()}</span>
-        </Tooltip>
-      }
-    />
+    <div className="my-comment">
+      <Skeleton
+        loading={!content}
+        avatar
+        active
+        title={false}
+        paragraph={{ rows: 3 }}
+      />
+      {content ? (
+        <Comment
+          actions={actions}
+          author={<p>John Doe</p>}
+          content={content}
+          datetime={
+            <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
+              <span>{moment().fromNow()}</span>
+            </Tooltip>
+          }
+        />
+      ) : (
+        ""
+      )}
+    </div>
   );
 };
