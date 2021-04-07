@@ -15,8 +15,7 @@ namespace Models
         [StringLength(64)]
         public string RoomName { get; set; }
 
-        // public ICollection<Student> Students { get; set; }
-        // public ICollection<Teacher> Teachers { get; set; }
+        public virtual ICollection<RoomUser> RoomUsers { get; set; }
         // todo: user and role management
 
         public virtual ICollection<Threads> Threads { get; set; }
@@ -24,6 +23,7 @@ namespace Models
         public Room()
         {
             this.Threads = new List<Threads>();
+            this.RoomUsers = new List<RoomUser>();
         }
     }
 }
