@@ -1,0 +1,12 @@
+.chat-window{
+    position: absolute;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in;
+    width: 300px;
+    height: calc(100% - 64px);
+    right: 0;
+    color: rgb(0, 0, 0);
+    bottom: 0;
+    display: none;
+    background-color: #f0f2f5;
+}

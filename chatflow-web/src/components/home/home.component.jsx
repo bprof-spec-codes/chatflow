@@ -5,6 +5,7 @@ import { Sidebar } from "../side-bar/side-bar.component";
 import { TopRow } from "../header/header.component";
 import { ContentContainer } from "../content-container/content-container.component";
 import { useParams } from "react-router";
+import { ChatWindow } from "../chat-window/chat-window.component";
 
 export const Home = () => {
   const [loading, setLoading] = useState(false);
@@ -38,11 +39,14 @@ export const Home = () => {
         <Sidebar loading={loading} rooms={rooms}></Sidebar>
         <Layout className="site-layout">
           <TopRow selectedRoom={selectedRoom}></TopRow>
-          <ContentContainer selectedRoom={selectedRoom}></ContentContainer>
-          <div className="write-post">
-            <TextArea rows={3} placeholder="Write a post..." />
-            <Button type="primary">Send</Button>
-          </div>
+          
+            <ContentContainer selectedRoom={selectedRoom}></ContentContainer>
+            <div className="write-post">
+              <TextArea rows={3} placeholder="Write a post..." />
+              <Button type="primary">Send</Button>
+            </div>
+          
+          <ChatWindow />
         </Layout>
       </Layout>
     </div>

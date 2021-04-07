@@ -8,12 +8,14 @@ import {
   LikeFilled,
 } from "@ant-design/icons";
 import "./comment.styles.css";
+import { ChatWindow } from "../chat-window/chat-window.component";
 
 export const Demo = (props) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
   const { content } = props;
+  const [ state, setMessagesOpen ] = useState(false);
 
   const like = () => {
     setLikes(1);
@@ -42,7 +44,9 @@ export const Demo = (props) => {
         <span className="comment-action">{dislikes}</span>
       </span>
     </Tooltip>,
-    <span key="comment-basic-reply-to">Reply to</span>,
+    <span key="comment-basic-reply-to" onClick={}>
+      Reply to
+    </span>,
   ];
 
   return (
