@@ -1,12 +1,14 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Models;
 
 namespace Data
 {
-    public class ChatFlowContext : DbContext
+    public class ChatFlowContext : IdentityDbContext<User>
     {
         // public DbSet<User> Users { get; set; }
         public DbSet<Room> Rooms { get; set; }
@@ -55,6 +57,28 @@ namespace Data
                 .HasOne(threads => threads.Room)
                 .WithMany(room => room.Threads)
                 .HasForeignKey(threads => threads.RoomID);
+            });
+
+            modelBuilder.Entity<RoomUser>(entity =>
+            {
+                entity
+                .HasKey(roomUser => new { roomUser.RoomID, roomUser.UserID });
+            });
+
+            modelBuilder.Entity<RoomUser>(entity =>
+            {
+                entity
+                .HasOne(roomUser => roomUser.Room)
+                .WithMany(room => room.RoomUsers)
+                .HasForeignKey(roomUser => roomUser.RoomID);
+            });
+
+            modelBuilder.Entity<RoomUser>(entity =>
+            {
+                entity
+                .HasOne(roomUser => roomUser.User)
+                .WithMany(user => user.RoomUsers)
+                .HasForeignKey(roomUser => roomUser.UserID);
             });
         }
     }
