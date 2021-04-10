@@ -14,5 +14,7 @@ namespace Logic.Interfaces
         IQueryable<Room> GetAllRoom();
         Room GetOneRoom(string idRoom);
         void UpdateRoom(Room updatedRoom);
+
+        void GenerateData();
     }
 }
