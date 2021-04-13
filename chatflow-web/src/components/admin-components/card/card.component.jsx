@@ -10,5 +10,4 @@ export const Card = props => (
         <h2>{props.member.name}</h2>
         <p>{props.member.email}</p>
     </div>
-
 )
