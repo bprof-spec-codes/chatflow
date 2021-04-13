@@ -1,0 +1,17 @@
+.logo {
+    text-align: center;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 7.8px;
+    color: white;
+}
+
+.side-bar {
+    overflow: "auto";
+    position: "fixed";
+    width: 200px;
+}
+
+.side-bar .ant-skeleton {
+    padding: 20px !important;
+}
