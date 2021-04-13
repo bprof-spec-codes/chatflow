@@ -15,6 +15,9 @@ namespace Logic.Interfaces
         Room GetOneRoom(string idRoom);
         void UpdateRoom(Room updatedRoom);
 
+        void AddThreadToRoom(Threads thread, string roomid);
+        void AddUserToRoom(User user, string roomid);
+        void DeleteUserFromRoom(User user, string roomid);
         void GenerateData();
     }
 }
