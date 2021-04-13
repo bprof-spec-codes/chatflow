@@ -31,7 +31,7 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
 
   return (
     <div className="thread-window">
-      <Content className="content-container" id="messagebody">
+      <Content className="content" id="messagebody">
         <div>
           {!threads && (
             <div>
