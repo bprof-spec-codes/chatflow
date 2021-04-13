@@ -13,16 +13,18 @@ namespace ChatFlow.Controllers
     public class MessagesController : ControllerBase
     {
         IMessagesLogic messagesLogic;
+        IThreadsLogic threadsLogic;
 
-        public MessagesController(IMessagesLogic messagesLogic)
+        public MessagesController(IMessagesLogic messagesLogic, IThreadsLogic threadsLogic)
         {
             this.messagesLogic = messagesLogic;
+            this.threadsLogic = threadsLogic;
         }
 
-        [HttpPost]
-        public void AddMessage([FromBody] Messages messages)
+        [HttpPost("{threadid}")]
+        public void AddMessage([FromBody] Messages messages, string threadid)
         {
-            messagesLogic.AddMessage(messages);
+            this.threadsLogic.AddMessageToThread(messages, threadid);
         }
 
         [HttpDelete]

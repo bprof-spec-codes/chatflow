@@ -12,40 +12,49 @@ namespace ChatFlow.Controllers
     [Route("{controller}")]
     public class AuthController : ControllerBase
     {
-        IAuthLogic logic;
-        public AuthController(IAuthLogic _logic)
+        IAuthLogic authLogic;
+        IRoomLogic roomLogic;
+
+        public AuthController(IAuthLogic _logic, IRoomLogic roomLogic)
         {
-            this.logic = _logic;
+            this.authLogic = _logic;
+            this.roomLogic = roomLogic;
         }
 
         [HttpPost]
         public async Task<string> AddUser([FromBody] User user)
         {
-            return await this.logic.CreateUser(user);
+            return await this.authLogic.CreateUser(user);
+        }
+
+        [HttpPost("{roomid}")]
+        public void AddUserToRoom(string roomid, [FromBody] User user)
+        {
+            this.roomLogic.AddUserToRoom(user, roomid);
         }
 
         [HttpGet("{userid}")]
         public async Task<User> GetUser(string userid)
         {
-            return await this.logic.GetUser(userid);
+            return await this.authLogic.GetUser(userid);
         }
 
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
-            return this.logic.GetAllUser();
+            return this.authLogic.GetAllUser();
         }
 
         [HttpDelete("{userid}")]
         public async Task DeleteUser(string userid)
         {
-            await this.logic.DeleteUser(userid);
+            await this.authLogic.DeleteUser(userid);
         }
 
         [HttpPut]
         public async Task UpdateUser([FromBody] User user)
         {
-            await this.logic.UpdateUser(user);
+            await this.authLogic.UpdateUser(user);
         }
 
         [HttpPatch]
@@ -53,7 +62,7 @@ namespace ChatFlow.Controllers
         {
             try
             {
-                return Ok(await this.logic.LoginUser(model));
+                return Ok(await this.authLogic.LoginUser(model));
             }
             catch (ArgumentException ex)
             {
