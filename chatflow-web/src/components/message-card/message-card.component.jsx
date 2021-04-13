@@ -59,7 +59,7 @@ const MessageCard = ({ id, content, onReply }) => {
         <Comment
           actions={actions}
           author={<p>John Doe</p>}
-          content={content}
+          content={<div dangerouslySetInnerHTML={{ __html: content }} />}
           datetime={
             <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
               <span>{moment().fromNow()}</span>

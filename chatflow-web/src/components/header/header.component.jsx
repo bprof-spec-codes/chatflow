@@ -15,7 +15,7 @@ export const TopRow = ({ selectedRoom }) => (
         title={false}
         paragraph={{ rows: 1 }}
       />
-      {selectedRoom ? selectedRoom.name : ""}
+      {selectedRoom ? <h3>{selectedRoom.name}</h3> : ""}
     </div>
     <div className="header-right">
       <Avatar size="large" icon={<UserOutlined />} />

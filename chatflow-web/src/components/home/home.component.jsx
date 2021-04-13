@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./home.styles.css";
-import { Layout, Input, Button } from "antd";
+import { Layout } from "antd";
 import { Sidebar } from "../side-bar/side-bar.component";
 import { TopRow } from "../header/header.component";
 import ThreadWindow from "../thread-window/thread-window.component";
@@ -13,8 +13,6 @@ export const Home = () => {
   const [selectedRoom, setSelectedRoom] = useState(null);
   const [selectedThread, setSelectedThread] = useState(null);
   const { id } = useParams();
-
-  const { TextArea } = Input;
 
   useEffect(() => {
     setLoading(true);
@@ -31,6 +29,7 @@ export const Home = () => {
   useEffect(() => {
     if (rooms) {
       setSelectedRoom(id ? rooms.find((c) => c.id === Number(id)) : rooms[0]);
+      setSelectedThread(null);
     }
   }, [id, rooms]);
 
@@ -46,10 +45,6 @@ export const Home = () => {
                 selectedRoom={selectedRoom}
                 onReply={(threadId) => setSelectedThread(threadId)}
               ></ThreadWindow>
-              <div className="write-post">
-                <TextArea rows={3} placeholder="Write a post..." />
-                <Button type="primary">Send</Button>
-              </div>
             </div>
             {selectedThread && <ChatWindow threadId={selectedThread} />}
           </div>

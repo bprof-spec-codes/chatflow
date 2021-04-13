@@ -4,11 +4,13 @@
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.0",
     "antd": "^4.14.1",
     "react": "^17.0.1",
+    "react-contenteditable": "^3.3.5",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",

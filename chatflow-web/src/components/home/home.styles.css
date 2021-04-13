@@ -2,13 +2,7 @@
     width: calc(100% - 200px) !important;
   }
 
-.write-post{
-  display: flex;
-  align-items: center;
-  height: 90px;
-  background-color: #13222f;
-  justify-content: space-evenly;
-}
+
 
 .ant-input{
   margin-left: 10px;

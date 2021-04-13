@@ -3,11 +3,12 @@ import "antd/dist/antd.css";
 import "./thread-window.styles.css";
 import { Layout } from "antd";
 import MessageCard from "../message-card/message-card.component";
-
+import Editor from "../editor/editor.component";
 const { Content } = Layout;
 
 const ThreadWindow = ({ selectedRoom, onReply }) => {
   const [threads, setThreads] = useState(null);
+  const users = ["Valaki", "Valami"];
   // const { room } = props;
 
   useEffect(() => {
@@ -23,26 +24,37 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
     messageBody.scrollTop = messageBody.scrollHeight;
   }, [threads]);
 
+  const addThread = (content) => {
+    //TODO: implement api
+    setThreads((threads) => threads.concat({ id: 1111, content: content }));
+  };
+
   return (
-    <Content className="content-container" id="messagebody">
-      <div>
-        {!threads && (
-          <div>
-            <MessageCard></MessageCard>
-            <MessageCard></MessageCard>
-            <MessageCard></MessageCard>
-          </div>
-        )}
-        {threads &&
-          threads.map((thread) => (
-            <MessageCard
-              id={thread.id}
-              content={thread.content}
-              onReply={(threadId) => onReply(threadId)}
-            ></MessageCard>
-          ))}
+    <div className="thread-window">
+      <Content className="content-container" id="messagebody">
+        <div>
+          {!threads && (
+            <div>
+              <MessageCard></MessageCard>
+              <MessageCard></MessageCard>
+              <MessageCard></MessageCard>
+            </div>
+          )}
+          {threads &&
+            threads.map((thread) => (
+              <MessageCard
+                key={thread.id}
+                id={thread.id}
+                content={thread.content}
+                onReply={(threadId) => onReply(threadId)}
+              ></MessageCard>
+            ))}
+        </div>
+      </Content>
+      <div className="write-post">
+        <Editor users={users} onSend={(content) => addThread(content)} />
       </div>
-    </Content>
+    </div>
   );
 };
 
