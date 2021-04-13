@@ -18,6 +18,12 @@ namespace Logic.Classes
             this.threadsRepository = threadsRepository;
         }
 
+        public void AddMessageToThread(Messages message, string threadid)
+        {
+            this.GetOneThread(threadid).Messages.Add(message);
+            this.threadsRepository.Save();
+        }
+
         public void AddThread(Threads threads)
         {
             threadsRepository.Add(threads);

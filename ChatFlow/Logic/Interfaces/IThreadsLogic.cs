@@ -14,5 +14,7 @@ namespace Logic.Interfaces
         IQueryable<Threads> GetAllThread();
         Threads GetOneThread(string idThreads);
         void UpdateThread(Threads updatedThreads);
+
+        void AddMessageToThread(Messages message, string threadid);
     }
 }
