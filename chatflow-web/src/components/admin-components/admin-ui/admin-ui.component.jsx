@@ -1,7 +1,6 @@
 import { CardList } from '../card-list/card-list.component';
 import React, { Component } from 'react';
-
-import { PopUp } from '../pop-up/pop-up.component'
+import './admin-ui.style.css';
 
 class AdminUI extends Component {
   constructor() {
@@ -22,17 +21,20 @@ class AdminUI extends Component {
   render() {
     return (
       <div className="AdminUI">
-        <input
-          type='search'
-          placeholder='search user'
-          onChange={e => {
-            this.setState({ searchField: e.target.value }, () => console.log(this.state));
-          }} />
+        <div className='tools'>
+          <CardList
+            members={this.state.members}>
+          </CardList>
 
-        <CardList
-          members={this.state.members}>
-        </CardList>
-        <PopUp/>
+          <input
+            type='search'
+            placeholder='search user'
+            onChange={e => {
+              this.setState({ searchField: e.target.value }, () => console.log(this.state));
+            }} />
+        </div>
+
+
       </div >
     );
   }
