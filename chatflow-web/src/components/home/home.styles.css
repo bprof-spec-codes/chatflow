@@ -1,3 +1,13 @@
 .site-layout {
     width: calc(100% - 200px) !important;
   }
+
+
+
+.ant-input{
+  margin-left: 10px;
+  width: 80%;
+  border-radius: 7px;
+  max-height: 70px;
+  resize: none;
+}
