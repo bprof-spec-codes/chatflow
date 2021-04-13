@@ -1,5 +1,5 @@
 import React, { createElement, useState } from "react";
-import { Comment, Tooltip, Skeleton } from "antd";
+import { Comment, Tooltip, Skeleton, Button } from "antd";
 import moment from "moment";
 import {
   DislikeOutlined,
@@ -7,15 +7,12 @@ import {
   DislikeFilled,
   LikeFilled,
 } from "@ant-design/icons";
-import "./comment.styles.css";
-import { ChatWindow } from "../chat-window/chat-window.component";
+import "./message-card.styles.css";
 
-export const Demo = (props) => {
+const MessageCard = ({ id, content, onReply }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
-  const { content } = props;
-  const [ state, setMessagesOpen ] = useState(false);
 
   const like = () => {
     setLikes(1);
@@ -44,9 +41,9 @@ export const Demo = (props) => {
         <span className="comment-action">{dislikes}</span>
       </span>
     </Tooltip>,
-    <span key="comment-basic-reply-to" onClick={}>
+    <Button key="comment-basic-reply-to" onClick={() => onReply(id)}>
       Reply to
-    </span>,
+    </Button>,
   ];
 
   return (
@@ -75,3 +72,5 @@ export const Demo = (props) => {
     </div>
   );
 };
+
+export default MessageCard;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
-import "./content-container.styles.css";
+import "./thread-window.styles.css";
 import { Layout } from "antd";
-import { Demo } from "../comment/comment.component";
+import MessageCard from "../message-card/message-card.component";
 
 const { Content } = Layout;
 
-export const ContentContainer = ({ selectedRoom }) => {
+const ThreadWindow = ({ selectedRoom, onReply }) => {
   const [threads, setThreads] = useState(null);
   // const { room } = props;
 
@@ -25,15 +25,25 @@ export const ContentContainer = ({ selectedRoom }) => {
 
   return (
     <Content className="content-container" id="messagebody">
-      {!threads && (
-        <div>
-          <Demo></Demo>
-          <Demo></Demo>
-          <Demo></Demo>
-        </div>
-      )}
-      {threads &&
-        threads.map((thread) => <Demo content={thread.content}></Demo>)}
+      <div>
+        {!threads && (
+          <div>
+            <MessageCard></MessageCard>
+            <MessageCard></MessageCard>
+            <MessageCard></MessageCard>
+          </div>
+        )}
+        {threads &&
+          threads.map((thread) => (
+            <MessageCard
+              id={thread.id}
+              content={thread.content}
+              onReply={(threadId) => onReply(threadId)}
+            ></MessageCard>
+          ))}
+      </div>
     </Content>
   );
 };
+
+export default ThreadWindow;

@@ -3,7 +3,7 @@ import "./home.styles.css";
 import { Layout, Input, Button } from "antd";
 import { Sidebar } from "../side-bar/side-bar.component";
 import { TopRow } from "../header/header.component";
-import { ContentContainer } from "../content-container/content-container.component";
+import ThreadWindow from "../thread-window/thread-window.component";
 import { useParams } from "react-router";
 import { ChatWindow } from "../chat-window/chat-window.component";
 
@@ -11,6 +11,7 @@ export const Home = () => {
   const [loading, setLoading] = useState(false);
   const [rooms, setRooms] = useState(null);
   const [selectedRoom, setSelectedRoom] = useState(null);
+  const [selectedThread, setSelectedThread] = useState(null);
   const { id } = useParams();
 
   const { TextArea } = Input;
@@ -39,14 +40,19 @@ export const Home = () => {
         <Sidebar loading={loading} rooms={rooms}></Sidebar>
         <Layout className="site-layout">
           <TopRow selectedRoom={selectedRoom}></TopRow>
-          
-            <ContentContainer selectedRoom={selectedRoom}></ContentContainer>
-            <div className="write-post">
-              <TextArea rows={3} placeholder="Write a post..." />
-              <Button type="primary">Send</Button>
+          <div style={{ display: "flex" }}>
+            <div style={{ width: "100%" }}>
+              <ThreadWindow
+                selectedRoom={selectedRoom}
+                onReply={(threadId) => setSelectedThread(threadId)}
+              ></ThreadWindow>
+              <div className="write-post">
+                <TextArea rows={3} placeholder="Write a post..." />
+                <Button type="primary">Send</Button>
+              </div>
             </div>
-          
-          <ChatWindow />
+            {selectedThread && <ChatWindow threadId={selectedThread} />}
+          </div>
         </Layout>
       </Layout>
     </div>
