@@ -14,11 +14,13 @@ namespace ChatFlow.Controllers
     {
         IAuthLogic authLogic;
         IRoomLogic roomLogic;
+        IRoomUserLogic RUlogic;
 
-        public AuthController(IAuthLogic _logic, IRoomLogic roomLogic)
+        public AuthController(IAuthLogic _logic, IRoomLogic roomLogic, IRoomUserLogic _RUlogic)
         {
             this.authLogic = _logic;
             this.roomLogic = roomLogic;
+            this.RUlogic = _RUlogic;
         }
 
         [HttpPost]
@@ -76,6 +78,12 @@ namespace ChatFlow.Controllers
 
                 return BadRequest(new { Error = ex.Message });
             }
+        }
+
+        [HttpGet("allroom/{userid}")]
+        public IEnumerable<Room> GetOneUsersAllRooms(string userid)
+        {
+            return this.RUlogic.GetOneUsersAllRooms(userid);
         }
     }
 }
