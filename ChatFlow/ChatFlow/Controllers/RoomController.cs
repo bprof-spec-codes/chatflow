@@ -13,10 +13,12 @@ namespace ChatFlow.Controllers
     public class RoomController : ControllerBase
     {
         IRoomLogic roomLogic;
+        IRoomUserLogic RUlogic;
 
-        public RoomController(IRoomLogic roomLogic)
+        public RoomController(IRoomLogic roomLogic, IRoomUserLogic _RUlogic)
         {
             this.roomLogic = roomLogic;
+            this.RUlogic = _RUlogic;
         }
 
         [HttpPost]
@@ -47,6 +49,12 @@ namespace ChatFlow.Controllers
         public void UpdateRoom([FromBody] Room updatedRoom)
         {
             roomLogic.UpdateRoom(updatedRoom);
+        }
+
+        [HttpGet("alluser/{roomid}")]
+        public IEnumerable<User> GetOneRoomsAllUsers(string roomid)
+        {
+            return this.RUlogic.GetOneRoomsAllUsers(roomid);
         }
     }
 }
