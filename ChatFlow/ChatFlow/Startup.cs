@@ -32,11 +32,13 @@ namespace ChatFlow
             services.AddTransient<IRoomLogic, RoomLogic>();
             services.AddTransient<IThreadsLogic, ThreadsLogic>();
             services.AddTransient<IAuthLogic, AuthLogic>();
+            services.AddTransient<IRoomUserLogic, RoomUserLogic>();
 
 
             services.AddTransient<IMessagesRepository, MessagesRepository>();
             services.AddTransient<IRoomRepository, RoomRepository>();
             services.AddTransient<IThreadsRepository, ThreadsRepository>();
+            services.AddTransient<IRoomUserRepository, RoomUserRepository>();
 
             services.AddTransient<ChatFlowContext, ChatFlowContext>();
 
