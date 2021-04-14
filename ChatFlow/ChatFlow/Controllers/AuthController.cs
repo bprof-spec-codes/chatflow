@@ -27,10 +27,16 @@ namespace ChatFlow.Controllers
             return await this.authLogic.CreateUser(user);
         }
 
-        [HttpPost("{roomid}")]
-        public void AddUserToRoom(string roomid, [FromBody] User user)
+        [HttpPost("{userid}/{roomid}")]
+        public void AddUserToRoom(string userid, string roomid)
         {
-            this.roomLogic.AddUserToRoom(user, roomid);
+            this.roomLogic.AddUserToRoom(userid, roomid);
+        }
+
+        [HttpDelete("{userid}/{roomid}")]
+        public void RemoveUserFromRoom(string userid, string roomid)
+        {
+            this.roomLogic.RemoveUserFromRoom(userid, roomid);
         }
 
         [HttpGet("{userid}")]
