@@ -63,7 +63,8 @@ namespace ChatFlow.Controllers
             await this.authLogic.UpdateUser(user);
         }
 
-        [HttpPatch]
+        [HttpGet]
+        [Route("login")]
         public async Task<ActionResult> Login([FromBody] LoginViewModel model)
         {
             try
