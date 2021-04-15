@@ -40,6 +40,12 @@ namespace Data
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<IdentityRole>().HasData(
+                new { Id = "e3b75db1-ab66-4847-9d19-3daf24eef74c", Name = "Admin", NormalizedName = "ADMIN" },
+                new { Id = "5610f2d4-92f9-4ad1-b921-a98e5cba7747", Name = "Teacher", NormalizedName = "TEACHER" },
+                new { Id = "117f7d38-f42f-4773-b196-fdc275380901", Name = "Student", NormalizedName = "STUDENT" }
+                );
+
             var admin = new User
             {
                 Id = "b09ea12e-9e51-419f-826a-cbd38f3664df",
@@ -145,6 +151,57 @@ namespace Data
             modelBuilder.Entity<User>().HasData(simon);
             modelBuilder.Entity<User>().HasData(tomi);
             modelBuilder.Entity<User>().HasData(dariusz);
+
+            //Admin
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "e3b75db1-ab66-4847-9d19-3daf24eef74c",
+                UserId = "b09ea12e-9e51-419f-826a-cbd38f3664df"
+            });
+
+            //Teacher
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "5610f2d4-92f9-4ad1-b921-a98e5cba7747",
+                UserId = "fc5ddfbf-adbb-485b-9198-d5697f670632"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "5610f2d4-92f9-4ad1-b921-a98e5cba7747",
+                UserId = "cd078415-b771-4375-9079-e0d497567e85"
+            });
+
+            //Student
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "117f7d38-f42f-4773-b196-fdc275380901",
+                UserId = "70c69d55-28b8-4528-9c27-a4129f12659d"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "117f7d38-f42f-4773-b196-fdc275380901",
+                UserId = "cd6687c1-30fb-4a21-b7d9-005986669286"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "117f7d38-f42f-4773-b196-fdc275380901",
+                UserId = "796f78d1-9d03-4e0c-bd88-e22338e01425"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "117f7d38-f42f-4773-b196-fdc275380901",
+                UserId = "cf7d31a0-20a7-4676-8e1f-c69d9470dc76"
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = "117f7d38-f42f-4773-b196-fdc275380901",
+                UserId = "523fdb57-cdc3-4f91-bad8-12e80dfef125"
+            });
 
             modelBuilder.Entity<Messages>(entity =>
             {
