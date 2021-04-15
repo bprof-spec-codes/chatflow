@@ -39,7 +39,6 @@ namespace Logic.Classes
 
         public async Task DeleteUser(string id)
         {
-            ;
             var userToDelete = await this.userManager.FindByIdAsync(id);
             await this.DeleteUser(userToDelete);
         }
@@ -58,6 +57,7 @@ namespace Logic.Classes
         {
             return this.userManager.Users;
         }
+
         public async Task<TokenViewModel> LoginUser(LoginViewModel model)
         {
             var user = await userManager.FindByNameAsync(model.Username);

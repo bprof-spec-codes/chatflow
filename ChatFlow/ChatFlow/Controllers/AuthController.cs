@@ -1,4 +1,5 @@
 ﻿using Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -23,46 +24,25 @@ namespace ChatFlow.Controllers
             this.RUlogic = _RUlogic;
         }
 
-        [HttpPost]
-        public async Task<string> AddUser([FromBody] User user)
-        {
-            return await this.authLogic.CreateUser(user);
-        }
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("{userid}/{roomid}")]
         public void AddUserToRoom(string userid, string roomid)
         {
             this.roomLogic.AddUserToRoom(userid, roomid);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{userid}/{roomid}")]
         public void RemoveUserFromRoom(string userid, string roomid)
         {
             this.roomLogic.RemoveUserFromRoom(userid, roomid);
         }
 
-        [HttpGet("{userid}")]
-        public async Task<User> GetUser(string userid)
-        {
-            return await this.authLogic.GetUser(userid);
-        }
-
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IEnumerable<User> GetUsers()
         {
             return this.authLogic.GetAllUser();
-        }
-
-        [HttpDelete("{userid}")]
-        public async Task DeleteUser(string userid)
-        {
-            await this.authLogic.DeleteUser(userid);
-        }
-
-        [HttpPut]
-        public async Task UpdateUser([FromBody] User user)
-        {
-            await this.authLogic.UpdateUser(user);
         }
 
         [HttpGet]
@@ -85,5 +65,33 @@ namespace ChatFlow.Controllers
         {
             return this.RUlogic.GetOneUsersAllRooms(userid);
         }
+
+        //only for testing
+        //[HttpPost]
+        //public async Task<string> AddUser([FromBody] User user)
+        //{
+        //    return await this.authLogic.CreateUser(user);
+        //}
+
+        //only for testing
+        //[HttpGet("{userid}")]
+        //public async Task<User> GetUser(string userid)
+        //{
+        //    return await this.authLogic.GetUser(userid);
+        //}
+
+        //only for testing
+        //[HttpDelete("{userid}")]
+        //public async Task DeleteUser(string userid)
+        //{
+        //    await this.authLogic.DeleteUser(userid);
+        //}
+
+        //only for testing
+        //[HttpPut]
+        //public async Task UpdateUser([FromBody] User user)
+        //{
+        //    await this.authLogic.UpdateUser(user);
+        //}
     }
 }
