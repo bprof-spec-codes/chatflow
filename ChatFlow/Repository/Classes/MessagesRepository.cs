@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Interfaces;
 using System;
@@ -11,7 +12,7 @@ namespace Repository.Classes
 {
     public class MessagesRepository : CommonRepository<Messages>, IMessagesRepository
     {
-        public MessagesRepository(DbContext context) : base(context)
+        public MessagesRepository(ChatFlowContext context) : base(context)
         {
         }
 

@@ -47,6 +47,31 @@ namespace Logic.Classes
             roomRepository.Update(updatedRoom);
         }
 
+        public void AddThreadToRoom(Threads thread, string roomid)
+        {
+            this.GetOneRoom(roomid).Threads.Add(thread);
+            this.roomRepository.Save();
+        }
+
+        public void AddUserToRoom(string userid, string roomid)
+        {
+            Room room = this.GetOneRoom(roomid);
+            room.RoomUsers.Add(new RoomUser
+            {
+                UserID = userid
+            });
+            this.roomRepository.Save();
+        }
+
+        public void RemoveUserFromRoom(string userid, string roomid)
+        {
+            RoomUser roomuser = this.GetOneRoom(roomid).RoomUsers.FirstOrDefault(ru => ru.UserID == userid);
+            if (roomuser != null)
+            {
+                this.GetOneRoom(roomid).RoomUsers.Remove(roomuser);
+                this.roomRepository.Save();
+            }
+        }
 
         //Generating data for tests
         public void GenerateData()
@@ -70,23 +95,15 @@ namespace Logic.Classes
             AddRoom(r1);
             AddRoom(r2);
 
-            t1.RoomID = r1.RoomID;
-            t2.RoomID = r2.RoomID;
-            t3.RoomID = r2.RoomID;
-            t4.RoomID = r2.RoomID;
-            t5.RoomID = r2.RoomID;
-            t6.RoomID = r2.RoomID;
-            t7.RoomID = r2.RoomID;
-            t8.RoomID = r2.RoomID;
+            AddThreadToRoom(t1, r1.RoomID);
+            AddThreadToRoom(t2, r2.RoomID);
+            AddThreadToRoom(t3, r2.RoomID);
+            AddThreadToRoom(t4, r2.RoomID);
+            AddThreadToRoom(t5, r2.RoomID);
+            AddThreadToRoom(t6, r2.RoomID);
+            AddThreadToRoom(t7, r2.RoomID);
+            AddThreadToRoom(t8, r2.RoomID);
 
-            threadsRepository.Add(t1);
-            threadsRepository.Add(t2);
-            threadsRepository.Add(t3);
-            threadsRepository.Add(t4);
-            threadsRepository.Add(t5);
-            threadsRepository.Add(t6);
-            threadsRepository.Add(t7);
-            threadsRepository.Add(t8);
 
             m1.ThreadID = t1.ThreadID;
             m2.ThreadID = t5.ThreadID;

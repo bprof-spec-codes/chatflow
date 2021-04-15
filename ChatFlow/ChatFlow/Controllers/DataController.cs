@@ -1,4 +1,4 @@
-﻿using Logic.Classes;
+﻿using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,9 +11,9 @@ namespace ChatFlow.Controllers
     [Route("{controller}")]
     public class DataController : ControllerBase
     {
-        RoomLogic logic;
+        IRoomLogic logic;
 
-        public DataController(RoomLogic rlogic)
+        public DataController(IRoomLogic rlogic)
         {
             this.logic = rlogic;
         }
