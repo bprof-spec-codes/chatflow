@@ -12,10 +12,12 @@ namespace Logic.Classes
     public class ThreadsLogic : IThreadsLogic
     {
         IThreadsRepository threadsRepository;
+        IReactionRepository reactionRepository;
 
-        public ThreadsLogic(IThreadsRepository threadsRepository)
+        public ThreadsLogic(IThreadsRepository threadsRepository, IReactionRepository reactionRepository)
         {
             this.threadsRepository = threadsRepository;
+            this.reactionRepository =  reactionRepository;
         }
 
         public void AddMessageToThread(Messages message, string threadid)
@@ -26,27 +28,75 @@ namespace Logic.Classes
 
         public void AddThread(Threads threads)
         {
-            threadsRepository.Add(threads);
+            this.threadsRepository.Add(threads);
         }
 
         public void DeleteThread(Threads threads)
         {
-            threadsRepository.Delete(threads);
+            this.threadsRepository.Delete(threads);
         }
 
         public IQueryable<Threads> GetAllThread()
         {
-            return threadsRepository.GetAll();
+            return this.threadsRepository.GetAll();
+        }
+
+        public IQueryable<Threads> GetAllThreadFromRoom(string idRoom)
+        {
+            return this.threadsRepository.GetAll().Where(thread => thread.RoomID == idRoom);
         }
 
         public Threads GetOneThread(string idThreads)
         {
-            return threadsRepository.GetOne(idThreads);
+            return this.threadsRepository.GetOne(idThreads);
         }
 
         public void UpdateThread(Threads updatedThreads)
         {
-            threadsRepository.Update(updatedThreads);
+            this.threadsRepository.Update(updatedThreads);
+        }
+
+        public IQueryable<Threads> GetAllPinnedThread(string idRoom)
+        {
+            return this.threadsRepository.GetAll().Where(thread => thread.RoomID == idRoom && thread.IsPinned == true);
+        }
+
+        public void PinThread(string idThreads)
+        {
+            Threads thread = GetOneThread(idThreads);
+            if (GetAllPinnedThread(thread.RoomID).Count() < 3)
+            {
+                this.threadsRepository.GetOne(idThreads).IsPinned = true;
+                this.threadsRepository.Save();
+            }
+            else
+            {
+                throw new Exception("You have no more pin!");
+            }
+        }
+
+        public void DeletePinThread(string idThreads)
+        {
+            this.threadsRepository.GetOne(idThreads).IsPinned = false;
+            this.threadsRepository.Save();
+        }
+
+        public void AddReactionToThread(string idThreads, Reaction reaction)
+        {
+            this.threadsRepository.GetOne(idThreads).Reactions.Add(reaction);
+            this.threadsRepository.Save();
+        }
+
+        public void DeleteReactionFromThread(string idReaction)
+        {
+            this.reactionRepository.Delete(idReaction);
+            this.threadsRepository.Save();
+        }
+
+        public void UpdateReactionOnThread(string idReaction, ReactionType type)
+        {
+            this.reactionRepository.Update(idReaction, type);
+            this.threadsRepository.Save();
         }
     }
 }

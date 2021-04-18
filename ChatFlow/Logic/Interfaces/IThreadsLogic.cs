@@ -12,9 +12,15 @@ namespace Logic.Interfaces
         void AddThread(Threads threads);
         void DeleteThread(Threads threads);
         IQueryable<Threads> GetAllThread();
+        IQueryable<Threads> GetAllThreadFromRoom(string idRoom);
         Threads GetOneThread(string idThreads);
         void UpdateThread(Threads updatedThreads);
-
-        void AddMessageToThread(Messages message, string threadid);
+        void AddMessageToThread(Messages message, string idThread);
+        IQueryable<Threads> GetAllPinnedThread(string roomId);
+        void PinThread(string idThreads);
+        void DeletePinThread(string idThreads);
+        void AddReactionToThread(string idThreads, Reaction reaction);
+        void DeleteReactionFromThread(string idReaction);
+        void UpdateReactionOnThread(string idReaction, ReactionType type);
     }
 }
