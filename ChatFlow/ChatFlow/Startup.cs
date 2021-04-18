@@ -16,6 +16,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Models;
+using Repository;
 using Repository.Classes;
 using Repository.Interfaces;
 
@@ -39,6 +40,7 @@ namespace ChatFlow
             services.AddTransient<IRoomRepository, RoomRepository>();
             services.AddTransient<IThreadsRepository, ThreadsRepository>();
             services.AddTransient<IRoomUserRepository, RoomUserRepository>();
+            services.AddTransient<IReactionRepository, ReactionRepository>();
 
             services.AddTransient<ChatFlowContext, ChatFlowContext>();
 
