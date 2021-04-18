@@ -241,6 +241,18 @@ namespace Data
                 .WithMany(user => user.RoomUsers)
                 .HasForeignKey(roomUser => roomUser.UserID);
             });
+
+            modelBuilder.Entity<Reaction>(entity =>
+            {
+                entity
+                .HasOne(reaction => reaction.Message)
+                .WithMany(message => message.Reactions)
+                .HasForeignKey(reaction => reaction.MessageID);
+                entity
+                .HasOne(reaction => reaction.Thread)
+                .WithMany(thread => thread.Reactions)
+                .HasForeignKey(reaction => reaction.ThreadID);
+            });
         }
     }
 }
