@@ -50,5 +50,36 @@ namespace ChatFlow.Controllers
         {
             messagesLogic.UpdateMessage(updatedMessages);
         }
+
+        [HttpPost("AddReaction/{idMessages}/{reactionNumber}")]
+        public void AddReactionToMessage(string idMessages, int reactionNumber)
+        {
+            ReactionType reactionType = (ReactionType)reactionNumber;
+            Reaction reaction = new Reaction();
+            reaction.MessageID = idMessages;
+            reaction.ReactionType = reactionType;
+            
+            this.messagesLogic.AddReactionToMessage(idMessages, reaction);
+        }
+
+        [HttpDelete("DeleteReaction/{idReaction}")]
+        public void DeleteReactionFromMessage(string idReaction)
+        {
+            this.messagesLogic.DeleteReactionFromMessage(idReaction);
+        }
+
+        [HttpPut("UpdateReaction/{idReaction}/{reactionNumber}")]
+        public void UpdateReactionOnMessage(string idReaction, int reactionNumber)
+        {
+            if (reactionNumber <= 3 && reactionNumber > 0)
+            {
+                ReactionType reactionType = (ReactionType)reactionNumber;
+                this.messagesLogic.UpdateReactionOnMessage(idReaction, reactionType);
+            }
+            else
+            {
+                throw new Exception("Invalid number!");
+            }
+        }
     }
 }
