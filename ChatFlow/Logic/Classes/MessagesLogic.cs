@@ -12,35 +12,55 @@ namespace Logic.Classes
     public class MessagesLogic : IMessagesLogic
     {
         IMessagesRepository messagesRepository;
+        IReactionRepository reactionRepository;
 
-        public MessagesLogic(IMessagesRepository messagesRepository)
+        public MessagesLogic(IMessagesRepository messagesRepository, IReactionRepository reactionRepository)
         {
             this.messagesRepository = messagesRepository;
+            this.reactionRepository = reactionRepository;
         }
 
         public void AddMessage(Messages messages)
         {
-            messagesRepository.Add(messages);
+            this.messagesRepository.Add(messages);
         }
 
         public void DeleteMessage(Messages messages)
         {
-            messagesRepository.Delete(messages);
+            this.messagesRepository.Delete(messages);
         }
 
         public IQueryable<Messages> GetAllMessage()
         {
-            return messagesRepository.GetAll();
+            return this.messagesRepository.GetAll();
         }
 
         public Messages GetOneMessage(string idMessages)
         {
-            return messagesRepository.GetOne(idMessages);
+            return this.messagesRepository.GetOne(idMessages);
         }
 
         public void UpdateMessage(Messages updatedMessages)
         {
-            messagesRepository.Update(updatedMessages);
+            this.messagesRepository.Update(updatedMessages);
+        }
+
+        public void AddReactionToMessage(string idMessages, Reaction reaction)
+        {
+            this.messagesRepository.GetOne(idMessages).Reactions.Add(reaction);
+            this.messagesRepository.Save();
+        }
+
+        public void DeleteReactionFromMessage(string idReaction)
+        {
+            this.reactionRepository.Delete(idReaction);
+            this.messagesRepository.Save();
+        }
+
+        public void UpdateReactionOnMessage(string idReaction, ReactionType type)
+        {
+            this.reactionRepository.Update(idReaction, type);
+            this.messagesRepository.Save();
         }
     }
 }
