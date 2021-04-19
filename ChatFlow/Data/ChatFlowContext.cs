@@ -208,8 +208,8 @@ namespace Data
                 entity
                 .HasOne(message => message.Threads)
                 .WithMany(threads => threads.Messages)
-                .HasForeignKey(message => message.ThreadID);
-                // .OnDelete needed??
+                .HasForeignKey(message => message.ThreadID)
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<Threads>(entity =>
@@ -217,7 +217,8 @@ namespace Data
                 entity
                 .HasOne(threads => threads.Room)
                 .WithMany(room => room.Threads)
-                .HasForeignKey(threads => threads.RoomID);
+                .HasForeignKey(threads => threads.RoomID)
+                .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<RoomUser>(entity =>
