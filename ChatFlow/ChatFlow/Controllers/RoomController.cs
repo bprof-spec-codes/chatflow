@@ -24,31 +24,31 @@ namespace ChatFlow.Controllers
         [HttpPost]
         public void AddRoom([FromBody] Room room)
         {
-            roomLogic.AddRoom(room);
+            this.roomLogic.AddRoom(room);
         }
 
-        [HttpDelete]
-        public void DeleteRoom([FromBody] Room room)
+        [HttpDelete("{idRoom}")]
+        public void DeleteRoom(string idRoom)
         {
-            roomLogic.DeleteRoom(room);
+            this.roomLogic.DeleteRoom(idRoom);
         }
 
         [HttpGet]
         public IQueryable<Room> GetAllRoom()
         {
-            return roomLogic.GetAllRoom();
+            return this.roomLogic.GetAllRoom();
         }
 
         [HttpGet("{idRoom}")]
         public Room GetOneRoom(string idRoom)
         {
-            return roomLogic.GetOneRoom(idRoom);
+            return this.roomLogic.GetOneRoom(idRoom);
         }
 
         [HttpPut]
         public void UpdateRoom([FromBody] Room updatedRoom)
         {
-            roomLogic.UpdateRoom(updatedRoom);
+            this.roomLogic.UpdateRoom(updatedRoom);
         }
 
         [HttpGet("alluser/{roomid}")]

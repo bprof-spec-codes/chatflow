@@ -10,9 +10,12 @@ namespace Logic.Interfaces
     public interface IMessagesLogic
     {
         void AddMessage(Messages messages);
-        void DeleteMessage(Messages messages);
+        void DeleteMessage(string idMessages);
         IQueryable<Messages> GetAllMessage();
         Messages GetOneMessage(string idMessages);
         void UpdateMessage(Messages updatedMessages);
+        void AddReactionToMessage(string idMessages, Reaction reaction);
+        void DeleteReactionFromMessage(string idReaction);
+        void UpdateReactionOnMessage(string idReaction, ReactionType type);
     }
 }

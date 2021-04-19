@@ -14,37 +14,41 @@ namespace Logic.Classes
         IRoomRepository roomRepository;
         IThreadsRepository threadsRepository;
         IMessagesRepository messagesRepository;
+        IMessagesLogic messagesLogic;
+        IThreadsLogic threadsLogic;
 
-        public RoomLogic(IRoomRepository roomRepository, IThreadsRepository threadsRepository, IMessagesRepository messagesRepository)
+        public RoomLogic(IRoomRepository roomRepository, IThreadsRepository threadsRepository, IMessagesRepository messagesRepository, IMessagesLogic messagesLogic, IThreadsLogic threadsLogic)
         {
             this.roomRepository = roomRepository;
             this.threadsRepository = threadsRepository;
             this.messagesRepository = messagesRepository;
+            this.messagesLogic = messagesLogic;
+            this.threadsLogic = threadsLogic;
         }
 
         public void AddRoom(Room room)
         {
-            roomRepository.Add(room);
+            this.roomRepository.Add(room);
         }
 
-        public void DeleteRoom(Room room)
+        public void DeleteRoom(string idRoom)
         {
-            roomRepository.Delete(room);
+            this.roomRepository.Delete(idRoom);
         }
 
         public IQueryable<Room> GetAllRoom()
         {
-            return roomRepository.GetAll();
+            return this.roomRepository.GetAll();
         }
 
         public Room GetOneRoom(string idRoom)
         {
-            return roomRepository.GetOne(idRoom);
+            return this.roomRepository.GetOne(idRoom);
         }
 
         public void UpdateRoom(Room updatedRoom)
         {
-            roomRepository.Update(updatedRoom);
+            this.roomRepository.Update(updatedRoom);
         }
 
         public void AddThreadToRoom(Threads thread, string roomid)
@@ -87,10 +91,15 @@ namespace Logic.Classes
             Threads t6 = new Threads() { IsPinned = false, TimeStamp = DateTime.Now.AddMinutes(5), Content = "Suspendisse neque ex, mollis quis pulvinar ut, blandit nec sem. In vel interdum tortor. Fusce ultrices diam urna, vel iaculis dui ultricies a. Cras at nibh id mi maximus vestibulum id id sem. Aliquam varius venenatis lacus quis convallis. Pellentesque tincidunt sapien tortor, dapibus ullamcorper metus bibendum a. Mauris molestie mi et volutpat tincidunt. Nunc quis dui felis. Mauris faucibus erat at dictum fermentum. Etiam facilisis dignissim tortor, eget faucibus lacus semper vitae. Fusce id neque semper, semper tortor tristique, fringilla tortor. Proin maximus nisl urna, vitae congue justo dictum sit amet. Vestibulum at turpis eget felis tempus convallis. Aenean libero leo, viverra non tempor vel, dignissim et eros. Donec bibendum varius magna ac aliquam." };
             Threads t7 = new Threads() { IsPinned = false, TimeStamp = DateTime.Now.AddMinutes(6), Content = "Nulla quis eros sit amet magna iaculis convallis sit amet non nisi. Nunc sodales sagittis arcu sit amet aliquet. Etiam elementum turpis eu mi blandit, quis mollis nunc condimentum. Sed lacinia faucibus lectus. Sed in ipsum euismod nisl imperdiet facilisis. Phasellus porta ligula et mi tempus, non volutpat sem pretium. Duis consectetur metus augue, elementum fringilla lorem consequat sit amet. Cras eu felis magna. Donec facilisis ex neque, id elementum ligula blandit nec." };
             Threads t8 = new Threads() { IsPinned = false, TimeStamp = DateTime.Now.AddMinutes(3), Content = "Curabitur vestibulum non urna vitae porta. Curabitur et ipsum quis elit volutpat condimentum. Donec ut varius neque, in gravida ante. Ut laoreet nisi eu augue pellentesque, mollis finibus libero commodo. Nullam a metus iaculis velit dignissim ultrices quis sed eros. Fusce sapien lectus, dapibus at lectus eu, egestas ultrices enim. Praesent ac tellus auctor, posuere mi eget, placerat turpis. Pellentesque elementum turpis quis turpis rutrum pretium. Nulla sed libero feugiat, tincidunt risus a, ultricies nisl. Sed commodo elit sed nunc aliquet viverra." };
+            Threads t9 = new Threads() { IsPinned = false, TimeStamp = DateTime.Now.AddMinutes(2), Content = "Curabitur non urna vitae porta. Curabitur et ipsum quis elit volutpat condimentum. Donec ut varius neque, in gravida ante. Ut laoreet nisi eu augue pellentesque, mollis finibus libero commodo. Nullam a metus iaculis velit dignissim quis sed eros. Fusce sapien lectus, dapibus at lectus eu, egestas ultrices enim. Praesent ac tellus auctor, posuere mi eget, placerat turpis. Pellentesque elementum turpis quis turpis rutrum pretium. Nulla sed libero feugiat, tincidunt risus a, ultricies nisl. Sed commodo elit sed nunc aliquet viverra." };
 
             Messages m1 = new Messages() { Content = "nice lorem ipsum bro", TimeStamp = DateTime.Now.AddMinutes(10) };
             Messages m2 = new Messages() { Content = "we should have mocked some data", TimeStamp = DateTime.Now.AddMinutes(10) };
             Messages m3 = new Messages() { Content = "a very nice message for you", TimeStamp = DateTime.Now.AddMinutes(20) };
+
+            Reaction reaction1 = new Reaction() { ReactionType = ReactionType.RedHeart};
+            Reaction reaction2 = new Reaction() { ReactionType = ReactionType.GreenTick };
+            Reaction reaction3 = new Reaction() { ReactionType = ReactionType.Smile };
 
             AddRoom(r1);
             AddRoom(r2);
@@ -103,7 +112,7 @@ namespace Logic.Classes
             AddThreadToRoom(t6, r2.RoomID);
             AddThreadToRoom(t7, r2.RoomID);
             AddThreadToRoom(t8, r2.RoomID);
-
+            AddThreadToRoom(t9, r1.RoomID);
 
             m1.ThreadID = t1.ThreadID;
             m2.ThreadID = t5.ThreadID;
@@ -112,6 +121,10 @@ namespace Logic.Classes
             messagesRepository.Add(m1);
             messagesRepository.Add(m2);
             messagesRepository.Add(m3);
+
+            messagesLogic.AddReactionToMessage(m2.MessageID, reaction1);
+            threadsLogic.AddReactionToThread(t7.ThreadID, reaction2);
+            threadsLogic.AddReactionToThread(t7.ThreadID, reaction3);
         }
     }
 }

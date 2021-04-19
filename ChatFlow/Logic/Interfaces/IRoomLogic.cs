@@ -10,7 +10,7 @@ namespace Logic.Interfaces
     public interface IRoomLogic
     {
         void AddRoom(Room room);
-        void DeleteRoom(Room room);
+        void DeleteRoom(string idRoom);
         IQueryable<Room> GetAllRoom();
         Room GetOneRoom(string idRoom);
         void UpdateRoom(Room updatedRoom);

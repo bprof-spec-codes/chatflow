@@ -30,6 +30,8 @@ namespace Repository.Classes
             this.context.SaveChanges();
         }
 
+        public abstract void Delete(string id);
+
         public IQueryable<T> GetAll()
         {
             return this.context.Set<T>();
