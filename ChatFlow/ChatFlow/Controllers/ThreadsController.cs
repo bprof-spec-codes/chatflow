@@ -27,64 +27,68 @@ namespace ChatFlow.Controllers
             this.roomLogic.AddThreadToRoom(threads, roomid);
         }
 
-        [HttpDelete]
-        public void DeleteThread([FromBody] Threads threads)
+        [HttpDelete("{idThreads}")]
+        public void DeleteThread(string idThreads)
         {
-            threadsLogic.DeleteThread(threads);
+            this.threadsLogic.DeleteThread(idThreads);
         }
 
         //only for testing
         [HttpGet]
         public IQueryable<Threads> GetAllThread()
         {
-            return threadsLogic.GetAllThread();
+            return this.threadsLogic.GetAllThread();
         }
 
         [HttpGet("Room/{idRoom}")]
         public IQueryable<Threads> GetAllThreadFromRoom(string idRoom)
         {
-            return threadsLogic.GetAllThreadFromRoom(idRoom);
+            return this.threadsLogic.GetAllThreadFromRoom(idRoom);
         }
 
         [HttpGet("{idThreads}")]
         public Threads GetOneThread(string idThreads)
         {
-            return threadsLogic.GetOneThread(idThreads);
+            return this.threadsLogic.GetOneThread(idThreads);
         }
 
         [HttpPut]
         public void UpdateThread([FromBody] Threads updatedThreads)
         {
-            threadsLogic.UpdateThread(updatedThreads);
+            this.threadsLogic.UpdateThread(updatedThreads);
         }
 
         [HttpGet("Pinned/{idRoom}")]
         public IQueryable<Threads> GetAllPinnedThread(string idRoom)
         {
-            return threadsLogic.GetAllPinnedThread(idRoom);
+            return this.threadsLogic.GetAllPinnedThread(idRoom);
         }
 
         [HttpPut("Pin/{idThreads}")]
         public void PinThread(string idThreads)
         {
-            threadsLogic.PinThread(idThreads);
+            this.threadsLogic.PinThread(idThreads);
         }
 
         [HttpPut("DeletePin/{idThreads}")]
         public void DeletePinThread(string idThreads)
         {
-            threadsLogic.DeletePinThread(idThreads);
+            this.threadsLogic.DeletePinThread(idThreads);
         }
 
         [HttpPost("AddReaction/{idThreads}/{reactionNumber}")]
         public void AddReactionToThread(string idThreads, int reactionNumber)
         {
-            ReactionType reactionType = (ReactionType)reactionNumber;
-            Reaction reaction = new Reaction();
-            reaction.ThreadID = idThreads;
-            reaction.ReactionType = reactionType;
-
-            this.threadsLogic.AddReactionToThread(idThreads, reaction);
+            if (reactionNumber <= 3 && reactionNumber > 0)
+            {
+                ReactionType reactionType = (ReactionType)reactionNumber;
+                Reaction reaction = new Reaction { ThreadID = idThreads, ReactionType = reactionType };
+                this.threadsLogic.AddReactionToThread(idThreads, reaction);
+            }
+            else
+            {
+                throw new Exception("Invalid number!");
+            }
         }
 
         [HttpDelete("DeleteReaction/{idThreads}")]

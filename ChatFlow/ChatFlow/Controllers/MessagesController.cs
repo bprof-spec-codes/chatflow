@@ -27,10 +27,10 @@ namespace ChatFlow.Controllers
             this.threadsLogic.AddMessageToThread(messages, threadid);
         }
 
-        [HttpDelete]
-        public void DeleteMessage([FromBody] Messages messages)
+        [HttpDelete("{idMessages}")]
+        public void DeleteMessage(string idMessages)
         {
-            messagesLogic.DeleteMessage(messages);
+            this.messagesLogic.DeleteMessage(idMessages);
         }
 
         [HttpGet]
