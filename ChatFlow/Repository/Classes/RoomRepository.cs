@@ -21,6 +21,11 @@ namespace Repository.Classes
             return this.GetAll().SingleOrDefault(x => x.RoomID == id);
         }
 
+        public override void Delete(string id)
+        {
+            Delete(GetOne(id));
+        }
+
         public override void Update(Room updatedItem)
         {
             var room = this.GetOne(updatedItem.RoomID);

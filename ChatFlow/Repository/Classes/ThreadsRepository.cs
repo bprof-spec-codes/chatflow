@@ -21,6 +21,11 @@ namespace Repository.Classes
             return this.GetAll().SingleOrDefault(x => x.ThreadID == id);
         }
 
+        public override void Delete(string id)
+        {
+            Delete(GetOne(id));
+        }
+
         public override void Update(Threads updatedItem)
         {
             var thread = this.GetOne(updatedItem.ThreadID);
