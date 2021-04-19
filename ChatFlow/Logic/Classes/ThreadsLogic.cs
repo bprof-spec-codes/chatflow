@@ -31,9 +31,9 @@ namespace Logic.Classes
             this.threadsRepository.Add(threads);
         }
 
-        public void DeleteThread(Threads threads)
+        public void DeleteThread(string idThreads)
         {
-            this.threadsRepository.Delete(threads);
+            this.threadsRepository.Delete(idThreads);
         }
 
         public IQueryable<Threads> GetAllThread()

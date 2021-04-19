@@ -31,9 +31,9 @@ namespace Logic.Classes
             this.roomRepository.Add(room);
         }
 
-        public void DeleteRoom(Room room)
+        public void DeleteRoom(string idRoom)
         {
-            this.roomRepository.Delete(room);
+            this.roomRepository.Delete(idRoom);
         }
 
         public IQueryable<Room> GetAllRoom()

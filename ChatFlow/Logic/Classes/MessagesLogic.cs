@@ -25,9 +25,9 @@ namespace Logic.Classes
             this.messagesRepository.Add(messages);
         }
 
-        public void DeleteMessage(Messages messages)
+        public void DeleteMessage(string idMessages)
         {
-            this.messagesRepository.Delete(messages);
+            this.messagesRepository.Delete(idMessages);
         }
 
         public IQueryable<Messages> GetAllMessage()
