@@ -10,44 +10,27 @@ using System.Threading.Tasks;
 
 namespace Repository
 {
-    public class ReactionRepository : IReactionRepository
+    public class ReactionRepository : CommonRepository<Reaction>, IReactionRepository
     {
-        ChatFlowContext context;
-
-        public ReactionRepository(ChatFlowContext context)
+        public ReactionRepository(ChatFlowContext context) : base(context)
         {
-            this.context = context;
         }
 
-        public void Add(Reaction reaction)
-        {
-            this.context.Set<Reaction>().Add(reaction);
-            this.context.SaveChanges();
-        }
-
-        public void Delete(Reaction reaction)
-        {
-            this.context.Set<Reaction>().Remove(reaction);
-            this.context.SaveChanges();
-        }
-
-        public void Delete(string id)
+        public override void Delete(string id)
         {
             Delete(GetOne(id));
-
         }
 
-        public Reaction GetOne(string id)
+        public override Reaction GetOne(string id)
         {
-            return this.context.Set<Reaction>().SingleOrDefault(x => x.ReactionID == id);
+            return this.GetAll().SingleOrDefault(x => x.ReactionID == id);
         }
 
-        public void Update(string id, ReactionType type)
+        public override void Update(Reaction updatedItem)
         {
-            Reaction reaction = this.context.Set<Reaction>().SingleOrDefault(x => x.ReactionID == id);
-            reaction.ReactionType = type;
-
-            this.context.SaveChanges();
+            var reaction = this.GetOne(updatedItem.ReactionID);
+            reaction.ReactionType = updatedItem.ReactionType;
+            this.Save();
         }
     }
 }
