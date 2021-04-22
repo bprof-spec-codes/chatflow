@@ -1,4 +1,5 @@
-﻿using Models;
+﻿using Logic.Classes;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,9 @@ namespace Logic.Interfaces
         IQueryable<Messages> GetAllMessage();
         Messages GetOneMessage(string idMessages);
         void UpdateMessage(Messages updatedMessages);
-        void AddReactionToMessage(string idMessages, Reaction reaction);
+        void AddReactionToMessage(Reaction reaction, string idMessages);
         void DeleteReactionFromMessage(string idReaction);
-        void UpdateReactionOnMessage(string idReaction, ReactionType type);
+        void UpdateReactionOnMessage(Reaction reaction);
+        IQueryable<Reaction> GetAllReactionFromMessage(string idMessages);
     }
 }

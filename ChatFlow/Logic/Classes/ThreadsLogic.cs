@@ -81,7 +81,7 @@ namespace Logic.Classes
             this.threadsRepository.Save();
         }
 
-        public void AddReactionToThread(string idThreads, Reaction reaction)
+        public void AddReactionToThread(Reaction reaction, string idThreads)
         {
             this.threadsRepository.GetOne(idThreads).Reactions.Add(reaction);
             this.threadsRepository.Save();
@@ -93,10 +93,14 @@ namespace Logic.Classes
             this.threadsRepository.Save();
         }
 
-        public void UpdateReactionOnThread(string idReaction, ReactionType type)
+        public void UpdateReactionOnThread(Reaction reaction)
         {
-            this.reactionRepository.Update(idReaction, type);
-            this.threadsRepository.Save();
+            this.reactionRepository.Update(reaction);
+        }
+
+        public IQueryable<Reaction> GetAllReactionFromThread(string idThreads)
+        {
+            return this.reactionRepository.GetAll().Where(reaction => reaction.ThreadID == idThreads);
         }
     }
 }

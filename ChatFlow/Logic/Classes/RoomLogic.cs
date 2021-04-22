@@ -97,9 +97,9 @@ namespace Logic.Classes
             Messages m2 = new Messages() { Content = "we should have mocked some data", TimeStamp = DateTime.Now.AddMinutes(10) };
             Messages m3 = new Messages() { Content = "a very nice message for you", TimeStamp = DateTime.Now.AddMinutes(20) };
 
-            Reaction reaction1 = new Reaction() { ReactionType = ReactionType.RedHeart};
-            Reaction reaction2 = new Reaction() { ReactionType = ReactionType.GreenTick };
-            Reaction reaction3 = new Reaction() { ReactionType = ReactionType.Smile };
+            Reaction reaction1 = new Reaction() { ReactionType = Models.ReactionType.RedHeart};
+            Reaction reaction2 = new Reaction() { ReactionType = Models.ReactionType.GreenTick };
+            Reaction reaction3 = new Reaction() { ReactionType = Models.ReactionType.Smile };
 
             AddRoom(r1);
             AddRoom(r2);
@@ -122,9 +122,9 @@ namespace Logic.Classes
             messagesRepository.Add(m2);
             messagesRepository.Add(m3);
 
-            messagesLogic.AddReactionToMessage(m2.MessageID, reaction1);
-            threadsLogic.AddReactionToThread(t7.ThreadID, reaction2);
-            threadsLogic.AddReactionToThread(t7.ThreadID, reaction3);
+            messagesLogic.AddReactionToMessage(reaction1, m2.MessageID);
+            threadsLogic.AddReactionToThread(reaction2, t7.ThreadID);
+            threadsLogic.AddReactionToThread(reaction3, t7.ThreadID);
         }
     }
 }

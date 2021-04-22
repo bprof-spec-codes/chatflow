@@ -45,7 +45,7 @@ namespace Logic.Classes
             this.messagesRepository.Update(updatedMessages);
         }
 
-        public void AddReactionToMessage(string idMessages, Reaction reaction)
+        public void AddReactionToMessage(Reaction reaction, string idMessages)
         {
             this.messagesRepository.GetOne(idMessages).Reactions.Add(reaction);
             this.messagesRepository.Save();
@@ -54,13 +54,16 @@ namespace Logic.Classes
         public void DeleteReactionFromMessage(string idReaction)
         {
             this.reactionRepository.Delete(idReaction);
-            this.messagesRepository.Save();
         }
 
-        public void UpdateReactionOnMessage(string idReaction, ReactionType type)
+        public void UpdateReactionOnMessage(Reaction reaction)
         {
-            this.reactionRepository.Update(idReaction, type);
-            this.messagesRepository.Save();
+            this.reactionRepository.Update(reaction);
+        }
+
+        IQueryable<Reaction> IMessagesLogic.GetAllReactionFromMessage(string idMessages)
+        {
+            return this.reactionRepository.GetAll().Where(reaction => reaction.MessageID == idMessages);
         }
     }
 }

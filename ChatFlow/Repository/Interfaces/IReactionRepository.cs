@@ -7,12 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repository.Interfaces
 {
-    public interface IReactionRepository
+    public interface IReactionRepository : ICommonRepository<Reaction>
     {
-        void Add(Reaction reaction);
-        void Delete(Reaction reaction);
-        void Delete(string id);
-        Reaction GetOne(string id);
-        void Update(string id, ReactionType type);
     }
 }

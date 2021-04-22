@@ -1,4 +1,5 @@
-﻿using Logic.Interfaces;
+﻿using Logic.Classes;
+using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -51,15 +52,10 @@ namespace ChatFlow.Controllers
             messagesLogic.UpdateMessage(updatedMessages);
         }
 
-        [HttpPost("AddReaction/{idMessages}/{reactionNumber}")]
-        public void AddReactionToMessage(string idMessages, int reactionNumber)
+        [HttpPost("AddReaction/{idMessages}")]
+        public void AddReactionToMessage([FromBody] Reaction reaction, string idMessages)
         {
-            ReactionType reactionType = (ReactionType)reactionNumber;
-            Reaction reaction = new Reaction();
-            reaction.MessageID = idMessages;
-            reaction.ReactionType = reactionType;
-            
-            this.messagesLogic.AddReactionToMessage(idMessages, reaction);
+            this.messagesLogic.AddReactionToMessage(reaction, idMessages);
         }
 
         [HttpDelete("DeleteReaction/{idReaction}")]
@@ -68,18 +64,16 @@ namespace ChatFlow.Controllers
             this.messagesLogic.DeleteReactionFromMessage(idReaction);
         }
 
-        [HttpPut("UpdateReaction/{idReaction}/{reactionNumber}")]
-        public void UpdateReactionOnMessage(string idReaction, int reactionNumber)
+        [HttpPut("UpdateReaction")]
+        public void UpdateReactionOnMessage([FromBody] Reaction updatedReaction)
         {
-            if (reactionNumber <= 3 && reactionNumber > 0)
-            {
-                ReactionType reactionType = (ReactionType)reactionNumber;
-                this.messagesLogic.UpdateReactionOnMessage(idReaction, reactionType);
-            }
-            else
-            {
-                throw new Exception("Invalid number!");
-            }
+            this.messagesLogic.UpdateReactionOnMessage(updatedReaction);
+        }
+
+        [HttpGet("Reactions/{idMessages}")]
+        public IQueryable<Reaction> GetAllReactionFromMessage(string idMessages)
+        {
+            return messagesLogic.GetAllReactionFromMessage(idMessages);
         }
     }
 }
