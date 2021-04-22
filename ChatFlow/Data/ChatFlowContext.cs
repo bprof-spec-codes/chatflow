@@ -16,6 +16,8 @@ namespace Data
 
         public DbSet<Messages> Messages { get; set; }
 
+        public DbSet<Reaction> Reactions { get; set; }
+
         public ChatFlowContext(DbContextOptions<ChatFlowContext> opt) : base(opt) 
         {
 
@@ -209,7 +211,7 @@ namespace Data
                 .HasOne(message => message.Threads)
                 .WithMany(threads => threads.Messages)
                 .HasForeignKey(message => message.ThreadID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull);
             });
 
             modelBuilder.Entity<Threads>(entity =>
@@ -218,7 +220,7 @@ namespace Data
                 .HasOne(threads => threads.Room)
                 .WithMany(room => room.Threads)
                 .HasForeignKey(threads => threads.RoomID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.SetNull); 
             });
 
             modelBuilder.Entity<RoomUser>(entity =>
@@ -248,11 +250,13 @@ namespace Data
                 entity
                 .HasOne(reaction => reaction.Message)
                 .WithMany(message => message.Reactions)
-                .HasForeignKey(reaction => reaction.MessageID);
+                .HasForeignKey(reaction => reaction.MessageID)
+                .OnDelete(DeleteBehavior.Cascade);
                 entity
                 .HasOne(reaction => reaction.Thread)
                 .WithMany(thread => thread.Reactions)
-                .HasForeignKey(reaction => reaction.ThreadID);
+                .HasForeignKey(reaction => reaction.ThreadID)
+                .OnDelete(DeleteBehavior.Cascade);
             });
         }
     }
