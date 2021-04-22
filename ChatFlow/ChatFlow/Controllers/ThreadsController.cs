@@ -76,19 +76,10 @@ namespace ChatFlow.Controllers
             this.threadsLogic.DeletePinThread(idThreads);
         }
 
-        [HttpPost("AddReaction/{idThreads}/{reactionNumber}")]
-        public void AddReactionToThread(string idThreads, int reactionNumber)
+        [HttpPost("AddReaction/{idThreads}")]
+        public void AddReactionToThread([FromBody] Reaction reaction, string idThreads)
         {
-            if (reactionNumber <= 3 && reactionNumber > 0)
-            {
-                ReactionType reactionType = (ReactionType)reactionNumber;
-                Reaction reaction = new Reaction { ThreadID = idThreads, ReactionType = reactionType };
-                this.threadsLogic.AddReactionToThread(idThreads, reaction);
-            }
-            else
-            {
-                throw new Exception("Invalid number!");
-            }
+            this.threadsLogic.AddReactionToThread(reaction, idThreads);
         }
 
         [HttpDelete("DeleteReaction/{idThreads}")]
@@ -97,18 +88,16 @@ namespace ChatFlow.Controllers
             this.threadsLogic.DeleteReactionFromThread(idThreads);
         }
 
-        [HttpPut("UpdateReaction/{idThreads}/{reactionNumber}")]
-        public void UpdateReactionOnThread(string idThreads, int reactionNumber)
+        [HttpPut("UpdateReaction")]
+        public void UpdateReactionOnThread([FromBody] Reaction updatedReaction)
         {
-            if (reactionNumber <= 3 && reactionNumber > 0)
-            {
-                ReactionType reactionType = (ReactionType)reactionNumber;
-                this.threadsLogic.UpdateReactionOnThread(idThreads, reactionType);
-            }
-            else
-            {
-                throw new Exception("Invalid number!");
-            }
+            this.threadsLogic.UpdateReactionOnThread(updatedReaction);
+        }
+
+        [HttpGet("Reactions/{idThreads}")]
+        public IQueryable<Reaction> GetAllReactionFromMessage(string idThreads)
+        {
+            return threadsLogic.GetAllReactionFromThread(idThreads);
         }
     }
 }
