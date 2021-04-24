@@ -13,6 +13,7 @@ export const ChatWindow = ({ threadId, onClose }) => {
   useEffect(() => {
     if (threadId) {
       setLoading(true);
+      setMessages(null);
       const minTime = new Promise((resolve) => setTimeout(resolve, 1000));
       const req = fetch(`/api/Thread/${threadId}`).then((res) => res.json());
 
@@ -43,11 +44,7 @@ export const ChatWindow = ({ threadId, onClose }) => {
     <div className="chat-window">
       <div className="chat-window__title">
         <h2>Thread</h2>
-        <Button
-          type="text"
-          icon={<CloseOutlined />}
-          onClick={onClose}
-        ></Button>
+        <Button type="text" icon={<CloseOutlined />} onClick={onClose}></Button>
       </div>
       <div className="chat-window__content">
         {loading && (
@@ -59,6 +56,7 @@ export const ChatWindow = ({ threadId, onClose }) => {
         )}
         {!messages && !loading && <Empty description="No messages yet!" />}
         {messages &&
+          !loading &&
           messages.map((message) => (
             <MessageCard
               key={message.id}
@@ -67,7 +65,11 @@ export const ChatWindow = ({ threadId, onClose }) => {
             ></MessageCard>
           ))}
       </div>
-      <Editor users={users} onSend={(content) => addMessage(content)} />
+      <Editor
+        users={users}
+        onSend={(content) => addMessage(content)}
+        shouldClear={loading}
+      />
     </div>
   );
 };
