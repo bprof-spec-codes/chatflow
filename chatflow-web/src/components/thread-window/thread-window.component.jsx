@@ -36,7 +36,11 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
 
   const addThread = (content) => {
     //TODO: implement api
-    setThreads((threads) => threads.concat({ id: 1111, content: content }));
+    if (threads) {
+      setThreads((threads) => threads.concat({ id: 1111, content }));
+    } else {
+      setThreads([{ id: 1111, content }]);
+    }
   };
 
   return (

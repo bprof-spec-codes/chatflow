@@ -37,7 +37,13 @@ export const ChatWindow = ({ threadId, onClose }) => {
 
   const addMessage = (content) => {
     //TODO: implement api
-    setMessages((messages) => messages.concat({ id: 1111, content: content }));
+    if (messages) {
+      setMessages((messages) =>
+        messages.concat({ id: 1111, content })
+      );
+    }else{
+      setMessages([{ id: 1111, content }]);
+    }
   };
 
   return (
