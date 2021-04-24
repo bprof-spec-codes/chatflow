@@ -41,10 +41,15 @@ const MessageCard = ({ id, content, onReply }) => {
         <span className="comment-action">{dislikes}</span>
       </span>
     </Tooltip>,
-    <Button key="comment-basic-reply-to" onClick={() => onReply(id)}>
-      Reply to
-    </Button>,
   ];
+
+  if (onReply && id) {
+    actions.push(
+      <Button key="comment-basic-reply-to" onClick={() => onReply(id)}>
+        Reply to
+      </Button>
+    );
+  }
 
   return (
     <div className="my-comment">

@@ -46,7 +46,12 @@ export const Home = () => {
                 onReply={(threadId) => setSelectedThread(threadId)}
               ></ThreadWindow>
             </div>
-            {selectedThread && <ChatWindow threadId={selectedThread} />}
+            {selectedThread && (
+              <ChatWindow
+                threadId={selectedThread}
+                onClose={() => setSelectedThread(null)}
+              />
+            )}
           </div>
         </Layout>
       </Layout>

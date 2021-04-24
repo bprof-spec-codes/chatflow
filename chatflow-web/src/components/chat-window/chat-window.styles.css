@@ -1,11 +1,37 @@
-.chat-window{
+.chat-window {
     /* position: absolute; */
     /* transform: translateX(100%);
     transition: transform 0.5s ease-in; */
     width: 33%;
-    height: calc(100% - 64px);
+    height: calc(100vh - 64px);
     right: 0;
     color: rgb(0, 0, 0);
     bottom: 0;
     background-color: #f0f2f5;
+    padding: 20px;
+    border-left: 1px solid lightgray;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-window .editor {
+    margin-top: 20px;
+}
+
+.chat-window__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
+.chat-window__title h2 {
+    color: black;
+    margin: 0;
+}
+
+.chat-window__content {
+    height: 100%;
+    overflow: auto;
 }
