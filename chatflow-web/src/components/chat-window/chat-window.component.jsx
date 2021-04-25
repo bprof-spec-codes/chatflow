@@ -38,10 +38,8 @@ export const ChatWindow = ({ threadId, onClose }) => {
   const addMessage = (content) => {
     //TODO: implement api
     if (messages) {
-      setMessages((messages) =>
-        messages.concat({ id: 1111, content })
-      );
-    }else{
+      setMessages((messages) => messages.concat({ id: 1111, content }));
+    } else {
       setMessages([{ id: 1111, content }]);
     }
   };
@@ -53,23 +51,25 @@ export const ChatWindow = ({ threadId, onClose }) => {
         <Button type="text" icon={<CloseOutlined />} onClick={onClose}></Button>
       </div>
       <div className="chat-window__content">
-        {loading && (
-          <div>
-            <MessageCard></MessageCard>
-            <MessageCard></MessageCard>
-            <MessageCard></MessageCard>
-          </div>
-        )}
-        {!messages && !loading && <Empty description="No messages yet!" />}
-        {messages &&
-          !loading &&
-          messages.map((message) => (
-            <MessageCard
-              key={message.id}
-              id={message.id}
-              content={message.content}
-            ></MessageCard>
-          ))}
+        <div>
+          {loading && (
+            <div>
+              <MessageCard></MessageCard>
+              <MessageCard></MessageCard>
+              <MessageCard></MessageCard>
+            </div>
+          )}
+          {!messages && !loading && <Empty description="No messages yet!" />}
+          {messages &&
+            !loading &&
+            messages.map((message) => (
+              <MessageCard
+                key={message.id}
+                id={message.id}
+                content={message.content}
+              ></MessageCard>
+            ))}
+        </div>
       </div>
       <Editor
         users={users}
