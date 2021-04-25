@@ -56,10 +56,17 @@ namespace ChatFlow.Controllers
             this.roomLogic.UpdateRoom(updatedRoom);
         }
 
-        [HttpGet("alluser/{roomid}")]
-        public IEnumerable<User> GetOneRoomsAllUsers(string roomid)
+        [HttpGet("alluser/{idRoom}")]
+        public IEnumerable<User> GetOneRoomsAllUsers(string idRoom)
         {
-            return this.RUlogic.GetOneRoomsAllUsers(roomid);
+            return this.RUlogic.GetOneRoomsAllUsers(idRoom);
+        }
+
+        [Authorize(Roles = ("Teacher, Student"))]
+        [HttpPost("{idRoom}")]
+        public void AddThreadToRoom([FromBody] Threads threadToAdd, string idRoom)
+        {
+            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom);
         }
     }
 }
