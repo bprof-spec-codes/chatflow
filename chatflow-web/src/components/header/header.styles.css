@@ -13,6 +13,18 @@
   align-items: center;
 }
 
+.header-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 120px;
+}
+
+.header-right-avatar {
+  display: flex;
+  align-items: center;
+}
+
 .header .ant-skeleton {
   width: 200px;
 }
@@ -23,4 +35,8 @@
 
 h3{
   color: white;
+}
+
+.ant-dropdown-menu {
+  width: 500px;
 }

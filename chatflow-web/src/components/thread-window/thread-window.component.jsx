@@ -32,7 +32,7 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
   useEffect(() => {
     const messageBody = document.getElementById("messagebody");
     messageBody.scrollTop = messageBody.scrollHeight;
-  }, [threads]);
+  }, []);
 
   const addThread = (content) => {
     //TODO: implement api
@@ -41,6 +41,14 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
     } else {
       setThreads([{ id: 1111, content }]);
     }
+  };
+
+  const pinThread = (id, pinned) => {
+    fetch(`/api/Thread/${id}`, {
+      headers: { 'Content-Type': 'application/json' },
+      method: "PUT",
+      body: JSON.stringify({ pinned }),
+    }).then(() => setThreads(threads => threads.map(thread => thread.id === id ? {...thread, pinned} : thread)));
   };
 
   return (
@@ -61,8 +69,10 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
               <MessageCard
                 key={thread.id}
                 id={thread.id}
+                pinned={thread.pinned}
                 content={thread.content}
                 onReply={(threadId) => onReply(threadId)}
+                onPin={pinThread}
               ></MessageCard>
             ))}
         </div>

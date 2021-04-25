@@ -6,10 +6,12 @@ import {
   LikeOutlined,
   DislikeFilled,
   LikeFilled,
+  PushpinOutlined,
+  PushpinFilled,
 } from "@ant-design/icons";
 import "./message-card.styles.css";
 
-const MessageCard = ({ id, content, onReply }) => {
+const MessageCard = ({ id, content, pinned, onReply, onPin }) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
@@ -45,9 +47,23 @@ const MessageCard = ({ id, content, onReply }) => {
 
   if (onReply && id) {
     actions.push(
-      <Button key="comment-basic-reply-to" onClick={() => onReply(id)}>
+      <Button
+        key="comment-basic-reply-to"
+        type="link"
+        onClick={() => onReply(id)}
+      >
         Reply to
       </Button>
+    );
+  }
+
+  if (onPin && id) {
+    actions.push(
+      <Button
+        type="text"
+        icon={pinned ? <PushpinFilled /> : <PushpinOutlined />}
+        onClick={() => onPin(id, !pinned)}
+      ></Button>
     );
   }
 
