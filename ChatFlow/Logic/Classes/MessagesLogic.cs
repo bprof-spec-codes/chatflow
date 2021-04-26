@@ -65,5 +65,10 @@ namespace Logic.Classes
         {
             return this.reactionRepository.GetAll().Where(reaction => reaction.MessageID == idMessages);
         }
+
+        public IQueryable<Messages> GetAllMessagesOfAThread(string threadid)
+        {
+            return this.GetAllMessage().Where(m => m.ThreadID == threadid);
+        }
     }
 }

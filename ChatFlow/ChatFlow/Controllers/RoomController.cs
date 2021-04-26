@@ -1,4 +1,5 @@
 ﻿using Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -21,18 +22,21 @@ namespace ChatFlow.Controllers
             this.RUlogic = _RUlogic;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void AddRoom([FromBody] Room room)
         {
             this.roomLogic.AddRoom(room);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{idRoom}")]
         public void DeleteRoom(string idRoom)
         {
             this.roomLogic.DeleteRoom(idRoom);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IQueryable<Room> GetAllRoom()
         {
@@ -45,16 +49,24 @@ namespace ChatFlow.Controllers
             return this.roomLogic.GetOneRoom(idRoom);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public void UpdateRoom([FromBody] Room updatedRoom)
         {
             this.roomLogic.UpdateRoom(updatedRoom);
         }
 
-        [HttpGet("alluser/{roomid}")]
-        public IEnumerable<User> GetOneRoomsAllUsers(string roomid)
+        [HttpGet("alluser/{idRoom}")]
+        public IEnumerable<User> GetOneRoomsAllUsers(string idRoom)
         {
-            return this.RUlogic.GetOneRoomsAllUsers(roomid);
+            return this.RUlogic.GetOneRoomsAllUsers(idRoom);
+        }
+
+        [Authorize(Roles = ("Teacher, Student"))]
+        [HttpPost("{idRoom}")]
+        public void AddThreadToRoom([FromBody] Threads threadToAdd, string idRoom)
+        {
+            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom);
         }
     }
 }

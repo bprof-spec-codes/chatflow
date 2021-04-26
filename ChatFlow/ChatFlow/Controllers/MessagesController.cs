@@ -1,5 +1,6 @@
 ﻿using Logic.Classes;
 using Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -22,10 +23,11 @@ namespace ChatFlow.Controllers
             this.threadsLogic = threadsLogic;
         }
 
-        [HttpPost("{threadid}")]
-        public void AddMessage([FromBody] Messages messages, string threadid)
+        [Authorize(Roles = "Student, Teacher")]
+        [HttpPost("{idThreads}")]
+        public void AddMessage([FromBody] Messages messages, string idThreads)
         {
-            this.threadsLogic.AddMessageToThread(messages, threadid);
+            this.threadsLogic.AddMessageToThread(messages, idThreads);
         }
 
         [HttpDelete("{idMessages}")]
@@ -34,11 +36,11 @@ namespace ChatFlow.Controllers
             this.messagesLogic.DeleteMessage(idMessages);
         }
 
-        [HttpGet]
-        public IQueryable<Messages> GetAllMessage()
-        {
-            return messagesLogic.GetAllMessage();
-        }
+        //[HttpGet]
+        //public IQueryable<Messages> GetAllMessage()
+        //{
+        //    return messagesLogic.GetAllMessage();
+        //}
 
         [HttpGet("{idMessages}")]
         public Messages GetOneMessage(string idMessages)
@@ -52,18 +54,21 @@ namespace ChatFlow.Controllers
             messagesLogic.UpdateMessage(updatedMessages);
         }
 
+        [Authorize(Roles = "Student, Teacher")]
         [HttpPost("AddReaction/{idMessages}")]
         public void AddReactionToMessage([FromBody] Reaction reaction, string idMessages)
         {
             this.messagesLogic.AddReactionToMessage(reaction, idMessages);
         }
 
+        [Authorize(Roles = "Student, Teacher")]
         [HttpDelete("DeleteReaction/{idReaction}")]
         public void DeleteReactionFromMessage(string idReaction)
         {
             this.messagesLogic.DeleteReactionFromMessage(idReaction);
         }
 
+        [Authorize(Roles = "Student, Teacher")]
         [HttpPut("UpdateReaction")]
         public void UpdateReactionOnMessage([FromBody] Reaction updatedReaction)
         {
@@ -74,6 +79,12 @@ namespace ChatFlow.Controllers
         public IQueryable<Reaction> GetAllReactionFromMessage(string idMessages)
         {
             return messagesLogic.GetAllReactionFromMessage(idMessages);
+        }
+
+        [HttpGet("{idThreads}")]
+        public IQueryable<Messages> GetEveryMessageFromThread(string idThreads)
+        {
+            return this.messagesLogic.GetAllMessagesOfAThread(idThreads);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -21,19 +22,12 @@ namespace ChatFlow.Controllers
             this.roomLogic = roomLogic;
         }
 
-        [HttpPost("{roomid}")]
-        public void AddThread([FromBody] Threads threads, string roomid)
-        {
-            this.roomLogic.AddThreadToRoom(threads, roomid);
-        }
-
         [HttpDelete("{idThreads}")]
         public void DeleteThread(string idThreads)
         {
             this.threadsLogic.DeleteThread(idThreads);
         }
 
-        //only for testing
         [HttpGet]
         public IQueryable<Threads> GetAllThread()
         {
@@ -64,30 +58,35 @@ namespace ChatFlow.Controllers
             return this.threadsLogic.GetAllPinnedThread(idRoom);
         }
 
+        [Authorize(Roles = "Teacher")]
         [HttpPut("Pin/{idThreads}")]
         public void PinThread(string idThreads)
         {
             this.threadsLogic.PinThread(idThreads);
         }
 
+        [Authorize(Roles = "Teacher")]
         [HttpPut("DeletePin/{idThreads}")]
         public void DeletePinThread(string idThreads)
         {
             this.threadsLogic.DeletePinThread(idThreads);
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpPost("AddReaction/{idThreads}")]
         public void AddReactionToThread([FromBody] Reaction reaction, string idThreads)
         {
             this.threadsLogic.AddReactionToThread(reaction, idThreads);
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpDelete("DeleteReaction/{idThreads}")]
         public void DeleteReactionFromThread(string idThreads)
         {
             this.threadsLogic.DeleteReactionFromThread(idThreads);
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpPut("UpdateReaction")]
         public void UpdateReactionOnThread([FromBody] Reaction updatedReaction)
         {
