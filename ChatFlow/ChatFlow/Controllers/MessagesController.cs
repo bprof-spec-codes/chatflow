@@ -36,11 +36,11 @@ namespace ChatFlow.Controllers
             this.messagesLogic.DeleteMessage(idMessages);
         }
 
-        [HttpGet]
-        public IQueryable<Messages> GetAllMessage()
-        {
-            return messagesLogic.GetAllMessage();
-        }
+        //[HttpGet]
+        //public IQueryable<Messages> GetAllMessage()
+        //{
+        //    return messagesLogic.GetAllMessage();
+        //}
 
         [HttpGet("{idMessages}")]
         public Messages GetOneMessage(string idMessages)
@@ -79,6 +79,12 @@ namespace ChatFlow.Controllers
         public IQueryable<Reaction> GetAllReactionFromMessage(string idMessages)
         {
             return messagesLogic.GetAllReactionFromMessage(idMessages);
+        }
+
+        [HttpGet("{idThreads}")]
+        public IQueryable<Messages> GetEveryMessageFromThread(string idThreads)
+        {
+            return this.messagesLogic.GetAllMessagesOfAThread(idThreads);
         }
     }
 }

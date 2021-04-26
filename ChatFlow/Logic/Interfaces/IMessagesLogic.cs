@@ -19,5 +19,6 @@ namespace Logic.Interfaces
         void DeleteReactionFromMessage(string idReaction);
         void UpdateReactionOnMessage(Reaction reaction);
         IQueryable<Reaction> GetAllReactionFromMessage(string idMessages);
+        IQueryable<Messages> GetAllMessagesOfAThread(string threadid);
     }
 }
