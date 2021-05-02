@@ -1,7 +1,7 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./header.styles.css";
-git import { Layout, Avatar, Skeleton, /*Menu,*/ Dropdown, Button } from "antd";
+import { Layout, Avatar, Skeleton, /*Menu,*/ Dropdown, Button } from "antd";
 import { UserOutlined, PushpinOutlined } from "@ant-design/icons";
 //import MessageCard from "../message-card/message-card.component";
 import { PinnedMessages } from "../pinned-messages/pinned-messages.component";
