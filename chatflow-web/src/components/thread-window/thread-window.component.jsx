@@ -58,7 +58,10 @@ const ThreadWindow = ({
 
   return (
     <div className="main-window">
-      <TopRow selectedRoom={selectedRoom}></TopRow>
+      <TopRow
+        selectedRoom={selectedRoom}
+        pinnedThreads={threads ? threads.filter((t) => t.pinned) : ""}
+      ></TopRow>
       <div className="row">
         <div className="thread-window">
           <MessageList
