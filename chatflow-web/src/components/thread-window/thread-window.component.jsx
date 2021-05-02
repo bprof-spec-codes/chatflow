@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "antd/dist/antd.css";
 import "./thread-window.styles.css";
-import { Layout, Empty } from "antd";
-import MessageCard from "../message-card/message-card.component";
 import Editor from "../editor/editor.component";
-const { Content } = Layout;
+import MessageList from "./message-list.component";
+import TopRow from "../header/header.component";
+import { ChatWindow } from "../chat-window/chat-window.component";
 
-const ThreadWindow = ({ selectedRoom, onReply }) => {
+const ThreadWindow = ({
+  selectedRoom,
+  onReply,
+  selectedThreadId,
+  setSelectedThreadId,
+}) => {
   const [threads, setThreads] = useState(null);
   const [loading, setLoading] = useState(true);
   const users = ["Valaki", "Valami"];
-  // const { room } = props;
 
   useEffect(() => {
     if (selectedRoom) {
@@ -29,11 +33,6 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
     }
   }, [selectedRoom]);
 
-  useEffect(() => {
-    const messageBody = document.getElementById("messagebody");
-    messageBody.scrollTop = messageBody.scrollHeight;
-  }, []);
-
   const addThread = (content) => {
     //TODO: implement api
     if (threads) {
@@ -45,44 +44,43 @@ const ThreadWindow = ({ selectedRoom, onReply }) => {
 
   const pinThread = (id, pinned) => {
     fetch(`/api/Thread/${id}`, {
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
       method: "PUT",
       body: JSON.stringify({ pinned }),
-    }).then(() => setThreads(threads => threads.map(thread => thread.id === id ? {...thread, pinned} : thread)));
+    }).then(() =>
+      setThreads((threads) =>
+        threads.map((thread) =>
+          thread.id === id ? { ...thread, pinned } : thread
+        )
+      )
+    );
   };
 
   return (
-    <div className="thread-window">
-      <Content className="content" id="messagebody">
-        <div>
-          {loading && (
-            <div>
-              <MessageCard></MessageCard>
-              <MessageCard></MessageCard>
-              <MessageCard></MessageCard>
-            </div>
-          )}
-          {!loading && !threads && <Empty description="No messages yet!" />}
-          {!loading &&
-            threads &&
-            threads.map((thread) => (
-              <MessageCard
-                key={thread.id}
-                id={thread.id}
-                pinned={thread.pinned}
-                content={thread.content}
-                onReply={(threadId) => onReply(threadId)}
-                onPin={pinThread}
-              ></MessageCard>
-            ))}
+    <div className="main-window">
+      <TopRow selectedRoom={selectedRoom}></TopRow>
+      <div className="row">
+        <div className="thread-window">
+          <MessageList
+            loading={loading}
+            messages={threads}
+            onReply={onReply}
+            onPin={pinThread}
+          />
+          <div className="write-post">
+            <Editor
+              users={users}
+              shouldClear={loading}
+              onSend={(content) => addThread(content)}
+            />
+          </div>
         </div>
-      </Content>
-      <div className="write-post">
-        <Editor
-          users={users}
-          shouldClear={loading}
-          onSend={(content) => addThread(content)}
-        />
+        {selectedThreadId && (
+          <ChatWindow
+            threadId={selectedThreadId}
+            onClose={() => setSelectedThreadId(null)}
+          />
+        )}
       </div>
     </div>
   );

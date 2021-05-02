@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./chat-window.styles.css";
 import Editor from "../editor/editor.component";
-import MessageCard from "../message-card/message-card.component";
-import { Empty, Button } from "antd";
+import { Button } from "antd";
 import { CloseOutlined } from "@ant-design/icons";
+import MessageList from "../thread-window/message-list.component";
 
 export const ChatWindow = ({ threadId, onClose }) => {
   const [messages, setMessages] = useState(null);
@@ -30,11 +30,6 @@ export const ChatWindow = ({ threadId, onClose }) => {
     }
   }, [threadId]);
 
-  useEffect(() => {
-    const chatWindow = document.querySelector(".chat-window__content");
-    chatWindow.scrollTop = chatWindow.scrollHeight;
-  }, [messages]);
-
   const addMessage = (content) => {
     //TODO: implement api
     if (messages) {
@@ -50,27 +45,7 @@ export const ChatWindow = ({ threadId, onClose }) => {
         <h2>Thread</h2>
         <Button type="text" icon={<CloseOutlined />} onClick={onClose}></Button>
       </div>
-      <div className="chat-window__content">
-        <div>
-          {loading && (
-            <div>
-              <MessageCard></MessageCard>
-              <MessageCard></MessageCard>
-              <MessageCard></MessageCard>
-            </div>
-          )}
-          {!messages && !loading && <Empty description="No messages yet!" />}
-          {messages &&
-            !loading &&
-            messages.map((message) => (
-              <MessageCard
-                key={message.id}
-                id={message.id}
-                content={message.content}
-              ></MessageCard>
-            ))}
-        </div>
-      </div>
+      <MessageList loading={loading} messages={messages} />
       <Editor
         users={users}
         onSend={(content) => addMessage(content)}
