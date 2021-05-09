@@ -5,6 +5,7 @@ using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ChatFlow.Controllers
@@ -45,7 +46,7 @@ namespace ChatFlow.Controllers
             return this.authLogic.GetAllUser();
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("login")]
         public async Task<ActionResult> Login([FromBody] LoginViewModel model)
         {
@@ -60,9 +61,11 @@ namespace ChatFlow.Controllers
             }
         }
 
-        [HttpGet("allroom/{userid}")]
-        public IEnumerable<Room> GetOneUsersAllRooms(string userid)
+        [Authorize(Roles = "Teacher, Student")]
+        [HttpGet("allroom")]
+        public IEnumerable<Room> GetOneUsersAllRooms()
         {
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
             return this.RUlogic.GetOneUsersAllRooms(userid);
         }
 
