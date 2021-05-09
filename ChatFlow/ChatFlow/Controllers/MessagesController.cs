@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace ChatFlow.Controllers
 {
     [ApiController]
+    [Authorize(Roles = "Student, Teacher")]
     [Route("{controller}")]
     public class MessagesController : ControllerBase
     {
@@ -23,7 +24,6 @@ namespace ChatFlow.Controllers
             this.threadsLogic = threadsLogic;
         }
 
-        [Authorize(Roles = "Student, Teacher")]
         [HttpPost("{idThreads}")]
         public void AddMessage([FromBody] Messages messages, string idThreads)
         {
@@ -42,11 +42,11 @@ namespace ChatFlow.Controllers
         //    return messagesLogic.GetAllMessage();
         //}
 
-        [HttpGet("{idMessages}")]
-        public Messages GetOneMessage(string idMessages)
-        {
-            return messagesLogic.GetOneMessage(idMessages);
-        }
+        //[HttpGet("{idMessages}")]
+        //public Messages GetOneMessage(string idMessages)
+        //{
+        //    return messagesLogic.GetOneMessage(idMessages);
+        //}
 
         [HttpPut]
         public void UpdateMessage([FromBody] Messages updatedMessages)
@@ -54,21 +54,18 @@ namespace ChatFlow.Controllers
             messagesLogic.UpdateMessage(updatedMessages);
         }
 
-        [Authorize(Roles = "Student, Teacher")]
         [HttpPost("AddReaction/{idMessages}")]
         public void AddReactionToMessage([FromBody] Reaction reaction, string idMessages)
         {
             this.messagesLogic.AddReactionToMessage(reaction, idMessages);
         }
 
-        [Authorize(Roles = "Student, Teacher")]
         [HttpDelete("DeleteReaction/{idReaction}")]
         public void DeleteReactionFromMessage(string idReaction)
         {
             this.messagesLogic.DeleteReactionFromMessage(idReaction);
         }
 
-        [Authorize(Roles = "Student, Teacher")]
         [HttpPut("UpdateReaction")]
         public void UpdateReactionOnMessage([FromBody] Reaction updatedReaction)
         {
