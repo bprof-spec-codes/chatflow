@@ -43,6 +43,7 @@ namespace ChatFlow.Controllers
             return this.roomLogic.GetAllRoom();
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpGet("{idRoom}")]
         public Room GetOneRoom(string idRoom)
         {
@@ -56,6 +57,7 @@ namespace ChatFlow.Controllers
             this.roomLogic.UpdateRoom(updatedRoom);
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpGet("alluser/{idRoom}")]
         public IEnumerable<User> GetOneRoomsAllUsers(string idRoom)
         {

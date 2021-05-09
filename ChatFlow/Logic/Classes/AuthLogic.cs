@@ -69,7 +69,7 @@ namespace Logic.Classes
                 {
                   new Claim(JwtRegisteredClaimNames.Sub, model.Username),
                   new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                  new Claim(ClaimTypes.NameIdentifier, user.Id)
+                  new Claim("userId", user.Id)
                 };
 
 
