@@ -14,12 +14,10 @@ namespace ChatFlow.Controllers
     public class ThreadsController : ControllerBase
     {
         IThreadsLogic threadsLogic;
-        IRoomLogic roomLogic;
 
-        public ThreadsController(IThreadsLogic threadsLogic, IRoomLogic roomLogic)
+        public ThreadsController(IThreadsLogic threadsLogic)
         {
             this.threadsLogic = threadsLogic;
-            this.roomLogic = roomLogic;
         }
 
         [HttpDelete("{idThreads}")]
@@ -34,6 +32,7 @@ namespace ChatFlow.Controllers
             return this.threadsLogic.GetAllThread();
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpGet("Room/{idRoom}")]
         public IQueryable<Threads> GetAllThreadFromRoom(string idRoom)
         {
@@ -52,6 +51,7 @@ namespace ChatFlow.Controllers
             this.threadsLogic.UpdateThread(updatedThreads);
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpGet("Pinned/{idRoom}")]
         public IQueryable<Threads> GetAllPinnedThread(string idRoom)
         {
@@ -60,9 +60,17 @@ namespace ChatFlow.Controllers
 
         [Authorize(Roles = "Teacher")]
         [HttpPut("Pin/{idThreads}")]
-        public void PinThread(string idThreads)
+        public string PinThread(string idThreads)
         {
-            this.threadsLogic.PinThread(idThreads);
+            try
+            {
+                this.threadsLogic.PinThread(idThreads);
+                return "SUCCESS";
+            }
+            catch (Exception exc)
+            {
+                return exc.Message;
+            }
         }
 
         [Authorize(Roles = "Teacher")]
@@ -93,6 +101,7 @@ namespace ChatFlow.Controllers
             this.threadsLogic.UpdateReactionOnThread(updatedReaction);
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpGet("Reactions/{idThreads}")]
         public IQueryable<Reaction> GetAllReactionFromMessage(string idThreads)
         {
