@@ -80,8 +80,8 @@ namespace Logic.Classes
         //Generating data for tests
         public void GenerateData()
         {
-            Room r1 = new Room() { RoomName = "TESTRoom1" };
-            Room r2 = new Room() { RoomName = "TESTRoom2" };
+            Room r1 = new Room() { RoomName = "Projektmunka" };
+            Room r2 = new Room() { RoomName = "Android fejlesztés alapjai" };
 
             Threads t1 = new Threads() { IsPinned = true, TimeStamp = DateTime.Now, Content = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed fringilla sapien condimentum, lacinia est a, ultricies risus. Vivamus non viverra magna. Nam eleifend nisl vel elementum sodales. Phasellus dictum metus eu vulputate sollicitudin. Quisque luctus nulla eu nibh condimentum commodo. Nunc mollis tellus massa, ac pharetra ante placerat id. Curabitur semper suscipit elit vel varius. Aliquam at elementum velit. Aliquam faucibus ultrices venenatis. Donec porttitor odio sed feugiat fringilla. Vestibulum placerat in nibh id placerat. Curabitur dignissim risus sit amet fringilla porta. Aliquam rutrum orci sed faucibus rhoncus. Phasellus tristique pulvinar mollis." };
             Threads t2 = new Threads() { IsPinned = false, TimeStamp = DateTime.Now.AddMinutes(1), Content = "Aliquam ac turpis et urna luctus pharetra. Integer pharetra sagittis nibh, quis aliquet elit. Cras eu velit dictum, commodo dui eu, tincidunt metus. Fusce eget viverra nisi. Sed et congue dolor. Curabitur rutrum semper justo, id commodo eros pellentesque eu. Donec vel porta metus, malesuada suscipit neque. Sed hendrerit libero in nulla placerat gravida. Suspendisse potenti. Quisque cursus scelerisque ultricies. Suspendisse hendrerit, leo sit amet viverra pellentesque, dui mi varius urna, sed consequat ipsum lectus vitae dui. Nunc cursus ut felis vel volutpat. Vivamus est nisl, lacinia blandit mattis id, laoreet a tortor. Integer varius consequat iaculis." };
@@ -125,6 +125,18 @@ namespace Logic.Classes
             messagesLogic.AddReactionToMessage(reaction1, m2.MessageID);
             threadsLogic.AddReactionToThread(reaction2, t7.ThreadID);
             threadsLogic.AddReactionToThread(reaction3, t7.ThreadID);
+
+            this.AddUserToRoom("fc5ddfbf-adbb-485b-9198-d5697f670632", r1.RoomID);
+            this.AddUserToRoom("cd078415-b771-4375-9079-e0d497567e85", r1.RoomID);
+            this.AddUserToRoom("70c69d55-28b8-4528-9c27-a4129f12659d", r1.RoomID);
+            this.AddUserToRoom("cd6687c1-30fb-4a21-b7d9-005986669286", r1.RoomID);
+            this.AddUserToRoom("cf7d31a0-20a7-4676-8e1f-c69d9470dc76", r1.RoomID);
+            this.AddUserToRoom("523fdb57-cdc3-4f91-bad8-12e80dfef125", r1.RoomID);
+            this.AddUserToRoom("796f78d1-9d03-4e0c-bd88-e22338e01425", r1.RoomID);
+            
+            this.AddUserToRoom("fc5ddfbf-adbb-485b-9198-d5697f670632", r2.RoomID);
+            this.AddUserToRoom("796f78d1-9d03-4e0c-bd88-e22338e01425", r2.RoomID);
+            this.AddUserToRoom("cf7d31a0-20a7-4676-8e1f-c69d9470dc76", r2.RoomID);
         }
     }
 }
