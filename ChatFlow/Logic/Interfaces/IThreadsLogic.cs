@@ -15,7 +15,7 @@ namespace Logic.Interfaces
         IQueryable<Threads> GetAllThreadFromRoom(string idRoom);
         Threads GetOneThread(string idThreads);
         void UpdateThread(Threads updatedThreads);
-        void AddMessageToThread(Messages message, string idThread);
+        void AddMessageToThread(Messages message, string idThread, string userid);
         IQueryable<Threads> GetAllPinnedThread(string roomId);
         void PinThread(string idThreads);
         void DeletePinThread(string idThreads);

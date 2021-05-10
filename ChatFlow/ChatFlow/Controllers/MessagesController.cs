@@ -27,7 +27,8 @@ namespace ChatFlow.Controllers
         [HttpPost("{idThreads}")]
         public void AddMessage([FromBody] Messages messages, string idThreads)
         {
-            this.threadsLogic.AddMessageToThread(messages, idThreads);
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            this.threadsLogic.AddMessageToThread(messages, idThreads, userid);
         }
 
         [HttpDelete("{idMessages}")]

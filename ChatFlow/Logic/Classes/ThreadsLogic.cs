@@ -20,8 +20,10 @@ namespace Logic.Classes
             this.reactionRepository =  reactionRepository;
         }
 
-        public void AddMessageToThread(Messages message, string threadid)
+        public void AddMessageToThread(Messages message, string threadid, string userid)
         {
+            message.SenderID = userid;
+            message.TimeStamp = DateTime.Now;
             this.GetOneThread(threadid).Messages.Add(message);
             this.threadsRepository.Save();
         }
