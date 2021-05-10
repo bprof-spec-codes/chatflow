@@ -120,6 +120,10 @@ namespace Logic.Classes
             m2.ThreadID = t5.ThreadID;
             m3.ThreadID = t5.ThreadID;
 
+            m1.SenderID = "796f78d1-9d03-4e0c-bd88-e22338e01425";
+            m2.SenderID = "796f78d1-9d03-4e0c-bd88-e22338e01425";
+            m3.SenderID = "796f78d1-9d03-4e0c-bd88-e22338e01425";
+
             messagesRepository.Add(m1);
             messagesRepository.Add(m2);
             messagesRepository.Add(m3);
