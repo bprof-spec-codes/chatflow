@@ -124,9 +124,9 @@ namespace Logic.Classes
             messagesRepository.Add(m2);
             messagesRepository.Add(m3);
 
-            messagesLogic.AddReactionToMessage(reaction1, m2.MessageID);
-            threadsLogic.AddReactionToThread(reaction2, t7.ThreadID);
-            threadsLogic.AddReactionToThread(reaction3, t7.ThreadID);
+            messagesLogic.AddReactionToMessage(reaction1, m2.MessageID, "fc5ddfbf-adbb-485b-9198-d5697f670632");
+            threadsLogic.AddReactionToThread(reaction2, t7.ThreadID, "796f78d1-9d03-4e0c-bd88-e22338e01425");
+            threadsLogic.AddReactionToThread(reaction3, t7.ThreadID, "cf7d31a0-20a7-4676-8e1f-c69d9470dc76");
 
             this.AddUserToRoom("fc5ddfbf-adbb-485b-9198-d5697f670632", r1.RoomID);
             this.AddUserToRoom("cd078415-b771-4375-9079-e0d497567e85", r1.RoomID);

@@ -45,8 +45,9 @@ namespace Logic.Classes
             this.messagesRepository.Update(updatedMessages);
         }
 
-        public void AddReactionToMessage(Reaction reaction, string idMessages)
+        public void AddReactionToMessage(Reaction reaction, string idMessages, string userid)
         {
+            reaction.UserID = userid;
             this.messagesRepository.GetOne(idMessages).Reactions.Add(reaction);
             this.messagesRepository.Save();
         }

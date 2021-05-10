@@ -83,8 +83,9 @@ namespace Logic.Classes
             this.threadsRepository.Save();
         }
 
-        public void AddReactionToThread(Reaction reaction, string idThreads)
+        public void AddReactionToThread(Reaction reaction, string idThreads, string userid)
         {
+            reaction.UserID = userid;
             this.threadsRepository.GetOne(idThreads).Reactions.Add(reaction);
             this.threadsRepository.Save();
         }

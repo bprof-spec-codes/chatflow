@@ -19,7 +19,7 @@ namespace Logic.Interfaces
         IQueryable<Threads> GetAllPinnedThread(string roomId);
         void PinThread(string idThreads);
         void DeletePinThread(string idThreads);
-        void AddReactionToThread(Reaction reaction, string idThreads);
+        void AddReactionToThread(Reaction reaction, string idThreads, string userid);
         void DeleteReactionFromThread(string idReaction);
         void UpdateReactionOnThread(Reaction reaction);
         IQueryable<Reaction> GetAllReactionFromThread(string idThreads);

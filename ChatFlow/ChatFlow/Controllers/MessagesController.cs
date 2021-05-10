@@ -58,7 +58,8 @@ namespace ChatFlow.Controllers
         [HttpPost("AddReaction/{idMessages}")]
         public void AddReactionToMessage([FromBody] Reaction reaction, string idMessages)
         {
-            this.messagesLogic.AddReactionToMessage(reaction, idMessages);
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            this.messagesLogic.AddReactionToMessage(reaction, idMessages, userid);
         }
 
         [HttpDelete("DeleteReaction/{idReaction}")]

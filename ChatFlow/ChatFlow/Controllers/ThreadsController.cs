@@ -84,7 +84,8 @@ namespace ChatFlow.Controllers
         [HttpPost("AddReaction/{idThreads}")]
         public void AddReactionToThread([FromBody] Reaction reaction, string idThreads)
         {
-            this.threadsLogic.AddReactionToThread(reaction, idThreads);
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            this.threadsLogic.AddReactionToThread(reaction, idThreads, userid);
         }
 
         [Authorize(Roles = "Teacher, Student")]
