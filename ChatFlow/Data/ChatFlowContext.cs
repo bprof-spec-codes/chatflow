@@ -34,7 +34,7 @@ namespace Data
             {
                 optionsBuilder.
                     UseLazyLoadingProxies().
-                    UseSqlServer(@"data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\ChatFlowTestDB.mdf;integrated security=True;MultipleActiveResultSets=True");
+                    UseSqlServer(@"Server = tcp:chatflow.database.windows.net, 1433; Initial Catalog = ChatflowDB; Persist Security Info = False; User ID = chatflowAdmin; Password = Passw0rd.56; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
             }
         }
 

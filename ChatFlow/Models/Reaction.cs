@@ -22,7 +22,7 @@ namespace Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public string ReactionID { get; set; }
         public ReactionType ReactionType { get; set; }
-        public string UserID { get; set; }
+        public string SenderName { get; set; }
         [NotMapped]
         [JsonIgnore]
         public virtual User User { get; set; }
