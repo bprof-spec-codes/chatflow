@@ -23,9 +23,9 @@ const MessageList = ({ loading, messages, onReply, onPin }) => {
         messages &&
         messages.map((message) => (
           <MessageCard
-            key={message.id}
-            id={message.id}
-            pinned={message.pinned}
+            key={message.threadID}
+            id={message.threadID}
+            pinned={message.isPinned}
             content={message.content}
             onReply={onReply}
             onPin={onPin}

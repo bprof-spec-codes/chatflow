@@ -62,7 +62,7 @@ const MessageCard = ({ id, content, pinned, onReply, onPin }) => {
       <Button
         type="text"
         icon={pinned ? <PushpinFilled /> : <PushpinOutlined />}
-        onClick={() => onPin(id, !pinned)}
+        onClick={() => onPin(id, pinned)}
       ></Button>
     );
   }

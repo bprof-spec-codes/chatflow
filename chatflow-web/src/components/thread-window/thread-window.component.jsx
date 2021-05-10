@@ -21,7 +21,7 @@ const ThreadWindow = ({
       setLoading(true);
       setThreads(null);
       const minTime = new Promise((resolve) => setTimeout(resolve, 200));
-      const req = fetch(`/api/Room/${selectedRoom.id}`).then((res) =>
+      const req = fetch(`/room/${selectedRoom.roomID}`).then((res) =>
         res.json()
       );
 
@@ -43,7 +43,7 @@ const ThreadWindow = ({
   };
 
   const pinThread = (id, pinned) => {
-    fetch(`/api/Thread/${id}`, {
+    fetch(`/threads/Pin/${id}`, {
       headers: { "Content-Type": "application/json" },
       method: "PUT",
       body: JSON.stringify({ pinned }),
@@ -60,7 +60,7 @@ const ThreadWindow = ({
     <div className="main-window">
       <TopRow
         selectedRoom={selectedRoom}
-        pinnedThreads={threads ? threads.filter((t) => t.pinned) : ""}
+        pinnedThreads={threads ? threads.filter((t) => t.isPinned) : ""}
       ></TopRow>
       <div className="row">
         <div className="thread-window">

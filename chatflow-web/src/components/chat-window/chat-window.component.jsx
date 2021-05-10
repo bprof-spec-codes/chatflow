@@ -15,7 +15,7 @@ export const ChatWindow = ({ threadId, onClose }) => {
       setLoading(true);
       setMessages(null);
       const minTime = new Promise((resolve) => setTimeout(resolve, 1000));
-      const req = fetch(`/api/Thread/${threadId}`).then((res) => res.json());
+      const req = fetch(`/threads/Room/${threadId}`).then((res) => res.json());
 
       Promise.all([minTime, req])
         .then((values) => {
