@@ -68,7 +68,8 @@ namespace ChatFlow.Controllers
         [HttpPost("{idRoom}")]
         public void AddThreadToRoom([FromBody] Threads threadToAdd, string idRoom)
         {
-            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom);
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom, userid);
         }
     }
 }

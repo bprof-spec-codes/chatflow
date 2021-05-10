@@ -51,8 +51,10 @@ namespace Logic.Classes
             this.roomRepository.Update(updatedRoom);
         }
 
-        public void AddThreadToRoom(Threads thread, string roomid)
+        public void AddThreadToRoom(Threads thread, string roomid, string senderid)
         {
+            thread.SenderID = senderid;
+            thread.TimeStamp = DateTime.Now;
             this.GetOneRoom(roomid).Threads.Add(thread);
             this.roomRepository.Save();
         }
@@ -104,15 +106,15 @@ namespace Logic.Classes
             AddRoom(r1);
             AddRoom(r2);
 
-            AddThreadToRoom(t1, r1.RoomID);
-            AddThreadToRoom(t2, r2.RoomID);
-            AddThreadToRoom(t3, r2.RoomID);
-            AddThreadToRoom(t4, r2.RoomID);
-            AddThreadToRoom(t5, r2.RoomID);
-            AddThreadToRoom(t6, r2.RoomID);
-            AddThreadToRoom(t7, r2.RoomID);
-            AddThreadToRoom(t8, r2.RoomID);
-            AddThreadToRoom(t9, r1.RoomID);
+            AddThreadToRoom(t1, r1.RoomID, "fc5ddfbf-adbb-485b-9198-d5697f670632");
+            AddThreadToRoom(t2, r1.RoomID, "cd078415-b771-4375-9079-e0d497567e85");
+            AddThreadToRoom(t3, r1.RoomID, "70c69d55-28b8-4528-9c27-a4129f12659d");
+            AddThreadToRoom(t4, r1.RoomID, "cd6687c1-30fb-4a21-b7d9-005986669286");
+            AddThreadToRoom(t5, r1.RoomID, "cf7d31a0-20a7-4676-8e1f-c69d9470dc76");
+            AddThreadToRoom(t6, r2.RoomID, "fc5ddfbf-adbb-485b-9198-d5697f670632");
+            AddThreadToRoom(t7, r2.RoomID, "cf7d31a0-20a7-4676-8e1f-c69d9470dc76");
+            AddThreadToRoom(t8, r2.RoomID, "fc5ddfbf-adbb-485b-9198-d5697f670632");
+            AddThreadToRoom(t9, r1.RoomID, "796f78d1-9d03-4e0c-bd88-e22338e01425");
 
             m1.ThreadID = t1.ThreadID;
             m2.ThreadID = t5.ThreadID;
