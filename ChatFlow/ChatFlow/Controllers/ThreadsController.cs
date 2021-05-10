@@ -14,10 +14,12 @@ namespace ChatFlow.Controllers
     public class ThreadsController : ControllerBase
     {
         IThreadsLogic threadsLogic;
+        IAuthLogic authLogic;
 
-        public ThreadsController(IThreadsLogic threadsLogic)
+        public ThreadsController(IThreadsLogic threadsLogic, IAuthLogic authLogic)
         {
             this.threadsLogic = threadsLogic;
+            this.authLogic = authLogic;
         }
 
         [HttpDelete("{idThreads}")]
@@ -85,7 +87,8 @@ namespace ChatFlow.Controllers
         public void AddReactionToThread([FromBody] Reaction reaction, string idThreads)
         {
             var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
-            this.threadsLogic.AddReactionToThread(reaction, idThreads, userid);
+            var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
+            this.threadsLogic.AddReactionToThread(reaction, idThreads, user.UserName);
         }
 
         [Authorize(Roles = "Teacher, Student")]

@@ -15,11 +15,11 @@ namespace Logic.Interfaces
         IQueryable<Threads> GetAllThreadFromRoom(string idRoom);
         Threads GetOneThread(string idThreads);
         void UpdateThread(Threads updatedThreads);
-        void AddMessageToThread(Messages message, string idThread, string userid);
+        void AddMessageToThread(Messages message, string idThread, string username);
         IQueryable<Threads> GetAllPinnedThread(string roomId);
         void PinThread(string idThreads);
         void DeletePinThread(string idThreads);
-        void AddReactionToThread(Reaction reaction, string idThreads, string userid);
+        void AddReactionToThread(Reaction reaction, string idThreads, string username);
         void DeleteReactionFromThread(string idReaction);
         void UpdateReactionOnThread(Reaction reaction);
         IQueryable<Reaction> GetAllReactionFromThread(string idThreads);

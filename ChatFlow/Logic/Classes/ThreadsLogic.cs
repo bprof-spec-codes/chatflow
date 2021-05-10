@@ -20,9 +20,9 @@ namespace Logic.Classes
             this.reactionRepository =  reactionRepository;
         }
 
-        public void AddMessageToThread(Messages message, string threadid, string userid)
+        public void AddMessageToThread(Messages message, string threadid, string username)
         {
-            message.SenderID = userid;
+            message.SenderName = username;
             message.TimeStamp = DateTime.Now;
             this.GetOneThread(threadid).Messages.Add(message);
             this.threadsRepository.Save();
@@ -83,9 +83,9 @@ namespace Logic.Classes
             this.threadsRepository.Save();
         }
 
-        public void AddReactionToThread(Reaction reaction, string idThreads, string userid)
+        public void AddReactionToThread(Reaction reaction, string idThreads, string username)
         {
-            reaction.UserID = userid;
+            reaction.SenderName = username;
             this.threadsRepository.GetOne(idThreads).Reactions.Add(reaction);
             this.threadsRepository.Save();
         }
