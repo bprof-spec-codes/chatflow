@@ -1,12 +1,19 @@
 .site-layout-background{
-    background-color: #001529 !important; 
-    
+    background-color: #001529 !important;     
     margin-left: 1%;
+}
+.site-layout-user{
+    background-color: #001529 !important;     
+    max-width: 80%;
+}
+.site-layout-group{
+    background-color: #001529 !important; 
+    min-width: 10%;  
 }
 .sider{
     background-color: whitesmoke !important; 
+    text-align: center;
 }
 .content-container{
     background-color: #001529 !important;
 }
-
