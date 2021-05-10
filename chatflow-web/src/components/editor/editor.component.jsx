@@ -48,6 +48,15 @@ class Editor extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.shouldClear) {
+      return {
+        text: "",
+      };
+    }
+    return null;
+  }
+
   getActiveTag(text) {
     const tagging = /@\w+/;
     const alreadyATag = /<span.*user-tag.*span>/;
