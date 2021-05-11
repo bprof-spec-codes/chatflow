@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./side-bar.styles.css";
 import { Menu, Layout, Skeleton } from "antd";
 import { Link } from "react-router-dom";
+import jwt_decode from "jwt-decode";
+import Cookies from "js-cookie";
 
 const { Sider } = Layout;
 
 export const Sidebar = (props) => {
   const { loading, rooms } = props;
+  const [isAdmin, setIsAdmin] = useState(false);
+  const token = Cookies.get("auth");
+  const decoded = jwt_decode(token);
 
   return (
     <Sider className="side-bar">

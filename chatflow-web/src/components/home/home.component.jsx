@@ -16,7 +16,7 @@ export const Home = () => {
 
   useEffect(() => {
     setLoading(true);
-    const minTime = new Promise((resolve) => setTimeout(resolve, 1500));
+    const minTime = new Promise((resolve) => setTimeout(resolve, 1000));
     //const req = fetch("/api/Room").then((res) => res.json());
     const req = axios.get("/auth/allroom");
     /*.then(function (response) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./login.styles.css";
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,8 @@ const { Footer } = Layout;
 var inFifteenMinutes = new Date(new Date().getTime() + 60 * 60 * 1000);
 
 export const NormalLoginForm = () => {
+  const [failedLogin, setFailedLogin] = useState(false);
+
   const history = useHistory();
   const onFinish = (values) => {
     /*fetch("/auth/login", {
@@ -39,7 +41,15 @@ export const NormalLoginForm = () => {
           expires: inFifteenMinutes,
         });
         history.push("/");
+      })
+      .catch(function (error) {
+        setFailedLogin(true);
+        console.log(error);
       });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -53,6 +63,7 @@ export const NormalLoginForm = () => {
             remember: true,
           }}
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
           <Form.Item
             name="username"
@@ -93,6 +104,13 @@ export const NormalLoginForm = () => {
             >
               Log in
             </Button>
+          </Form.Item>
+          <Form.Item style={{ margin: "0px" }}>
+            {failedLogin && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Wrong username or password
+              </p>
+            )}
           </Form.Item>
         </Form>
       </div>

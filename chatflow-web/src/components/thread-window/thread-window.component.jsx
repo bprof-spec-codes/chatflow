@@ -22,7 +22,7 @@ const ThreadWindow = ({
     if (selectedRoom) {
       setLoading(true);
       setThreads(null);
-      const minTime = new Promise((resolve) => setTimeout(resolve, 200));
+      const minTime = new Promise((resolve) => setTimeout(resolve));
       const req = axios.get(`/room/${selectedRoom.roomID}`);
 
       Promise.all([minTime, req]).then((values) => {
@@ -33,14 +33,23 @@ const ThreadWindow = ({
     }
   }, [axios, selectedRoom]);
 
-  const addThread = (content) => {
+  const addThread = (content, name) => {
     //TODO: implement api
     if (threads) {
-      setThreads((threads) => threads.concat({ id: 1111, content }));
+      setThreads((threads) => threads.concat({ id: 1111, content, name }));
     } else {
-      setThreads([{ id: 1111, content }]);
+      setThreads([{ id: 1111, content, name }]);
     }
-    axios.post(`/room/${selectedRoom.roomID}`, { content: content });
+    axios
+      .post(`/room/${selectedRoom.roomID}`, {
+        content: content,
+        senderName: name,
+      })
+      /*.then(() =>
+        axios
+          .get(`/room/${selectedRoom.roomID}`)
+          .then((res) => setThreads(res.data.threads))
+      );*/
   };
 
   const pinThread = (id, pinned) => {

@@ -27,6 +27,8 @@ const MessageList = ({ loading, messages, onReply, onPin }) => {
           <MessageCard
             key={message.threadID}
             id={message.threadID}
+            author={message.senderName}
+            timeStamp={message.timeStamp}
             pinned={message.isPinned}
             content={message.content}
             onReply={onReply}
