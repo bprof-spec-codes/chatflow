@@ -15,11 +15,13 @@ namespace ChatFlow.Controllers
     {
         IRoomLogic roomLogic;
         IRoomUserLogic RUlogic;
+        IAuthLogic authLogic;
 
-        public RoomController(IRoomLogic roomLogic, IRoomUserLogic _RUlogic)
+        public RoomController(IRoomLogic roomLogic, IRoomUserLogic _RUlogic, IAuthLogic authLogic)
         {
             this.roomLogic = roomLogic;
             this.RUlogic = _RUlogic;
+            this.authLogic = authLogic;
         }
 
         [Authorize(Roles = "Admin")]
@@ -68,7 +70,9 @@ namespace ChatFlow.Controllers
         [HttpPost("{idRoom}")]
         public void AddThreadToRoom([FromBody] Threads threadToAdd, string idRoom)
         {
-            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom);
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
+            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom, user.UserName);
         }
     }
 }

@@ -17,17 +17,21 @@ namespace ChatFlow.Controllers
     {
         IMessagesLogic messagesLogic;
         IThreadsLogic threadsLogic;
+        IAuthLogic authLogic;
 
-        public MessagesController(IMessagesLogic messagesLogic, IThreadsLogic threadsLogic)
+        public MessagesController(IMessagesLogic messagesLogic, IThreadsLogic threadsLogic, IAuthLogic authLogic)
         {
             this.messagesLogic = messagesLogic;
             this.threadsLogic = threadsLogic;
+            this.authLogic = authLogic;
         }
 
         [HttpPost("{idThreads}")]
         public void AddMessage([FromBody] Messages messages, string idThreads)
         {
-            this.threadsLogic.AddMessageToThread(messages, idThreads);
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
+            this.threadsLogic.AddMessageToThread(messages, idThreads, user.UserName);
         }
 
         [HttpDelete("{idMessages}")]
@@ -57,7 +61,9 @@ namespace ChatFlow.Controllers
         [HttpPost("AddReaction/{idMessages}")]
         public void AddReactionToMessage([FromBody] Reaction reaction, string idMessages)
         {
-            this.messagesLogic.AddReactionToMessage(reaction, idMessages);
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
+            this.messagesLogic.AddReactionToMessage(reaction, idMessages, user.UserName);
         }
 
         [HttpDelete("DeleteReaction/{idReaction}")]

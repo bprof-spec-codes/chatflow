@@ -23,7 +23,7 @@ namespace Models
 
         public DateTime TimeStamp { get; set; }
 
-        public string SenderID { get; set; }
+        public string SenderName { get; set; }
 
         public bool IsPinned { get; set; }
 
