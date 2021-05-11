@@ -88,7 +88,7 @@ namespace ChatFlow.Controllers
         {
             var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
             var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
-            this.threadsLogic.AddReactionToThread(reaction, idThreads, user.UserName);
+            this.threadsLogic.AddReactionToThread(reaction, idThreads, user);
         }
 
         [Authorize(Roles = "Teacher, Student")]
