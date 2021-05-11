@@ -69,7 +69,7 @@ namespace Logic.Classes
 
         public IQueryable<Messages> GetAllMessagesOfAThread(string threadid)
         {
-            return this.GetAllMessage().Where(m => m.ThreadID == threadid);
+            return this.GetAllMessage().Where(m => m.ThreadID == threadid).OrderBy(m => m.TimeStamp);
         }
     }
 }

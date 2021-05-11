@@ -45,7 +45,7 @@ namespace Logic.Classes
 
         public IQueryable<Threads> GetAllThreadFromRoom(string idRoom)
         {
-            return this.threadsRepository.GetAll().Where(thread => thread.RoomID == idRoom);
+            return this.threadsRepository.GetAll().Where(thread => thread.RoomID == idRoom).OrderBy(thread => thread.TimeStamp);
         }
 
         public Threads GetOneThread(string idThreads)
