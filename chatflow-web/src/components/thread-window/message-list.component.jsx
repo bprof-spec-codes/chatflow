@@ -18,7 +18,9 @@ const MessageList = ({ loading, messages, onReply, onPin }) => {
           <MessageCard></MessageCard>
         </div>
       )}
-      {!loading && !messages && <Empty description="No messages yet!" />}
+      {!loading && messages.length === 0 && (
+        <Empty description="No messages yet!" />
+      )}
       {!loading &&
         messages &&
         messages.map((message) => (

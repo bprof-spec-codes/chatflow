@@ -10,17 +10,21 @@ export const ChatWindow = ({ threadId, onClose }) => {
   const [loading, setLoading] = useState(true);
   const users = ["Valaki", "Valami"];
 
+  const axios = require("axios");
+
   useEffect(() => {
     if (threadId) {
       setLoading(true);
       setMessages(null);
       const minTime = new Promise((resolve) => setTimeout(resolve, 1000));
-      const req = fetch(`/threads/Room/${threadId}`).then((res) => res.json());
+      //const req = fetch(`/threads/Room/${threadId}`).then((res) => res.json());
+      const req = axios.get(`/messages/${threadId}`);
 
       Promise.all([minTime, req])
         .then((values) => {
           const reqData = values[1];
-          setMessages(reqData.messages);
+          console.log(reqData.data);
+          setMessages(reqData.data);
           setLoading(false);
         })
         .catch((err) => {
@@ -28,7 +32,7 @@ export const ChatWindow = ({ threadId, onClose }) => {
           setLoading(false);
         });
     }
-  }, [threadId]);
+  }, [threadId, axios]);
 
   const addMessage = (content) => {
     //TODO: implement api
@@ -37,6 +41,8 @@ export const ChatWindow = ({ threadId, onClose }) => {
     } else {
       setMessages([{ id: 1111, content }]);
     }
+
+    axios.post(`/messages/${threadId}`, { content: content });
   };
 
   return (

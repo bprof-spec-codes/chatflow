@@ -11,13 +11,13 @@ import AdminUI from "./components/admin-components/admin-ui/admin-ui.component";
 import AdminLayout from "./components/admin-components/admin-layout/admin-layout.component";
 import Cookies from "js-cookie";
 
-const axios = require('axios').default;
+const axios = require("axios").default;
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
   const token = Cookies.get("auth");
   if (token) {
     // TODO axios set global authorization header
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
     return (
       <Route {...rest} render={(props) => <Component {...rest} {...props} />} />
     );
@@ -34,7 +34,7 @@ function App() {
         </Route>
         <ProtectedRoute path="/admin" component={AdminLayout} />
 
-        <ProtectedRoute path="/rooms/:id" component={Home} />
+        <ProtectedRoute path="/room/:id" component={Home} />
 
         <ProtectedRoute path="/" component={Home} />
       </Switch>

@@ -66,10 +66,21 @@ class Editor extends React.Component {
     return res ? res[0] : null;
   }
 
+  highlightLink(text){
+    const tagging = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+    // TODO 
+    return text.split(" ").map(part => tagging.test(part) ? <a href={part}>{part}</a> : part+" ");
+    /*const removedTags = text.replace("");
+    const res = removedTags.match(tagging);
+    return res ? res[0] : null;*/
+    
+  }
+
   handleChange(e) {
-    const value = e.target.value;
+    let value = e.target.value;
 
     const activeTag = this.getActiveTag(value);
+    //value = this.highlightLink(value);
     if (activeTag) {
       const filter = activeTag.slice(1).toLowerCase();
       const list = this.props.users

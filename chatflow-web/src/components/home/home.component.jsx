@@ -31,7 +31,7 @@ export const Home = () => {
       setRooms(reqData.data);
       setLoading(false);
     });
-  }, []);
+  }, [axios]);
 
   useEffect(() => {
     if (rooms) {
