@@ -17,9 +17,17 @@
     transform: scale(1.05);
   }
   .avatar{
-    padding: 0px 0px 0px 25px;
+    max-height: fit-content;
+    max-width: fit-content;
+    margin: auto;
   }
   .personal-data{
-    text-align: center
+    text-align: center;
   }
+  .tools{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 40%;
+  }
+
   
