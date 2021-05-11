@@ -11,6 +11,7 @@ namespace Repository.Interfaces
         void Add(T item);
         void Update(T updatedItem);
         void Delete(T item);
+        void Delete(string id);
         void Save();
     }
 }

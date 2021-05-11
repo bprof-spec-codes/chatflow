@@ -11,3 +11,7 @@
     position: "fixed";
     width: 200px;
 }
+
+.side-bar .ant-skeleton {
+    padding: 20px !important;
+}

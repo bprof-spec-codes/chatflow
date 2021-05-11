@@ -5,4 +5,22 @@
     display: flex;
     justify-content: space-between;
     top: 0;
-  }
+    height: 64px !important;
+}
+
+.header-left{
+  display: flex;
+  align-items: center;
+}
+
+.header .ant-skeleton {
+  width: 200px;
+}
+
+.ant-skeleton-paragraph {
+  margin: 0;
+}
+
+h3{
+  color: white;
+}

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Interfaces;
 using System;
@@ -11,13 +12,18 @@ namespace Repository.Classes
 {
     public class MessagesRepository : CommonRepository<Messages>, IMessagesRepository
     {
-        public MessagesRepository(DbContext context) : base(context)
+        public MessagesRepository(ChatFlowContext context) : base(context)
         {
         }
 
         public override Messages GetOne(string id)
         {
             return this.GetAll().SingleOrDefault(x => x.MessageID == id);
+        }
+
+        public override void Delete(string id)
+        {
+            Delete(GetOne(id));
         }
 
         public override void Update(Messages updatedItem)

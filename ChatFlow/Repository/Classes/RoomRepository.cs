@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Interfaces;
 using System;
@@ -11,13 +12,18 @@ namespace Repository.Classes
 {
     public class RoomRepository : CommonRepository<Room>, IRoomRepository
     {
-        public RoomRepository(DbContext context) : base(context)
+        public RoomRepository(ChatFlowContext context) : base(context)
         {
         }
 
         public override Room GetOne(string id)
         {
             return this.GetAll().SingleOrDefault(x => x.RoomID == id);
+        }
+
+        public override void Delete(string id)
+        {
+            Delete(GetOne(id));
         }
 
         public override void Update(Room updatedItem)

@@ -1,4 +1,5 @@
 ﻿using Logic.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using System;
@@ -13,40 +14,65 @@ namespace ChatFlow.Controllers
     public class RoomController : ControllerBase
     {
         IRoomLogic roomLogic;
+        IRoomUserLogic RUlogic;
+        IAuthLogic authLogic;
 
-        public RoomController(IRoomLogic roomLogic)
+        public RoomController(IRoomLogic roomLogic, IRoomUserLogic _RUlogic, IAuthLogic authLogic)
         {
             this.roomLogic = roomLogic;
+            this.RUlogic = _RUlogic;
+            this.authLogic = authLogic;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public void AddRoom([FromBody] Room room)
         {
-            roomLogic.AddRoom(room);
+            this.roomLogic.AddRoom(room);
         }
 
-        [HttpDelete]
-        public void DeleteRoom([FromBody] Room room)
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("{idRoom}")]
+        public void DeleteRoom(string idRoom)
         {
-            roomLogic.DeleteRoom(room);
+            this.roomLogic.DeleteRoom(idRoom);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public IQueryable<Room> GetAllRoom()
         {
-            return roomLogic.GetAllRoom();
+            return this.roomLogic.GetAllRoom();
         }
 
+        [Authorize(Roles = "Teacher, Student")]
         [HttpGet("{idRoom}")]
         public Room GetOneRoom(string idRoom)
         {
-            return roomLogic.GetOneRoom(idRoom);
+            return this.roomLogic.GetOneRoom(idRoom);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPut]
         public void UpdateRoom([FromBody] Room updatedRoom)
         {
-            roomLogic.UpdateRoom(updatedRoom);
+            this.roomLogic.UpdateRoom(updatedRoom);
+        }
+
+        [Authorize(Roles = "Teacher, Student")]
+        [HttpGet("alluser/{idRoom}")]
+        public IEnumerable<User> GetOneRoomsAllUsers(string idRoom)
+        {
+            return this.RUlogic.GetOneRoomsAllUsers(idRoom);
+        }
+
+        [Authorize(Roles = ("Teacher, Student"))]
+        [HttpPost("{idRoom}")]
+        public void AddThreadToRoom([FromBody] Threads threadToAdd, string idRoom)
+        {
+            var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
+            var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
+            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom, user.UserName);
         }
     }
 }

@@ -21,6 +21,10 @@ namespace ChatFlow
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseKestrel(opts =>
+                    {
+                        opts.ListenAnyIP(55420, opts => opts.UseHttps());
+                    });
                 });
     }
 }

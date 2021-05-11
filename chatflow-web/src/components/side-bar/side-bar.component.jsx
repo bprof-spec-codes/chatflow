@@ -1,27 +1,32 @@
 import React from "react";
 import "antd/dist/antd.css";
 import "./side-bar.styles.css";
-import { Menu, Layout } from "antd";
+import { Menu, Layout, Skeleton } from "antd";
 import { Link } from "react-router-dom";
 
 const { Sider } = Layout;
 
-export const Sidebar = (props) => (
-  <Sider className="side-bar">
-    <div className="logo">ChatFlow</div>
-    <Menu theme="dark">
-      <Menu.Item key="1">
-        {/* <Link to="/channel1">Channel 1</Link> */}
-        Channel 1
-      </Menu.Item>
-      <Menu.Item key="2">
-        {/* <Link to="/channel2">Channel 2</Link> */}
-        Channel 2
-      </Menu.Item>
-      <Menu.Item key="3">
-        {/* <Link to="/channel3">Channel 3</Link> */}
-        Channel 3
-      </Menu.Item>
-    </Menu>
-  </Sider>
-);
+export const Sidebar = (props) => {
+  const { loading, rooms } = props;
+
+  return (
+    <Sider className="side-bar">
+      <div className="logo">ChatFlow</div>
+      <Skeleton
+        loading={loading}
+        active
+        title={false}
+        paragraph={{ rows: 5 }}
+      />
+      {rooms && (
+        <Menu theme="dark">
+          {rooms.map((room) => (
+            <Menu.Item key={room.id}>
+              <Link to={`/rooms/${room.id}`}>{'# ' + room.name}</Link>
+            </Menu.Item>
+          ))}
+        </Menu>
+      )}
+    </Sider>
+  );
+};
