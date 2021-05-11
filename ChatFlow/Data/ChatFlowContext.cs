@@ -35,6 +35,7 @@ namespace Data
                 optionsBuilder.
                     UseLazyLoadingProxies().
                     UseSqlServer(@"Server = tcp:chatflow.database.windows.net, 1433; Initial Catalog = ChatflowDB; Persist Security Info = False; User ID = chatflowAdmin; Password = Passw0rd.56; MultipleActiveResultSets = False; Encrypt = True; TrustServerCertificate = False; Connection Timeout = 30;");
+                    //UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=ChatflowTestDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;");
             }
         }
 
@@ -56,7 +57,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "admin",
                 NormalizedUserName = "ADMIN",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "Chatflow",
+                LastName = "Admin"
             };
 
             var andris = new User
@@ -67,7 +70,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "kovacs.andras",
                 NormalizedUserName = "KOVACS.ANDRAS",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "András",
+                LastName = "Kovács"
             };
 
             var miki = new User
@@ -78,7 +83,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "sipos.miklos",
                 NormalizedUserName = "SIPOS.MIKLOS",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "Miklós",
+                LastName = "Sipos"
             };
 
             var boldi = new User
@@ -89,7 +96,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "boldi.bihari",
                 NormalizedUserName = "BOLDI.BIHARI",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "Boldizsár",
+                LastName = "Bihari"
             };
 
             var roli = new User
@@ -100,7 +109,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "bogdan.roland",
                 NormalizedUserName = "BOGDAN.ROLAND",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "Roland",
+                LastName = "Bogdán"
             };
 
             var simon = new User
@@ -111,7 +122,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "buzasi.simon",
                 NormalizedUserName = "BUZASI.SIMON",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "Simon",
+                LastName = "Buzási"
             };
 
             var tomi = new User
@@ -122,7 +135,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "tamas.lengyel",
                 NormalizedUserName = "TAMAS.LENGYEL",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "Tamás",
+                LastName = "Lengyel"
             };
 
             var dariusz = new User
@@ -133,7 +148,9 @@ namespace Data
                 EmailConfirmed = true,
                 UserName = "dariusz.szabo",
                 NormalizedUserName = "DARIUSZ.SZABO",
-                SecurityStamp = string.Empty
+                SecurityStamp = string.Empty,
+                FirstName = "Dáriusz",
+                LastName = "Szabó"
             };
 
             admin.PasswordHash = new PasswordHasher<User>().HashPassword(null, "admin");

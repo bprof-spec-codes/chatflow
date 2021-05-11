@@ -25,7 +25,7 @@ namespace Logic.Classes
 
         public IEnumerable<Room> GetOneUsersAllRooms(string userid)
         {
-            return this.RUrepo.GetOneUsersAllRooms(userid);
+            return this.RUrepo.GetOneUsersAllRooms(userid).OrderBy(r => r.RoomName);
         }
     }
 }
