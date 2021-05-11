@@ -17,7 +17,7 @@ namespace Models
         [StringLength(300)]
         public string Content { get; set; }
 
-        public string SenderID { get; set; }
+        public string SenderName { get; set; }
 
         public DateTime TimeStamp { get; set; }
 

@@ -18,10 +18,11 @@ namespace ChatFlow.Controllers
             this.logic = rlogic;
         }
 
-        [HttpGet]
-        public void FillDatabase()
-        {
-            this.logic.GenerateData();
-        }
+        // test data uploaded to cloud => this api not needed
+        //[HttpGet]
+        //public void FillDatabase()
+        //{
+        //    this.logic.GenerateData();
+        //}
     }
 }
