@@ -18,14 +18,16 @@ const MessageList = ({ loading, messages, onReply, onPin }) => {
           <MessageCard></MessageCard>
         </div>
       )}
-      {!loading && !messages && <Empty description="No messages yet!" />}
+      {!loading && messages.length === 0 && (
+        <Empty description="No messages yet!" />
+      )}
       {!loading &&
         messages &&
         messages.map((message) => (
           <MessageCard
-            key={message.id}
-            id={message.id}
-            pinned={message.pinned}
+            key={message.threadID}
+            id={message.threadID}
+            pinned={message.isPinned}
             content={message.content}
             onReply={onReply}
             onPin={onPin}

@@ -16,22 +16,22 @@ const ThreadWindow = ({
   const [loading, setLoading] = useState(true);
   const users = ["Valaki", "Valami"];
 
+  const axios = require("axios");
+
   useEffect(() => {
     if (selectedRoom) {
       setLoading(true);
       setThreads(null);
       const minTime = new Promise((resolve) => setTimeout(resolve, 200));
-      const req = fetch(`/api/Room/${selectedRoom.id}`).then((res) =>
-        res.json()
-      );
+      const req = axios.get(`/room/${selectedRoom.roomID}`);
 
       Promise.all([minTime, req]).then((values) => {
         const reqData = values[1];
-        setThreads(reqData.threads);
+        setThreads(reqData.data.threads);
         setLoading(false);
       });
     }
-  }, [selectedRoom]);
+  }, [axios, selectedRoom]);
 
   const addThread = (content) => {
     //TODO: implement api
@@ -40,27 +40,39 @@ const ThreadWindow = ({
     } else {
       setThreads([{ id: 1111, content }]);
     }
+    axios.post(`/room/${selectedRoom.roomID}`, { content: content });
   };
 
   const pinThread = (id, pinned) => {
-    fetch(`/api/Thread/${id}`, {
-      headers: { "Content-Type": "application/json" },
-      method: "PUT",
-      body: JSON.stringify({ pinned }),
-    }).then(() =>
-      setThreads((threads) =>
-        threads.map((thread) =>
-          thread.id === id ? { ...thread, pinned } : thread
-        )
-      )
-    );
+    if (pinned) {
+      axios
+        .put(`/threads/DeletePin/${id}`)
+        .then(() =>
+          setThreads((threads) =>
+            threads.map((thread) =>
+              thread.threadID === id ? { ...thread, isPinned: false } : thread
+            )
+          )
+        );
+    }
+    if (!pinned) {
+      axios
+        .put(`/threads/Pin/${id}`)
+        .then(() =>
+          setThreads((threads) =>
+            threads.map((thread) =>
+              thread.threadID === id ? { ...thread, isPinned: true } : thread
+            )
+          )
+        );
+    }
   };
 
   return (
     <div className="main-window">
       <TopRow
         selectedRoom={selectedRoom}
-        pinnedThreads={threads ? threads.filter((t) => t.pinned) : ""}
+        pinnedThreads={threads ? threads.filter((t) => t.isPinned) : ""}
       ></TopRow>
       <div className="row">
         <div className="thread-window">

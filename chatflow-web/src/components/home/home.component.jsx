@@ -12,21 +12,30 @@ export const Home = () => {
   const [selectedThreadId, setSelectedThreadId] = useState(null);
   const { id } = useParams();
 
+  const axios = require("axios");
+
   useEffect(() => {
     setLoading(true);
     const minTime = new Promise((resolve) => setTimeout(resolve, 1500));
-    const req = fetch("/api/Room").then((res) => res.json());
+    //const req = fetch("/api/Room").then((res) => res.json());
+    const req = axios.get("/auth/allroom");
+    /*.then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });*/
 
     Promise.all([minTime, req]).then((values) => {
       const reqData = values[1];
-      setRooms(reqData);
+      setRooms(reqData.data);
       setLoading(false);
     });
-  }, []);
+  }, [axios]);
 
   useEffect(() => {
     if (rooms) {
-      setSelectedRoom(id ? rooms.find((c) => c.id === Number(id)) : rooms[0]);
+      setSelectedRoom(id ? rooms.find((c) => c.roomID === id) : rooms[0]);
       setSelectedThreadId(null);
     }
   }, [id, rooms]);
@@ -39,7 +48,7 @@ export const Home = () => {
           selectedRoom={selectedRoom}
           selectedThreadId={selectedThreadId}
           setSelectedThreadId={setSelectedThreadId}
-          onReply={(threadId) => setSelectedThreadId(threadId)}
+          onReply={(threadID) => setSelectedThreadId(threadID)}
         ></ThreadWindow>
       </Layout>
     </div>
