@@ -10,7 +10,7 @@ import axios from 'axios'
 const { Header, Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const api = axios.create({
-    baseURL: 'https://localhost:44325/'
+    baseURL: 'https://localhost:5000'
 })
 
 class AdminLayout extends Component {
@@ -42,19 +42,21 @@ class AdminLayout extends Component {
         /*fetch('https://localhost:44325/auth/')
             .then(response => response.json())
             .then(users => this.setState({ members: users }));*/
-        api.post(`/auth/login`,
+        api.get(`/auth/login`,
             {
-                "username": "admin",
-                "password": "admin"
+                userName : 'admin',
+                password : 'admin'
             })
-            .then(response => response.json())
-            .then(getToken => this.setState({ token: getToken }))
+            .then(response => console.log(response)).catch((error) => {
+                console.log(error.message);
+              });
+            /*.then(getToken => this.setState({ token: getToken }))
             .then(
                 api.get('/auth',{ 'Authorization': `Bearer ${this.state.token}` })
                     .then(response => response.json())
                     .then(users => this.setState({ members: users })
                     )
-            )
+            )*/
     }
 
     render() {
