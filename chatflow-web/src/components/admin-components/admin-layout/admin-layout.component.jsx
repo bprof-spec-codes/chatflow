@@ -5,8 +5,6 @@ import { Layout, Menu } from 'antd';
 import { TeamOutlined, UserOutlined } from '@ant-design/icons';
 import { CardList } from '../card-list/card-list.component';
 import { SearchBox } from '../search-box/search-box.component';
-import { Button } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
 
 const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
@@ -33,7 +31,6 @@ class AdminLayout extends Component {
             groups: [],
             searchUser: '',
             token: '',
-            room: '',
         };
     }
 
@@ -56,15 +53,7 @@ class AdminLayout extends Component {
             this.setState({ groups: reqData2.data });
         }
         );
-    }
-    onClick = (value) => {
-        axios
-            .delete(`/room/${value}`)
-    };
-
-    handleChange = (value) =>{
-        this.state.room.setState(value);
-    }
+    }    
 
     render() {
         const { members, searchUser } = this.state;
@@ -102,7 +91,6 @@ class AdminLayout extends Component {
                         <SubMenu key="sub3" icon={<TeamOutlined />} title="Rooms">
                             {this.state.groups?.map(room => (
                                 <Menu.Item key={room.roomID} >
-                                    <Button /*onClick={this.onClick(room.roomID)}*/ value={room.roomID} shape='round' icon={<DeleteOutlined />}></Button>
                                     {room.roomName}                                    
                                 </Menu.Item>
                             ))}
