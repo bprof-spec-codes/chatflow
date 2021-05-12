@@ -12,6 +12,7 @@ import AdminLayout from "./components/admin-components/admin-layout/admin-layout
 import Cookies from "js-cookie";
 import { AddRoom } from "./components/admin-components/add-room/add-room.component";
 import { ExportRoom } from "./components/admin-components/export-room/export-room.component";
+import { RoomDetail } from "./components/admin-components/roomDetail/room-detail.component";
 
 const axios = require("axios").default;
 
@@ -39,6 +40,8 @@ function App() {
         <ProtectedRoute path="/addUser" component={AddUser} />/
         
         <ProtectedRoute path="/addRoom" component={AddRoom} />/
+
+        <ProtectedRoute path="/roomDetail" component={RoomDetail} />/
 
         <ProtectedRoute path="/exportRoom" component={ExportRoom} />/
 

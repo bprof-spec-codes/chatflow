@@ -3,16 +3,25 @@ import 'antd/dist/antd.css';
 import './add-user.style.css'
 import { Form, Button, Select } from 'antd';
 
-export const ExportRoom = () => {
+export const RoomDetail = () => {
+    const [users, setUser] = useState(null);
     const [rooms, setRoom] = useState(null);
     const [room, setRoomSelected] = useState('');
-    const axios = require("axios");
-    const onFinish = (values) => {
-        axios
-            .get(`/room/${room}`)
-            //új oldalra json formátumban :c
-    };
 
+    
+    const axios = require("axios");
+    const onFinish = () => {
+        const minTime = new Promise((resolve) => setTimeout(resolve, 200));
+        const req = axios.get(`/room/alluser/${room}`);
+
+        Promise.all([minTime, req]).then((values) => {
+            const reqData = values[1];
+            console.log(reqData.data);
+            setUser(reqData.data);
+        }
+        
+        );
+    };
 
     useEffect(() => {
 
@@ -26,8 +35,10 @@ export const ExportRoom = () => {
         }
         );
     }, [axios, setRoom]);
-    const handleChange = (value) =>{
+
+    const handleChange2 = (value) =>{
         setRoomSelected(value);
+        console.log(value);
     }
 
     return (
@@ -37,17 +48,22 @@ export const ExportRoom = () => {
                 <div className='form-container2'>
                     <Form onFinish={onFinish}>                        
                         <Form.Item label="Select Room">
-                            <Select onChange ={handleChange}>
+                            <Select onChange ={handleChange2}>
                                 {rooms?.map(room => (
                                     <Select.Option value={room.roomID}>{room.roomName}</Select.Option>
                                 ))}
                             </Select>
                         </Form.Item>
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" className='add-form-button'>Export Room</Button>
+                            <Button onClick='' type="primary" htmlType="submit" className='add-form-button'>List Users</Button>
                             <Button className='add-form-button' href = '/admin'>Back to Admin UI</Button>
                         </Form.Item>
                     </Form>
+                </div>
+                <div>
+                {users?.map(user => (
+                    <h2>{user.userName}</h2>
+                ))}
                 </div>
             </div>
         </>
