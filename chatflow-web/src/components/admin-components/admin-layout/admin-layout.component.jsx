@@ -5,12 +5,12 @@ import { Layout, Menu } from 'antd';
 import { TeamOutlined, UserOutlined } from '@ant-design/icons';
 import { CardList } from '../card-list/card-list.component';
 import { SearchBox } from '../search-box/search-box.component';
-import { Sidebar } from '../../side-bar/side-bar.component';
+import { Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 const { SubMenu } = Menu;
 const axios = require("axios");
-
 
 
 class AdminLayout extends Component {
@@ -32,8 +32,6 @@ class AdminLayout extends Component {
             searchUser: '',
             token: '',
         };
-
-
     }
 
 
@@ -59,16 +57,17 @@ class AdminLayout extends Component {
     }
 
 
-
     render() {
+
+
+
         const { members, searchUser } = this.state;
         const filteredMembers = members.filter(member =>
             member.userName.toLowerCase().includes(searchUser.toLowerCase())
         );
         const { collapsed } = this.state;
         return (
-            <Layout style={{ minHeight: '100vh' }}>
-
+            <Layout style={{ minHeight: '100vh'}} >
                 <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse} className='sider'>
                     <div className="logo" />
                     <Menu defaultSelectedKeys={['1']} mode="inline" className='sider'>
@@ -83,15 +82,16 @@ class AdminLayout extends Component {
                                 />
                             </Menu.Item>
                         </SubMenu>
-                        <SubMenu key="sub2" icon={<TeamOutlined />} title="Group Options">
+                        <SubMenu key="sub2" icon={<TeamOutlined />} title="Room Options">
                             <Menu.Item key="3">
-                                <a href='/add'>Add</a>
+                                <a href='/addRoom'>Add Room</a>
                             </Menu.Item>
                         </SubMenu>
-                        <SubMenu key="sub2" icon={<TeamOutlined />} title="Groups">
+                        <SubMenu key="sub3" icon={<TeamOutlined />} title="Rooms">
                             {this.state.groups?.map(room => (
-                                <Menu.Item key={room.roomID}>
-                                    <a href='/add'>{room.roomName}</a>
+                                <Menu.Item key={room.roomID} >
+                                    <Button shape='round' icon={<DeleteOutlined />}></Button>
+                                    {room.roomName}                                    
                                 </Menu.Item>
                             ))}
                         </SubMenu>
