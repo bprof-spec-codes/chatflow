@@ -4,11 +4,7 @@
 }
 .site-layout-user{
     background-color: #001529 !important;     
-    max-width: 80%;
-}
-.site-layout-group{
-    background-color: #001529 !important; 
-    min-width: 10%;  
+    max-width: 100%;
 }
 .sider{
     background-color: whitesmoke !important; 
