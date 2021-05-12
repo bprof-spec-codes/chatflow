@@ -23,7 +23,7 @@ export const ChatWindow = ({ threadId, onClose }) => {
       Promise.all([minTime, req])
         .then((values) => {
           const reqData = values[1];
-          console.log(reqData.data);
+          //console.log(reqData.data);
           setMessages(reqData.data);
           setLoading(false);
         })
@@ -34,15 +34,19 @@ export const ChatWindow = ({ threadId, onClose }) => {
     }
   }, [threadId, axios]);
 
-  const addMessage = (content) => {
+  const addMessage = (content, name) => {
     //TODO: implement api
-    if (messages) {
-      setMessages((messages) => messages.concat({ id: 1111, content }));
+    /*if (messages) {
+      setMessages((messages) => messages.concat({ id: 1111, content, name }));
     } else {
-      setMessages([{ id: 1111, content }]);
-    }
+      setMessages([{ id: 1111, content, name }]);
+    }*/
 
-    axios.post(`/messages/${threadId}`, { content: content });
+    axios
+      .post(`/messages/${threadId}`, { content: content, senderName: name })
+      .then(() =>
+        axios.get(`/messages/${threadId}`).then((res) => setMessages(res.data))
+      );
   };
 
   return (
