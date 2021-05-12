@@ -34,7 +34,6 @@ class AdminLayout extends Component {
         };
     }
 
-
     componentDidMount() {
 
         const minTime = new Promise((resolve) => setTimeout(resolve, 200));
@@ -58,9 +57,6 @@ class AdminLayout extends Component {
 
 
     render() {
-
-
-
         const { members, searchUser } = this.state;
         const filteredMembers = members.filter(member =>
             member.userName.toLowerCase().includes(searchUser.toLowerCase())
@@ -86,6 +82,9 @@ class AdminLayout extends Component {
                             <Menu.Item key="3">
                                 <a href='/addRoom'>Add Room</a>
                             </Menu.Item>
+                            <Menu.Item key="4">
+                                <a href='/exportRoom'>Export Room</a>
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub3" icon={<TeamOutlined />} title="Rooms">
                             {this.state.groups?.map(room => (
@@ -95,6 +94,9 @@ class AdminLayout extends Component {
                                 </Menu.Item>
                             ))}
                         </SubMenu>
+                        <Menu.Item key="4">
+                                <a href='/'>Exit from Admin UI</a>
+                            </Menu.Item>
                     </Menu>
                 </Sider>
 

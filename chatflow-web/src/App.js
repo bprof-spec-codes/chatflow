@@ -11,6 +11,7 @@ import { Home } from "./components/home/home.component";
 import AdminLayout from "./components/admin-components/admin-layout/admin-layout.component";
 import Cookies from "js-cookie";
 import { AddRoom } from "./components/admin-components/add-room/add-room.component";
+import { ExportRoom } from "./components/admin-components/export-room/export-room.component";
 
 const axios = require("axios").default;
 
@@ -38,6 +39,8 @@ function App() {
         <ProtectedRoute path="/addUser" component={AddUser} />/
         
         <ProtectedRoute path="/addRoom" component={AddRoom} />/
+
+        <ProtectedRoute path="/exportRoom" component={ExportRoom} />/
 
         <ProtectedRoute path="/room/:id" component={Home} />
 
