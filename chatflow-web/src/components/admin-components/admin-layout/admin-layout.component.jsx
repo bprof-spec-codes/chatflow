@@ -96,7 +96,7 @@ class AdminLayout extends Component {
                                 <a href='/exportRoom'>Export Room</a>
                             </Menu.Item>
                             <Menu.Item key="4">
-                                <a href='/roomDetail'>Rooms Detail</a>
+                                <a href='/roomDetail'>Room Details & Delete</a>
                             </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub3" icon={<TeamOutlined />} title="Rooms">
