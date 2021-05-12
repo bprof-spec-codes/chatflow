@@ -31,7 +31,7 @@ namespace ChatFlow.Controllers
         {
             var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
             var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
-            this.threadsLogic.AddMessageToThread(messages, idThreads, user.UserName);
+            this.threadsLogic.AddMessageToThread(messages, idThreads, user);
         }
 
         [HttpDelete("{idMessages}")]
@@ -63,7 +63,7 @@ namespace ChatFlow.Controllers
         {
             var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
             var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
-            this.messagesLogic.AddReactionToMessage(reaction, idMessages, user.UserName);
+            this.messagesLogic.AddReactionToMessage(reaction, idMessages, user);
         }
 
         [HttpDelete("DeleteReaction/{idReaction}")]

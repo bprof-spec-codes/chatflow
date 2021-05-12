@@ -72,7 +72,7 @@ namespace ChatFlow.Controllers
         {
             var userid = this.User.Claims.FirstOrDefault(claim => claim.Type == "userId").Value;
             var user = this.authLogic.GetAllUser().FirstOrDefault(x => x.Id == userid);
-            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom, user.UserName);
+            this.roomLogic.AddThreadToRoom(threadToAdd, idRoom, user);
         }
     }
 }

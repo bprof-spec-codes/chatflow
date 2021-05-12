@@ -15,7 +15,7 @@ namespace Logic.Interfaces
         IQueryable<Messages> GetAllMessage();
         Messages GetOneMessage(string idMessages);
         void UpdateMessage(Messages updatedMessages);
-        void AddReactionToMessage(Reaction reaction, string idMessages, string username);
+        void AddReactionToMessage(Reaction reaction, string idMessages, User user);
         void DeleteReactionFromMessage(string idReaction);
         void UpdateReactionOnMessage(Reaction reaction);
         IQueryable<Reaction> GetAllReactionFromMessage(string idMessages);

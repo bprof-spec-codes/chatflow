@@ -45,9 +45,9 @@ namespace Logic.Classes
             this.messagesRepository.Update(updatedMessages);
         }
 
-        public void AddReactionToMessage(Reaction reaction, string idMessages, string username)
+        public void AddReactionToMessage(Reaction reaction, string idMessages, User user)
         {
-            reaction.SenderName = username;
+            reaction.SenderName = $"{user.FirstName} {user.LastName}";
             this.messagesRepository.GetOne(idMessages).Reactions.Add(reaction);
             this.messagesRepository.Save();
         }
@@ -69,7 +69,7 @@ namespace Logic.Classes
 
         public IQueryable<Messages> GetAllMessagesOfAThread(string threadid)
         {
-            return this.GetAllMessage().Where(m => m.ThreadID == threadid);
+            return this.GetAllMessage().Where(m => m.ThreadID == threadid).OrderBy(m => m.TimeStamp);
         }
     }
 }
