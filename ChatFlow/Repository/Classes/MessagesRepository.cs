@@ -28,11 +28,16 @@ namespace Repository.Classes
 
         public override void Update(Messages updatedItem)
         {
+            //var message = this.GetOne(updatedItem.MessageID);
+            //message.GetType().GetProperties().ToList().ForEach(property =>
+            //{
+            //    property.SetValue(message, property.GetValue(updatedItem));
+            //});
+            //this.Save();
+
             var message = this.GetOne(updatedItem.MessageID);
-            message.GetType().GetProperties().ToList().ForEach(property =>
-            {
-                property.SetValue(message, property.GetValue(updatedItem));
-            });
+            message.Content = updatedItem.Content;
+            message.TimeStamp = DateTime.Now;
             this.Save();
         }
     }
