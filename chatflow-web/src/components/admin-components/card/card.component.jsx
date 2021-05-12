@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 export const Card = props => (
+    
     <div className='card-container'>
         <div className='avatar'>
             <img
@@ -17,7 +18,7 @@ export const Card = props => (
             <p>{props.member.email}</p>
         </div>
         <div className='tools'>
-            <Button shape='round' icon={<EditOutlined />}></Button>
+            <Button shape='round' href='/ModifyUser' icon={<EditOutlined />}></Button>
             <Button shape='round' icon={<DeleteOutlined />}></Button>
         </div>
     </div>
