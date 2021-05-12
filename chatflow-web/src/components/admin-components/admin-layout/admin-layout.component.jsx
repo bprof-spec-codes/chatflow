@@ -13,7 +13,9 @@ const { SubMenu } = Menu;
 const axios = require("axios");
 
 
+
 class AdminLayout extends Component {
+    
     state = {
         collapsed: false,
     };
@@ -31,6 +33,7 @@ class AdminLayout extends Component {
             groups: [],
             searchUser: '',
             token: '',
+            room: '',
         };
     }
 
@@ -54,7 +57,14 @@ class AdminLayout extends Component {
         }
         );
     }
+    onClick = (value) => {
+        axios
+            .delete(`/room/${value}`)
+    };
 
+    handleChange = (value) =>{
+        this.state.room.setState(value);
+    }
 
     render() {
         const { members, searchUser } = this.state;
@@ -85,16 +95,19 @@ class AdminLayout extends Component {
                             <Menu.Item key="4">
                                 <a href='/exportRoom'>Export Room</a>
                             </Menu.Item>
+                            <Menu.Item key="4">
+                                <a href='/roomDetail'>Rooms Detail</a>
+                            </Menu.Item>
                         </SubMenu>
                         <SubMenu key="sub3" icon={<TeamOutlined />} title="Rooms">
                             {this.state.groups?.map(room => (
                                 <Menu.Item key={room.roomID} >
-                                    <Button shape='round' icon={<DeleteOutlined />}></Button>
+                                    <Button /*onClick={this.onClick(room.roomID)}*/ value={room.roomID} shape='round' icon={<DeleteOutlined />}></Button>
                                     {room.roomName}                                    
                                 </Menu.Item>
                             ))}
                         </SubMenu>
-                        <Menu.Item key="4">
+                        <Menu.Item key="5">
                                 <a href='/'>Exit from Admin UI</a>
                             </Menu.Item>
                     </Menu>
