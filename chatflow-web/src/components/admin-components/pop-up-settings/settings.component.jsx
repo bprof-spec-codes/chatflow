@@ -26,6 +26,9 @@ export const Settings = (id, roomID) => {
 
   return (
     <Menu>
+    <Menu.Item value='1' onClick=''>
+          Valami
+        </Menu.Item>
       {rooms?.map(room => (
         <Menu.Item value={room.roomID} onClick=''>
           X - {room.roomName}
