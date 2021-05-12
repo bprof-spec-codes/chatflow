@@ -28,11 +28,15 @@ namespace Repository.Classes
 
         public override void Update(Room updatedItem)
         {
+            //var room = this.GetOne(updatedItem.RoomID);
+            //room.GetType().GetProperties().ToList().ForEach(property =>
+            //{
+            //    property.SetValue(room, property.GetValue(updatedItem));
+            //});
+            //this.Save();
+
             var room = this.GetOne(updatedItem.RoomID);
-            room.GetType().GetProperties().ToList().ForEach(property =>
-            {
-                property.SetValue(room, property.GetValue(updatedItem));
-            });
+            room.RoomName = updatedItem.RoomName;
             this.Save();
         }
     }
