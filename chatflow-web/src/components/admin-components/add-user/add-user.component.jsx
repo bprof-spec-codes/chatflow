@@ -62,6 +62,7 @@ export const AddUser = () => {
                         </Form.Item>
                         <Form.Item>
                             <Button onClick='' type="primary" htmlType="submit" className='add-form-button'>Add User</Button>
+                            <Button className='add-form-button' href = '/admin'>Back to Admin UI</Button>
                         </Form.Item>
                     </Form>
                 </div>
