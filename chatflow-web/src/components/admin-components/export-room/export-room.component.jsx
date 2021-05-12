@@ -8,9 +8,18 @@ export const ExportRoom = () => {
     const [room, setRoomSelected] = useState('');
     const axios = require("axios");
     const onFinish = (values) => {
-        axios
-            .get(`/room/${room}`)
+        axios.get(`/room/${room}`)
             //új oldalra json formátumban :c
+
+        const minTime2 = new Promise((resolve) => setTimeout(resolve, 300));
+        const req2 = axios.get(`/room/${room}`);
+
+        Promise.all([minTime2, req2]).then((values) => {
+            const reqData2 = values[1];
+            console.log(reqData2.data);
+            window.open(reqData2.data);
+        }
+        );
     };
 
 
@@ -26,6 +35,7 @@ export const ExportRoom = () => {
         }
         );
     }, [axios, setRoom]);
+
     const handleChange = (value) =>{
         setRoomSelected(value);
     }
