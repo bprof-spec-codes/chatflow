@@ -45,7 +45,7 @@ namespace ChatFlow.Controllers
             return this.roomLogic.GetAllRoom();
         }
 
-        [Authorize(Roles = "Teacher, Student")]
+        [Authorize(Roles = "Admin, Teacher, Student")]
         [HttpGet("{idRoom}")]
         public Room GetOneRoom(string idRoom)
         {
