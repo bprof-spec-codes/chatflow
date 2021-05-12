@@ -7,10 +7,12 @@ import {
 } from "react-router-dom";
 import { NormalLoginForm } from "./components/login/login.component";
 import { AddUser } from "./components/admin-components/add-user/add-user.component";
-import { ModifyUser } from "./components/admin-components/Modify-user/modify-user.component";
 import { Home } from "./components/home/home.component";
 import AdminLayout from "./components/admin-components/admin-layout/admin-layout.component";
 import Cookies from "js-cookie";
+import { AddRoom } from "./components/admin-components/add-room/add-room.component";
+import { ExportRoom } from "./components/admin-components/export-room/export-room.component";
+import { RoomDetail } from "./components/admin-components/roomDetail/room-detail.component";
 
 const axios = require("axios").default;
 
@@ -34,6 +36,14 @@ function App() {
           <NormalLoginForm />
         </Route>
         <ProtectedRoute path="/admin" component={AdminLayout} />
+
+        <ProtectedRoute path="/addUser" component={AddUser} />/
+        
+        <ProtectedRoute path="/addRoom" component={AddRoom} />/
+
+        <ProtectedRoute path="/roomDetail" component={RoomDetail} />/
+
+        <ProtectedRoute path="/exportRoom" component={ExportRoom} />/
 
         <ProtectedRoute path="/room/:id" component={Home} />
 

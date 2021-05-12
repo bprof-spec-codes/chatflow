@@ -1,26 +1,40 @@
-import React from 'react';
+
+import React, { useEffect, useState } from "react";
 import 'antd/dist/antd.css';
 import { Menu } from 'antd';
 
-export const Settings = () =>{
-    return (
+export const Settings = (id, roomID) => {
+  const [rooms, setRoom] = useState(null);
+  const axios = require("axios");
+    const onClick = (values) => {
+        axios
+            .delete("/auth/{id}/{roomID}")
+    };
+  useEffect(() => {
+
+    const minTime2 = new Promise((resolve) => setTimeout(resolve, 300));
+    const req2 = axios.get(`/auth/allroom/${id}`);
+
+    Promise.all([minTime2, req2]).then((values) => {
+      const reqData2 = values[1];
+      console.log(reqData2.data);
+      setRoom(reqData2.data);
+    }
+    );
+  }, [axios, setRoom, id]);
+
+
+  return (
     <Menu>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="https://www.google.com">
-        1st menu item
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="https://www.google.com">
-        2nd menu item
-      </a>
-    </Menu.Item>
-    <Menu.Item>
-      <a target="_blank" rel="noopener noreferrer" href="https://www.google.com">
-        3rd menu item
-      </a>
-    </Menu.Item>
-  </Menu>
+    <Menu.Item value='1' onClick=''>
+          Valami
+        </Menu.Item>
+      {rooms?.map(room => (
+        <Menu.Item value={room.roomID} onClick=''>
+          X - {room.roomName}
+        </Menu.Item>
+      ))}
+    </Menu>
   );
-};    
-   
+};
+

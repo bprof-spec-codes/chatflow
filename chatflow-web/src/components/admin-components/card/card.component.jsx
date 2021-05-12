@@ -1,10 +1,9 @@
 import React from 'react';
 import './card.styles.css'
-
-import { Button } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { PopUp } from '../pop-up/pop-up.component';
 
 export const Card = props => (
+    
     <div className='card-container'>
         <div className='avatar'>
             <img
@@ -17,10 +16,7 @@ export const Card = props => (
             <p>{props.member.email}</p>
         </div>
         <div className='tools'>
-            <Button shape='round' icon={<EditOutlined />}></Button>
-            <Button shape='round' icon={<DeleteOutlined />}></Button>
+            <PopUp id = {props.member.id}/>
         </div>
     </div>
-
-
 )

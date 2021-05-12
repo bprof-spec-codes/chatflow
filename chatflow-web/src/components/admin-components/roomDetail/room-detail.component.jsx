@@ -3,32 +3,25 @@ import 'antd/dist/antd.css';
 import './add-user.style.css'
 import { Form, Button, Select } from 'antd';
 
-export const AddUser = () => {
+export const RoomDetail = () => {
     const [users, setUser] = useState(null);
     const [rooms, setRoom] = useState(null);
-    const [user, setUserSelected] = useState('');
     const [room, setRoomSelected] = useState('');
 
     
     const axios = require("axios");
     const onFinish = () => {
-        axios
-            .post(`/auth/${user}/${room}`)
-    };
-
-
-    useEffect(() => {
-
         const minTime = new Promise((resolve) => setTimeout(resolve, 200));
-        const req = axios.get(`/auth`);
+        const req = axios.get(`/room/alluser/${room}`);
 
         Promise.all([minTime, req]).then((values) => {
             const reqData = values[1];
             console.log(reqData.data);
             setUser(reqData.data);
         }
+        
         );
-    }, [axios, setUser]);
+    };
 
     useEffect(() => {
 
@@ -43,12 +36,9 @@ export const AddUser = () => {
         );
     }, [axios, setRoom]);
 
-    const handleChange = (value) =>{
-        setUserSelected(value);
-    }
-
     const handleChange2 = (value) =>{
         setRoomSelected(value);
+        console.log(value);
     }
 
     return (
@@ -56,14 +46,7 @@ export const AddUser = () => {
             <div className="logo-login">ChatFlow</div>
             <div className='form-container'>
                 <div className='form-container2'>
-                    <Form onFinish={onFinish}>
-                        <Form.Item label="Select User">
-                            <Select onChange ={handleChange}>
-                                {users?.map(user => (
-                                    <Select.Option value={user.id}>{user.userName}</Select.Option>
-                                ))}
-                            </Select>
-                        </Form.Item>
+                    <Form onFinish={onFinish}>                        
                         <Form.Item label="Select Room">
                             <Select onChange ={handleChange2}>
                                 {rooms?.map(room => (
@@ -72,10 +55,15 @@ export const AddUser = () => {
                             </Select>
                         </Form.Item>
                         <Form.Item>
-                            <Button onClick='' type="primary" htmlType="submit" className='add-form-button'>Add User</Button>
+                            <Button onClick='' type="primary" htmlType="submit" className='add-form-button'>List Users</Button>
                             <Button className='add-form-button' href = '/admin'>Back to Admin UI</Button>
                         </Form.Item>
                     </Form>
+                </div>
+                <div>
+                {users?.map(user => (
+                    <h2>{user.userName}</h2>
+                ))}
                 </div>
             </div>
         </>
