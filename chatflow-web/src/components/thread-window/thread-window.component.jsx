@@ -22,12 +22,12 @@ const ThreadWindow = ({
     if (selectedRoom) {
       setLoading(true);
       setThreads(null);
-      const minTime = new Promise((resolve) => setTimeout(resolve));
-      const req = axios.get(`/room/${selectedRoom.roomID}`);
+      const minTime = new Promise((resolve) => setTimeout(resolve), 100);
+      const req = axios.get(`/threads/Room/${selectedRoom.roomID}`);
 
       Promise.all([minTime, req]).then((values) => {
         const reqData = values[1];
-        setThreads(reqData.data.threads);
+        setThreads(reqData.data);
         setLoading(false);
       });
     }
@@ -35,21 +35,21 @@ const ThreadWindow = ({
 
   const addThread = (content, name) => {
     //TODO: implement api
-    if (threads) {
+    /*if (threads) {
       setThreads((threads) => threads.concat({ id: 1111, content, name }));
     } else {
       setThreads([{ id: 1111, content, name }]);
-    }
+    }*/
     axios
       .post(`/room/${selectedRoom.roomID}`, {
         content: content,
         senderName: name,
       })
-      /*.then(() =>
+      .then(() =>
         axios
-          .get(`/room/${selectedRoom.roomID}`)
-          .then((res) => setThreads(res.data.threads))
-      );*/
+          .get(`/threads/Room/${selectedRoom.roomID}`)
+          .then((res) => setThreads(res.data))
+      );
   };
 
   const pinThread = (id, pinned) => {
@@ -65,15 +65,15 @@ const ThreadWindow = ({
         );
     }
     if (!pinned) {
-      axios
-        .put(`/threads/Pin/${id}`)
-        .then(() =>
+      axios.put(`/threads/Pin/${id}`).then((res) => {
+        if (res.data === "SUCCESS") {
           setThreads((threads) =>
             threads.map((thread) =>
               thread.threadID === id ? { ...thread, isPinned: true } : thread
             )
-          )
-        );
+          );
+        }
+      });
     }
   };
 

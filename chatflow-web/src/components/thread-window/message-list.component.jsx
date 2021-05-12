@@ -4,6 +4,7 @@ import { Empty } from "antd";
 
 const MessageList = ({ loading, messages, onReply, onPin }) => {
   const messageList = useRef();
+  let messageKey = 1;
 
   useEffect(() => {
     messageList.current.scrollTop = messageList.current.scrollHeight;
@@ -18,14 +19,14 @@ const MessageList = ({ loading, messages, onReply, onPin }) => {
           <MessageCard></MessageCard>
         </div>
       )}
-      {!loading && messages.length === 0 && (
+      {!loading && (!messages || messages.length === 0) && (
         <Empty description="No messages yet!" />
       )}
       {!loading &&
         messages &&
         messages.map((message) => (
           <MessageCard
-            key={message.threadID}
+            key={message.threadID + `${messageKey++}`}
             id={message.threadID}
             author={message.senderName}
             timeStamp={message.timeStamp}

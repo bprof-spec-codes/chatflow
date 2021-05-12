@@ -66,14 +66,18 @@ class Editor extends React.Component {
     return res ? res[0] : null;
   }
 
-  highlightLink(text){
-    const tagging = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-    // TODO 
-    return text.split(" ").map(part => tagging.test(part) ? <a href={part}>{part}</a> : part+" ");
+  highlightLink(text) {
+    const tagging =
+      /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
+    // TODO
+    return text
+      .split(" ")
+      .map((part) =>
+        tagging.test(part) ? <a href={part}>{part}</a> : part + " "
+      );
     /*const removedTags = text.replace("");
     const res = removedTags.match(tagging);
     return res ? res[0] : null;*/
-    
   }
 
   handleChange(e) {
@@ -176,8 +180,13 @@ class Editor extends React.Component {
             <Button
               icon={<SendOutlined />}
               type="primary"
-              onClick={() => this.props.onSend(text)}
-            />
+              onClick={() => {
+                this.props.onSend(text);
+                this.setState({
+                  text: "",
+                });
+              }}
+            ></Button>
           </div>
         )}
       </div>
