@@ -59,7 +59,7 @@ namespace ChatFlow.Controllers
             this.roomLogic.UpdateRoom(updatedRoom);
         }
 
-        [Authorize(Roles = "Teacher, Student")]
+        [Authorize(Roles = "Admin, Teacher, Student")]
         [HttpGet("alluser/{idRoom}")]
         public IEnumerable<User> GetOneRoomsAllUsers(string idRoom)
         {
