@@ -7,7 +7,6 @@ import {
 } from "react-router-dom";
 import { NormalLoginForm } from "./components/login/login.component";
 import { AddUser } from "./components/admin-components/add-user/add-user.component";
-import { ModifyUser } from "./components/admin-components/Modify-user/modify-user.component";
 import { Home } from "./components/home/home.component";
 import AdminLayout from "./components/admin-components/admin-layout/admin-layout.component";
 import Cookies from "js-cookie";
@@ -34,6 +33,8 @@ function App() {
           <NormalLoginForm />
         </Route>
         <ProtectedRoute path="/admin" component={AdminLayout} />
+
+        <ProtectedRoute path="/addUser" component={AddUser} />/
 
         <ProtectedRoute path="/room/:id" component={Home} />
 
