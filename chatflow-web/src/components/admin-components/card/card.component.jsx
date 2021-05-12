@@ -2,7 +2,7 @@ import React from 'react';
 import './card.styles.css'
 
 import { Button } from 'antd';
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 
 export const Card = props => (
     
@@ -18,7 +18,6 @@ export const Card = props => (
             <p>{props.member.email}</p>
         </div>
         <div className='tools'>
-            <Button shape='round' href='/ModifyUser' icon={<EditOutlined />}></Button>
             <Button shape='round' icon={<DeleteOutlined />}></Button>
         </div>
     </div>
