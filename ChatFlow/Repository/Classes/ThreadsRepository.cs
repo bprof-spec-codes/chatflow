@@ -28,11 +28,16 @@ namespace Repository.Classes
 
         public override void Update(Threads updatedItem)
         {
+            //var thread = this.GetOne(updatedItem.ThreadID);
+            //thread.GetType().GetProperties().ToList().ForEach(property =>
+            //{
+            //    property.SetValue(thread, property.GetValue(updatedItem));
+            //});
+            //this.Save();
+
             var thread = this.GetOne(updatedItem.ThreadID);
-            thread.GetType().GetProperties().ToList().ForEach(property =>
-            {
-                property.SetValue(thread, property.GetValue(updatedItem));
-            });
+            thread.Content = updatedItem.Content;
+            thread.TimeStamp = DateTime.Now;
             this.Save();
         }
     }
