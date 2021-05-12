@@ -74,8 +74,8 @@ namespace Logic.Classes
 
 
                 var roles = await userManager.GetRolesAsync(user);
-
-                claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
+                
+                claims.AddRange(roles.Select(role => new Claim("role", role)));
 
 
                 var signinKey = new SymmetricSecurityKey(
