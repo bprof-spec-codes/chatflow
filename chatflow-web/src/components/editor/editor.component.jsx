@@ -67,17 +67,13 @@ class Editor extends React.Component {
   }
 
   highlightLink(text) {
-    const tagging =
-      /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
-    // TODO
-    return text
-      .split(" ")
-      .map((part) =>
-        tagging.test(part) ? <a href={part}>{part}</a> : part + " "
-      );
-    /*const removedTags = text.replace("");
-    const res = removedTags.match(tagging);
-    return res ? res[0] : null;*/
+    const isLink =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+
+    return text.replace(
+      isLink,
+      (match) => `<a href="${match}" target="_blank">${match}</a>`
+    );
   }
 
   handleChange(e) {
@@ -136,10 +132,7 @@ class Editor extends React.Component {
       !this.state.usersDisplayed
     ) {
       e.preventDefault();
-      this.props.onSend(this.state.text);
-      this.setState({
-        text: "",
-      });
+      this.send();
     }
   }
 
@@ -153,6 +146,14 @@ class Editor extends React.Component {
       usersDisplayed: false,
       selectedUser: 0,
     }));
+  }
+
+  send() {
+    const finalText = this.highlightLink(this.state.text);
+    this.props.onSend(finalText);
+    this.setState({
+      text: "",
+    });
   }
 
   render() {
@@ -180,12 +181,7 @@ class Editor extends React.Component {
             <Button
               icon={<SendOutlined />}
               type="primary"
-              onClick={() => {
-                this.props.onSend(text);
-                this.setState({
-                  text: "",
-                });
-              }}
+              onClick={this.send}
             ></Button>
           </div>
         )}
