@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Interfaces;
 using System;
@@ -11,7 +12,7 @@ namespace Repository.Classes
 {
     public class MessagesRepository : CommonRepository<Messages>, IMessagesRepository
     {
-        public MessagesRepository(DbContext context) : base(context)
+        public MessagesRepository(ChatFlowContext context) : base(context)
         {
         }
 
@@ -20,13 +21,23 @@ namespace Repository.Classes
             return this.GetAll().SingleOrDefault(x => x.MessageID == id);
         }
 
+        public override void Delete(string id)
+        {
+            Delete(GetOne(id));
+        }
+
         public override void Update(Messages updatedItem)
         {
+            //var message = this.GetOne(updatedItem.MessageID);
+            //message.GetType().GetProperties().ToList().ForEach(property =>
+            //{
+            //    property.SetValue(message, property.GetValue(updatedItem));
+            //});
+            //this.Save();
+
             var message = this.GetOne(updatedItem.MessageID);
-            message.GetType().GetProperties().ToList().ForEach(property =>
-            {
-                property.SetValue(message, property.GetValue(updatedItem));
-            });
+            message.Content = updatedItem.Content;
+            message.TimeStamp = DateTime.Now;
             this.Save();
         }
     }

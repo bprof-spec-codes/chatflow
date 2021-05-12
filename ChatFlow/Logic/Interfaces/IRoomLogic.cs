@@ -10,9 +10,14 @@ namespace Logic.Interfaces
     public interface IRoomLogic
     {
         void AddRoom(Room room);
-        void DeleteRoom(Room room);
+        void DeleteRoom(string idRoom);
         IQueryable<Room> GetAllRoom();
         Room GetOneRoom(string idRoom);
         void UpdateRoom(Room updatedRoom);
+
+        void AddThreadToRoom(Threads thread, string roomid, User user);
+        void AddUserToRoom(string userid, string roomid);
+        void RemoveUserFromRoom(string userid, string roomid);
+        void GenerateData();
     }
 }

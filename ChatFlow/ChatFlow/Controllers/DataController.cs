@@ -1,4 +1,4 @@
-﻿using Logic.Classes;
+﻿using Logic.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,17 +11,18 @@ namespace ChatFlow.Controllers
     [Route("{controller}")]
     public class DataController : ControllerBase
     {
-        RoomLogic logic;
+        IRoomLogic logic;
 
-        public DataController(RoomLogic rlogic)
+        public DataController(IRoomLogic rlogic)
         {
             this.logic = rlogic;
         }
 
-        [HttpGet]
-        public void FillDatabase()
-        {
-            this.logic.GenerateData();
-        }
+        // test data uploaded to cloud => this api not needed
+        //[HttpGet]
+        //public void FillDatabase()
+        //{
+        //    this.logic.GenerateData();
+        //}
     }
 }

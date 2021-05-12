@@ -18,9 +18,12 @@ namespace Models
 
         public virtual ICollection<Messages> Messages { get; set; }
 
+        [NotMapped]
+        public virtual ICollection<Reaction> Reactions { get; set; }
+
         public DateTime TimeStamp { get; set; }
 
-        public string SenderID { get; set; }
+        public string SenderName { get; set; }
 
         public bool IsPinned { get; set; }
 
@@ -33,6 +36,7 @@ namespace Models
         public Threads()
         {
             this.Messages = new List<Messages>();
+            this.Reactions = new List<Reaction>();
         }
     }
 }

@@ -6,10 +6,21 @@ import {
   LikeOutlined,
   DislikeFilled,
   LikeFilled,
+  PushpinOutlined,
+  PushpinFilled,
 } from "@ant-design/icons";
 import "./message-card.styles.css";
+import dateFormat from "dateformat";
 
-const MessageCard = ({ id, content, onReply }) => {
+const MessageCard = ({
+  id,
+  content,
+  pinned,
+  onReply,
+  onPin,
+  author,
+  timeStamp,
+}) => {
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState(null);
@@ -41,10 +52,29 @@ const MessageCard = ({ id, content, onReply }) => {
         <span className="comment-action">{dislikes}</span>
       </span>
     </Tooltip>,
-    <Button key="comment-basic-reply-to" onClick={() => onReply(id)}>
-      Reply to
-    </Button>,
   ];
+
+  if (onReply && id) {
+    actions.push(
+      <Button
+        key="comment-basic-reply-to"
+        type="link"
+        onClick={() => onReply(id)}
+      >
+        Reply to
+      </Button>
+    );
+  }
+
+  if (onPin && id) {
+    actions.push(
+      <Button
+        type="text"
+        icon={pinned ? <PushpinFilled /> : <PushpinOutlined />}
+        onClick={() => onPin(id, pinned)}
+      ></Button>
+    );
+  }
 
   return (
     <div className="my-comment">
@@ -58,11 +88,17 @@ const MessageCard = ({ id, content, onReply }) => {
       {content ? (
         <Comment
           actions={actions}
-          author={<p>John Doe</p>}
+          author={author}
           content={<div dangerouslySetInnerHTML={{ __html: content }} />}
           datetime={
-            <Tooltip title={moment().format("YYYY-MM-DD HH:mm:ss")}>
-              <span>{moment().fromNow()}</span>
+            <Tooltip
+              title={
+                dateFormat(timeStamp, "yyyy-mm-dd, HH:MM")
+
+                /*moment().format("YYYY-MM-DD HH:mm:ss")*/
+              }
+            >
+              <span>{moment(timeStamp).fromNow()}</span>
             </Tooltip>
           }
         />

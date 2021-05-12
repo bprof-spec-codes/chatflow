@@ -1,14 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "./login.styles.css";
-import { Form, Input, Button, Checkbox, Layout } from "antd";
+import { useHistory } from "react-router-dom";
+import { Form, Input, Button, Layout } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import Cookies from "js-cookie";
+import axios from "axios";
 
 const { Footer } = Layout;
+var inFifteenMinutes = new Date(new Date().getTime() + 60 * 60 * 1000);
 
 export const NormalLoginForm = () => {
+  const [failedLogin, setFailedLogin] = useState(false);
+
+  const history = useHistory();
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    /*fetch("/auth/login", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify({
+        userName: values.username,
+        passWord: values.password,
+      }),
+    })
+      .then((res) => res.json())
+      .then(
+        (data) =>
+          Cookies.set("auth", data.token, {
+            expires: inFifteenMinutes,
+          }),
+        history.push("/")
+      );*/
+    axios
+      .post("/auth/login", {
+        userName: values.username,
+        passWord: values.password,
+      })
+      .then((response) => {
+        Cookies.set("auth", response.data.token, {
+          expires: inFifteenMinutes,
+        });
+        history.push("/");
+      })
+      .catch(function (error) {
+        setFailedLogin(true);
+        console.log(error);
+      });
+  };
+
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
   };
 
   return (
@@ -22,6 +63,7 @@ export const NormalLoginForm = () => {
             remember: true,
           }}
           onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
         >
           <Form.Item
             name="username"
@@ -55,16 +97,6 @@ export const NormalLoginForm = () => {
             />
           </Form.Item>
           <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-
-            <a className="login-form-forgot" href="/">
-              Forgot password
-            </a>
-          </Form.Item>
-
-          <Form.Item>
             <Button
               type="primary"
               htmlType="submit"
@@ -72,7 +104,13 @@ export const NormalLoginForm = () => {
             >
               Log in
             </Button>
-            Or <a href="/">register now!</a>
+          </Form.Item>
+          <Form.Item style={{ margin: "0px" }}>
+            {failedLogin && (
+              <p style={{ color: "red", fontSize: "16px" }}>
+                Wrong username or password
+              </p>
+            )}
           </Form.Item>
         </Form>
       </div>

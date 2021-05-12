@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Repository.Interfaces;
 using System;
@@ -11,7 +12,7 @@ namespace Repository.Classes
 {
     public class ThreadsRepository : CommonRepository<Threads>, IThreadsRepository
     {
-        public ThreadsRepository(DbContext context) : base(context)
+        public ThreadsRepository(ChatFlowContext context) : base(context)
         {
         }
 
@@ -20,13 +21,23 @@ namespace Repository.Classes
             return this.GetAll().SingleOrDefault(x => x.ThreadID == id);
         }
 
+        public override void Delete(string id)
+        {
+            Delete(GetOne(id));
+        }
+
         public override void Update(Threads updatedItem)
         {
+            //var thread = this.GetOne(updatedItem.ThreadID);
+            //thread.GetType().GetProperties().ToList().ForEach(property =>
+            //{
+            //    property.SetValue(thread, property.GetValue(updatedItem));
+            //});
+            //this.Save();
+
             var thread = this.GetOne(updatedItem.ThreadID);
-            thread.GetType().GetProperties().ToList().ForEach(property =>
-            {
-                property.SetValue(thread, property.GetValue(updatedItem));
-            });
+            thread.Content = updatedItem.Content;
+            thread.TimeStamp = DateTime.Now;
             this.Save();
         }
     }

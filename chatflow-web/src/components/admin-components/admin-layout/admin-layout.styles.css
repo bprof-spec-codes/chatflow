@@ -1,12 +1,17 @@
 .site-layout-background{
-    background-color: #001529 !important; 
-    
-    margin-left: 1%;
+    background-color: #001529 !important;  
+}
+.site-layout-user{
+    background-color: #001529 !important;     
+    max-width: 100%;
+    width: fit-content;
 }
 .sider{
     background-color: whitesmoke !important; 
+    text-align: center;
+    align-content: center;
+    width: fit-content;
 }
 .content-container{
     background-color: #001529 !important;
 }
-

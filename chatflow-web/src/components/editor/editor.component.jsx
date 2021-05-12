@@ -48,6 +48,15 @@ class Editor extends React.Component {
     };
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.shouldClear) {
+      return {
+        text: "",
+      };
+    }
+    return null;
+  }
+
   getActiveTag(text) {
     const tagging = /@\w+/;
     const alreadyATag = /<span.*user-tag.*span>/;
@@ -57,10 +66,21 @@ class Editor extends React.Component {
     return res ? res[0] : null;
   }
 
+  highlightLink(text) {
+    const isLink =
+      /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/;
+
+    return text.replace(
+      isLink,
+      (match) => `<a href="${match}" target="_blank">${match}</a>`
+    );
+  }
+
   handleChange(e) {
-    const value = e.target.value;
+    let value = e.target.value;
 
     const activeTag = this.getActiveTag(value);
+    //value = this.highlightLink(value);
     if (activeTag) {
       const filter = activeTag.slice(1).toLowerCase();
       const list = this.props.users
@@ -112,10 +132,7 @@ class Editor extends React.Component {
       !this.state.usersDisplayed
     ) {
       e.preventDefault();
-      this.props.onSend(this.state.text);
-      this.setState({
-        text: "",
-      });
+      this.send();
     }
   }
 
@@ -129,6 +146,14 @@ class Editor extends React.Component {
       usersDisplayed: false,
       selectedUser: 0,
     }));
+  }
+
+  send() {
+    const finalText = this.highlightLink(this.state.text);
+    this.props.onSend(finalText);
+    this.setState({
+      text: "",
+    });
   }
 
   render() {
@@ -156,8 +181,8 @@ class Editor extends React.Component {
             <Button
               icon={<SendOutlined />}
               type="primary"
-              onClick={() => this.props.onSend(text)}
-            />
+              onClick={this.send}
+            ></Button>
           </div>
         )}
       </div>

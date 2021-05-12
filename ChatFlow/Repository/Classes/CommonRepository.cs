@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Data;
+using Microsoft.EntityFrameworkCore;
 using Repository.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace Repository.Classes
 {
     public abstract class CommonRepository<T> : ICommonRepository<T> where T : class
     {
-        protected DbContext context;
+        protected ChatFlowContext context;
 
-        public CommonRepository(DbContext context)
+        public CommonRepository(ChatFlowContext context)
         {
             this.context = context;
         }
@@ -28,6 +29,8 @@ namespace Repository.Classes
             this.context.Set<T>().Remove(item);
             this.context.SaveChanges();
         }
+
+        public abstract void Delete(string id);
 
         public IQueryable<T> GetAll()
         {
