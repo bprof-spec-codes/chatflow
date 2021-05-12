@@ -6,10 +6,14 @@ import { Form, Button, Select } from 'antd';
 export const AddUser = () => {
     const [users, setUser] = useState(null);
     const [rooms, setRoom] = useState(null);
+    const [user, setUserSelected] = useState('');
+    const [room, setRoomSelected] = useState('');
+
+    
     const axios = require("axios");
-    const onFinish = (values) => {
+    const onFinish = () => {
         axios
-            .post("/auth/{user.id}/{room.roomID}")
+            .post(`/auth/${user}/${room}`)
     };
 
 
@@ -39,6 +43,13 @@ export const AddUser = () => {
         );
     }, [axios, setRoom]);
 
+    const handleChange = (value) =>{
+        setUserSelected(value);
+    }
+
+    const handleChange2 = (value) =>{
+        setRoomSelected(value);
+    }
 
     return (
         <>
@@ -47,14 +58,14 @@ export const AddUser = () => {
                 <div className='form-container2'>
                     <Form onFinish={onFinish}>
                         <Form.Item label="Select User">
-                            <Select>
+                            <Select onChange ={handleChange}>
                                 {users?.map(user => (
                                     <Select.Option value={user.id}>{user.userName}</Select.Option>
                                 ))}
                             </Select>
                         </Form.Item>
                         <Form.Item label="Select Room">
-                            <Select>
+                            <Select onChange ={handleChange2}>
                                 {rooms?.map(room => (
                                     <Select.Option value={room.roomID}>{room.roomName}</Select.Option>
                                 ))}
