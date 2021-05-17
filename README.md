@@ -2,12 +2,12 @@
 
 ## Tartalomjegyzék:
 
- - Csapat felállás
- - Telepítési, és lokális futtatási útmutató
- - Megadott bejelentkezési adatok
- - Használt API-k
- - Oldal ismertetése a felhasználó számára
- - Probléma jegyzőkönyv
+ - [Csapat felállás](#csapat-felállás)
+ - [Telepítési, és lokális futtatási útmutató](#telepítési-és-lokális-futtatási-útmutató)
+ - [Megadott bejelentkezési adatok](#megadott-bejelentkezési-adatok)
+ - [Használt API-k](#használt-api-k)
+ - [Oldal ismertetése a felhasználó számára](#oldal-ismertetése-a-felhasználó-számára)
+ - [Probléma jegyzőkönyv](#probléma-jegyzőkönyv)
 
 ## Csapat felállás
 Fejlesztők:
@@ -20,7 +20,7 @@ Használt technológiák:
 	-Backend: ASP .NET  
 	-Adatbázis: Microsoft Azure  
 
-## Telepítési, és lokális futtatási útmutató
+## Telepítési és lokális futtatási útmutató
 Az alkalmazás lokális hostolásához és futtatásához, első sorban a következőket kell telepítenünk, feltéve hogy még nincsenek telepítve:
 
  - [.NET core 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
