@@ -29,10 +29,16 @@ Az alkalmazás lokális hostolásához és futtatásához, első sorban a követ
 
 Ezek után, először a backendet kell elindítanunk, amit a következő képpen tudunk megtenni:
 
- - Először egy Visual Studio Code-ot kell nyitnunk, majd bal fent a *File -> Open Folder...* opciónál ki kell keressük a projekt mappáját, azon belül is a *ChatFlow* nevű mappát, és ezt megnyitnunk.![Step1](https://i.imgur.com/TB0yxwk.png)![Step2](https://i.imgur.com/9kv3Hrh.png)
- - Ezután az alkalmazásban a *Terminal -> New Terminal* segítségével nyitni egy terminált, ahova a `dotnet build` parancsot kell beírjuk, majd egy entert nyomnunk. Ez pár másodpercig el fog tartani.![Step3](https://i.imgur.com/FMslTqs.png)
- - Következő lépésként, tegyük le tálcára a Visual Studio alkalmazást (még szükség lesz rá), és a projekt könyvtárába navigáljunk. Itt a *ChatFlow/ChatFlow/bin/Debug/net5.0/* mappát, ahol (windows-on) egy *ChatFlow.exe* fájlt találunk, ezt indítsuk el.![step4](https://i.imgur.com/x0peiAC.png)
- - Utolsó lépésként, menjünk vissza a Visual Studio Code-ba, ahol *File -> Open Folder...* segítségével most a *chatflow-web* mappát nyissuk meg. Ezután a terminál segítségével (ha nincs már ott a terminál a korábbi lépésekben látható a megnyitása) írjunk be egy *npm install* parancsot, ezt enterrel futtassuk le (ezt egyszer kell megtenni, későbbi indításoknál elég a következő parancs), majd egy *npm start* parancs segítségével elindul az alkalmazás frontend része.![Step5](https://i.imgur.com/zxtck9v.png)![Step6](https://i.imgur.com/QdKwx3Q.png)
+ - Először egy Visual Studio Code-ot kell nyitnunk, majd bal fent a *File -> Open Folder...* opciónál ki kell keressük a projekt mappáját, azon belül is a *ChatFlow* nevű mappát, és ezt megnyitnunk.
+![Step1](https://i.imgur.com/TB0yxwk.png)
+![Step2](https://i.imgur.com/9kv3Hrh.png)
+ - Ezután az alkalmazásban a *Terminal -> New Terminal* segítségével nyitni egy terminált, ahova a `dotnet build` parancsot kell beírjuk, majd egy entert nyomnunk. Ez pár másodpercig el fog tartani.
+![Step3](https://i.imgur.com/FMslTqs.png)
+ - Következő lépésként, tegyük le tálcára a Visual Studio alkalmazást (még szükség lesz rá), és a projekt könyvtárába navigáljunk. Itt a *ChatFlow/ChatFlow/bin/Debug/net5.0/* mappát, ahol (windows-on) egy *ChatFlow.exe* fájlt találunk, ezt indítsuk el.
+![step4](https://i.imgur.com/x0peiAC.png)
+ - Utolsó lépésként, menjünk vissza a Visual Studio Code-ba, ahol *File -> Open Folder...* segítségével most a *chatflow-web* mappát nyissuk meg. Ezután a terminál segítségével (ha nincs már ott a terminál a korábbi lépésekben látható a megnyitása) írjunk be egy *npm install* parancsot, ezt enterrel futtassuk le (ezt egyszer kell megtenni, későbbi indításoknál elég a következő parancs), majd egy *npm start* parancs segítségével elindul az alkalmazás frontend része.
+![Step5](https://i.imgur.com/zxtck9v.png)
+![Step6](https://i.imgur.com/QdKwx3Q.png)
 
 ## Megadott bejelentkezési adatok
 A bejelentkezéshez egy felhasználóra van szükségünk, ezt a rendszerben adminok által előre elkészített felhasználókkal tehetjük meg, a felhasználónév és jelszó kombinációjával. A jelenlegi létező felhasználók, és szerepköreik a következők:
@@ -100,7 +106,7 @@ Az alkalmazás a következő API-okat használja:
 |Message|$PUT|/messages/UpdateReaction + JSON|S,T|Change the reaction|
 |Message|$GET(idMessages)|/messages/Reactions/{idMessages}|S,T|Get one messages every reaction|
 
-### Oldal ismertetése a felhasználó számára
+## Oldal ismertetése a felhasználó számára
 Bejelentkezési felület
  - Ezen a felületen lehet bejelentkezni a felhasználónevünkkel, és a jelszavunkkal ![ui1](https://i.imgur.com/FD5Symv.png)
 
@@ -108,17 +114,24 @@ Főoldal
  - Ha bejelentkeztünk, az alkalmazás főoldalán találjuk magunkat.
  - Bal oldalsó oszlopban találhatóak a különböző szobák ahová a felhasználó tartozik, ezek között lehet váltani, ekkor a többi panel is frissül.
  - A középső része az oldalnak a szobában található posztok/thread-ek. Ezekre lehet reagálni, válaszolni, és tanárok tudnak pinnelni is.
- - Alul tudunk írni új posztot a kiválasztott szobába. ![ui2](https://i.imgur.com/PHMiOc7.png)
- - A jobb felső sarokban egy gombostűre kattintva láthatjuk a pinnelt üzeneteket ![ui4](https://i.imgur.com/PU60Xgc.png)
+ - Alul tudunk írni új posztot a kiválasztott szobába.
+![ui2](https://i.imgur.com/PHMiOc7.png)
+ - A jobb felső sarokban egy gombostűre kattintva láthatjuk a pinnelt üzeneteket
+![ui4](https://i.imgur.com/PU60Xgc.png)
  - A posztokon a *Reply to* gombra kattintva, megjelennek jobb oldalt a poszthoz fűzött kommentek, üzenetek.
- - Itt ugyanúgy alul tudunk válaszolni. ![ui3](https://i.imgur.com/170WHZF.png)
+ - Itt ugyanúgy alul tudunk válaszolni.
+![ui3](https://i.imgur.com/170WHZF.png)
  
  Admin felület
 
- - Ha admin felhasználóval (admin <> admin) lépünk be, és utána a link végére odaírjuk hogy */admin*, akkor az admin felületre jutunk, ahol a felhasználókat és a szobákat tudjuk kezelni. ![adminui1](https://i.imgur.com/KpmxzlK.png)
- - Az oldalon tudunk tanulót szobához rendelni. ![adminui2](https://i.imgur.com/TBdxqzs.png)
- - Szobát létrehozni. ![adminui3](https://i.imgur.com/EKtEcwY.png)
- - És szobát törölni. ![adminui4](https://i.imgur.com/3pqdjTe.png)
+ - Ha admin felhasználóval (admin <> admin) lépünk be, és utána a link végére odaírjuk hogy */admin*, akkor az admin felületre jutunk, ahol a felhasználókat és a szobákat tudjuk kezelni.
+![adminui1](https://i.imgur.com/KpmxzlK.png)
+ - Az oldalon tudunk tanulót szobához rendelni.
+![adminui2](https://i.imgur.com/TBdxqzs.png)
+ - Szobát létrehozni.
+![adminui3](https://i.imgur.com/EKtEcwY.png)
+ - És szobát törölni.
+![adminui4](https://i.imgur.com/3pqdjTe.png)
  
 
 ## Probléma jegyzőkönyv
